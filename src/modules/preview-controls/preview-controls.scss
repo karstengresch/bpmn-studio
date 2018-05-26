@@ -1,0 +1,48 @@
+.preview-controls {
+  padding: 1rem;
+  max-width: 900px;
+}
+
+.ui-preview {
+  border: 1rem solid #5856D6;
+  border-top: none;
+  margin-bottom: 2rem;
+}
+
+.ui-preview__title {
+  font-size: 2rem;
+  padding: 0.25rem;
+  background: #5856D6;
+  color: #fff;
+}
+
+.ui-preview__body {
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.ui-preview__controls {
+  padding: 1rem;
+}
+
+.ui-preview__code {
+
+}
+
+.ui-preview__body--property-panel-bg {
+  background-color: #f7f7f7;
+  border-top: 1px solid #eee;
+}
+
+.ui-preview__color {
+  display: inline-block;
+  padding: 2rem 0.5rem 0.5rem 0.5rem;
+  min-width: 7rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  color: white;
+}
+
+.ui-preview__color--light {
+  color: #aaa;
+}

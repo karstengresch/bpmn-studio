@@ -1,0 +1,298 @@
+<template>
+  <require from="./preview-controls.css"></require>
+  <require from="../property-panel/property-panel.css"></require>
+  <require from="../property-panel/styles/sections.css"></require>
+
+  <div class="preview-controls">
+    <h1>UI Controls: Preview &amp; Styleguide</h1>
+
+    <div class="ui-preview">
+      <div class="ui-preview__title">Colors</div>
+      <div class="ui-preview__body">
+        <span class="ui-preview__color" style="background-color: #FF3B30">red</span>
+        <span class="ui-preview__color" style="background-color: #FF9500">orange</span>
+        <span class="ui-preview__color" style="background-color: #FFCC00">yellow</span>
+        <span class="ui-preview__color" style="background-color: #4CD964">green</span>
+        <span class="ui-preview__color" style="background-color: #5AC8FA">light blue</span>
+        <span class="ui-preview__color" style="background-color: #007AFF">blue</span>
+        <span class="ui-preview__color" style="background-color: #5856D6">purple</span>
+
+        <span class="ui-preview__color" style="background-color: #8E8E93">dark gray</span>
+        <span class="ui-preview__color" style="background-color: #C7C7CC">gray</span>
+        <span class="ui-preview__color" style="background-color: #D1D1D6">mid gray</span>
+        <span class="ui-preview__color ui-preview__color--light" style="background-color: #E5E5EA">light gray</span>
+        <span class="ui-preview__color ui-preview__color--light" style="background-color: #EFEFF4">lighter gray</span>
+      </div>
+
+      <div class="ui-preview__body ui-preview__body--property-panel-bg">
+        <span class="ui-preview__color" style="background-color: #FF3B30">red</span>
+        <span class="ui-preview__color" style="background-color: #FF9500">orange</span>
+        <span class="ui-preview__color" style="background-color: #FFCC00">yellow</span>
+        <span class="ui-preview__color" style="background-color: #4CD964">green</span>
+        <span class="ui-preview__color" style="background-color: #5AC8FA">light blue</span>
+        <span class="ui-preview__color" style="background-color: #007AFF">blue</span>
+        <span class="ui-preview__color" style="background-color: #5856D6">purple</span>
+
+        <span class="ui-preview__color" style="background-color: #8E8E93">dark gray</span>
+        <span class="ui-preview__color" style="background-color: #C7C7CC">gray</span>
+        <span class="ui-preview__color" style="background-color: #D1D1D6">mid gray</span>
+        <span class="ui-preview__color ui-preview__color--light" style="background-color: #E5E5EA">light gray</span>
+        <span class="ui-preview__color ui-preview__color--light" style="background-color: #EFEFF4">lighter gray</span>
+      </div>
+    </div>
+
+    <div class="ui-preview">
+      <div class="ui-preview__title">Buttons</div>
+
+      <div class="ui-preview__body">
+        <p>
+          BPMN Studio includes predefined button styles to provide a consistent user interface.
+        </p>
+
+        <div class="ui-preview__controls">
+          <a href="javascript:void(0);" class="btn btn-default">default</a>
+          <a href="javascript:void(0);" class="btn btn-primary">primary</a>
+          <a href="javascript:void(0);" class="btn btn-danger">danger</a>
+        </div>
+        <div class="ui-preview__code">
+          <pre>
+  &lt;a href="javascript:void(0);" class="btn btn-default">default&lt;/a>
+  &lt;a href="javascript:void(0);" class="btn btn-primary">primary&lt;/a>
+  &lt;a href="javascript:void(0);" class="btn btn-danger">danger&lt;/a>
+</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-preview">
+      <div class="ui-preview__title">Property Panel</div>
+
+      <div class="ui-preview__body">
+        <p>
+          The Property Panel is a term which refers to a set of panels displaying information about the currently selected flow node
+          instance.
+        </p>
+
+        <div class="ui-preview__controls">
+
+          <div style="width: 320px">
+
+            <div class="section-panel panel--general ">
+              <div class="panel__heading">General</div>
+              <div class="panel__content">
+                <table class="props-table">
+                  <tbody>
+                    <tr>
+                      <th>Id</th>
+                      <td>
+                        <input type="text" class="props-input au-target" id="elementId" value.bind="businessObjInPanel.id &amp; validateOnChange"
+                          change.delegate="updateId()" au-target-id="159">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Name</th>
+                      <td>
+                        <input type="text" class="props-input au-target" value.bind="businessObjInPanel.name" change.delegate="updateName()" au-target-id="165">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Docs</th>
+                      <td>
+                        <input type="text" class="props-input au-target" value.bind="elementDocumentation" change.delegate="updateDocumentation()"
+                          au-target-id="167">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div>
+
+
+
+              <div class="section-panel panel--grow">
+                <div class="panel__heading">User Task</div>
+                <div class="panel__content">
+                  <table class="props-table">
+                    <tbody>
+                      <tr>
+                        <th>Form Key</th>
+                        <td>
+                          <input type="text" class="props-input au-target" value.bind="businessObjInPanel.formKey" au-target-id="187">
+                        </td>
+                        <td>
+                          <span class="glyphicon glyphicon-remove-circle props-table--clear-button au-target" click.delegate="clearFormKey()" au-target-id="188"></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="section-panel panel--grow">
+                <div class="panel__heading">
+                  Form Fields
+                  <button class="remove-context-button au-target" disabled.bind="!isFormSelected" click.delegate="removeSelectedForm()" au-target-id="189"
+                    disabled="">
+                    <span class="fa fa-trash"></span>
+                  </button>
+                  <button class="add-context-button au-target" click.delegate="addForm()" au-target-id="190">
+                    <span class="fa fa-plus"></span>
+                  </button>
+                </div>
+                <div class="panel__content">
+                  <select class="form-control forms-list au-target" value.bind="selectedForm" change.delegate="selectForm()" size="5" au-target-id="191">
+                    <option model.bind="form" class="au-target" au-target-id="192">name</option>
+                    <option model.bind="form" class="au-target" au-target-id="192">key</option>
+                    <!--anchor-->
+                  </select>
+                </div>
+              </div>
+
+              <div class="panel panel--grow au-target aurelia-hide" show.bind="isFormSelected" au-target-id="195">
+                <div class="panel__heading">Form Field</div>
+                <div class="panel__content">
+                  <table class="props-table">
+                    <tbody>
+                      <tr>
+                        <th>ID</th>
+                        <td>
+                          <input type="text" class="props-input au-target" id="formId" value.bind="selectedForm.id &amp; validateOnChange" placeholder="ID"
+                            change.delegate="updateId()" au-target-id="196">
+                        </td>
+                        <td>
+                          <span class="glyphicon glyphicon-remove-circle props-table--clear-button au-target" click.delegate="clearId()" au-target-id="197"></span>
+                        </td>
+                        <td>
+                          <div show.bind="isFormSelected" class="au-target aurelia-hide" au-target-id="198">
+                            <!--anchor-->
+                            <div class="id-tooltip-ok">
+                              <div class="tooltip">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                <span class="tooltiptext">This Id is fine!</span>
+                              </div>
+                            </div>
+                            <!--anchor-->
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Type</th>
+                        <td>
+                          <select class="props-input au-target" value.bind="selectedType" change.delegate="updateType()" au-target-id="203">
+                            <option model.bind="null" class="au-target" au-target-id="204">-Choose Type-</option>
+                            <option model.bind="type" class="au-target" au-target-id="205">string</option>
+                            <option model.bind="type" class="au-target" au-target-id="205">long</option>
+                            <option model.bind="type" class="au-target" au-target-id="205">boolean</option>
+                            <option model.bind="type" class="au-target" au-target-id="205">date</option>
+                            <option model.bind="type" class="au-target" au-target-id="205">enum</option>
+                            <option model.bind="type" class="au-target" au-target-id="205">custom type</option>
+                            <!--anchor-->
+                          </select>
+                      </tr>
+                      <!--anchor-->
+                      <tr>
+                        <th>Label</th>
+                        <td>
+                          <input type="text" class="props-input au-target" value.bind="selectedForm.label" placeholder="Label" change.delegate="updateLabel()"
+                            au-target-id="211">
+                        </td>
+                        <td>
+                          <span class="glyphicon glyphicon-remove-circle props-table--clear-button au-target" click.delegate="clearLabel()" au-target-id="212"></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Default Value</th>
+                        <td>
+                          <input type="text" class="props-input au-target" value.bind="selectedForm.defaultValue" placeholder="Default Value" change.delegate="updateDefaultValue()"
+                            au-target-id="213">
+                        </td>
+                        <td>
+                          <span class="glyphicon glyphicon-remove-circle props-table--clear-button au-target" click.delegate="clearValue()" au-target-id="214"></span>
+                        </td>
+                      </tr>
+
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!--anchor-->
+
+
+              <div class="section-panel panel--grow">
+                <div class="panel__heading">
+                  Properties
+                  <button class="add-context-button au-target" click.delegate="addProperty()" au-target-id="169">
+                    <span class="fa fa-plus"></span>
+                  </button>
+                </div>
+                <div class="panel__content">
+                  <table>
+                    <tbody>
+                      <tr index.bind="$index" class="au-target" au-target-id="170">
+                        <td class="key-value-column">
+                          <input type="text" class="key-value-input au-target" value.bind="newNames[$index]" placeholder="Name" change.delegate="changeName($index)"
+                            au-target-id="171">
+                        </td>
+                        <td class="key-value-column">
+                          <input type="text" class="key-value-input au-target" value.bind="newValues[$index]" placeholder="Value" change.delegate="changeValue($index)"
+                            au-target-id="172">
+                        </td>
+                        <td>
+                          <button class="extensions-remove au-target" click.delegate="removeProperty($index)" au-target-id="173">x</button>
+                        </td>
+                      </tr>
+                      <!--anchor-->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="ui-preview__code">
+          ...
+        </div>
+      </div>
+    </div>
+
+
+    <div class="ui-preview">
+      <div class="ui-preview__title">Dialogs</div>
+
+      <div class="ui-preview__body">
+        <p>
+          BPMN Studio includes predefined dialog styles.
+        </p>
+
+        <div class="ui-preview__controls">
+            <div class="modal" style="display: block; position: relative;" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <a href="javascript:void(0);" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</a>
+                      <a href="javascript:void(0);" class="btn btn-success">Submit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="ui-preview__code">
+          <pre>...</pre>
+        </div>
+      </div>
+    </div> <!-- .ui-preview -->
+
+  </div>
+</template>

@@ -57,6 +57,12 @@ export class App {
         moduleId: 'modules/config-panel/config-panel',
       },
       {
+        route: 'preview-controls',
+        title: 'Preview Controls',
+        name: 'preview-controls',
+        moduleId: 'modules/preview-controls/preview-controls',
+      },
+      {
         route: 'waitingroom/:processInstanceId',
         title: 'Waiting Room',
         name: 'waiting-room',
