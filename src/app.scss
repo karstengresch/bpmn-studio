@@ -46,3 +46,11 @@ a:hover {
 .toast-bottom-left {
   bottom: 20px;
 }
+
+.mdi::before {
+  font-size: 16px;
+}
+.mdi--status-bar::before {
+  font-size: 12px;
+  line-height: 16px;
+}

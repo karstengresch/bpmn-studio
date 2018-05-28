@@ -188,6 +188,14 @@
             ]
           },
           {
+            "name": "mdi",
+            "path": "../node_modules/@mdi/font",
+            "main": "css/materialdesignicons.min.css",
+            "resources": [
+              "css/materialdesignicons.min.css"
+            ]
+          },
+          {
             "name": "@process-engine/bpmn-studio_client",
             "path": "../node_modules/@process-engine/bpmn-studio_client/dist/amd",
             "main": "index.js"
@@ -316,6 +324,9 @@
       "node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2": "bootstrap/fonts",
       "node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff": "bootstrap/fonts",
       "node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf": "bootstrap/fonts",
+      "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2": "mdi/fonts",
+      "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff": "mdi/fonts",
+      "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf": "mdi/fonts",
       "src/resources/images/default-avatar.png": "src/resources/images",
       "node_modules/font-awesome/fonts/fontawesome-webfont.woff2": "fonts"
     }

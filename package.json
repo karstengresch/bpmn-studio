@@ -74,6 +74,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@mdi/font": "^2.4.85",
     "@process-engine/skeleton-electron": "^2.0.0",
     "aurelia-validation": "^1.1.2",
     "electron-is-dev": "^0.3.0",

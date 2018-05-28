@@ -5,20 +5,20 @@
   -->
   <div class="status-bar status-bar--system-macos">
     <div class="status-bar__left-bar">
-      <span>Connected to: ${processEngineRoute}</span>
+      <span><i class="mdi mdi-power-plug mdi--status-bar"></i> ${processEngineRoute}</span>
     </div>
     <div class="status-bar__center-bar"></div>
     <div class="status-bar__right-bar">
       <div if.bind="showXMLButton">
         <a class="status-bar__element" click.delegate="toggleXMLView()" if.bind="!xmlIsShown">
-          <i class="fa fa-file-code-o"></i> Show XML
+          <i class="mdi mdi-xml mdi--status-bar"></i> Show XML
         </a>
         <a class="status-bar__element" click.delegate="toggleXMLView()" if.bind="xmlIsShown">
-          <i class="fa fa-file-code-o"></i> Show Diagramm
+          <i class="mdi mdi-xml mdi--status-bar"></i> Show Diagramm
         </a>
       </div>
       <a class="status-bar__element" click.delegate="navigateToSettings()">
-        <i class="fa fa-wrench"></i> Settings
+        <i class="mdi mdi-settings mdi--status-bar"></i> Settings
       </a>
     </div>
   </div>
