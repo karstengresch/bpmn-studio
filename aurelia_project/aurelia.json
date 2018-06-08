@@ -308,6 +308,14 @@
             "resources": [
               "styles/*.css"
             ]
+          },
+          {
+            "name": "heatmap.js",
+            "main": "build/heatmap.js",
+            "path": "../node_modules/heatmap.js",
+            "resources": [
+              "styles/*.css"
+            ]
           }
         ]
       }

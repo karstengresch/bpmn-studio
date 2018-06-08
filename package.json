@@ -85,6 +85,7 @@
     "electron-notifications": "^1.0.0",
     "electron-updater": "^2.19.1",
     "get-port": "^3.2.0",
+    "heatmap.js": "^2.0.5",
     "highlight.js": "^9.12.0",
     "highlightjs-line-numbers.js": "^2.2.0",
     "minimist": "^1.2.0",

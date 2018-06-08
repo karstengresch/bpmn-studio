@@ -2,8 +2,8 @@
   <require from="../bpmn-io/bpmn-io"></require>
   <require from="./processdef-detail.css"></require>
   <require from="spectrum-colorpicker/spectrum.css"></require>
-  <div class="process-def-detail">
-  <div class="bpmnio-container">
-    <bpmn-io view-model.ref="bpmn" xml.bind="process.xml"></bpmn-io>
-  </div>
+  <div ref="detailView" class="process-def-detail">
+    <div class="bpmnio-container">
+      <bpmn-io view-model.ref="bpmn" xml.bind="process.xml"></bpmn-io>
+    </div>
 </template>

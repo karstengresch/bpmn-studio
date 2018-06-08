@@ -7,6 +7,7 @@ import {Router} from 'aurelia-router';
 import {ValidateEvent, ValidationController} from 'aurelia-validation';
 import * as canvg from 'canvg-browser';
 import * as download from 'downloadjs';
+import * as heatmap from 'heatmap.js';
 import * as beautify from 'xml-beautifier';
 import {
   AuthenticationStateEvent,
@@ -42,6 +43,8 @@ export class ProcessDefDetail {
   private bpmnStudioClient: BpmnStudioClient;
   private router: Router;
 
+  private _heatmap: any;
+
   public validationController: ValidationController;
   public validationError: boolean;
   public solutionExplorerIsShown: boolean = false;
@@ -51,6 +54,7 @@ export class ProcessDefDetail {
   @bindable() public name: string;
   @bindable() public startedProcessId: string;
   @bindable({ defaultBindingMode: bindingMode.oneWay }) public initialLoadingFinished: boolean = false;
+  public detailView: any;
 
   constructor(processEngineService: IProcessEngineService,
               eventAggregator: EventAggregator,
@@ -108,6 +112,10 @@ export class ProcessDefDetail {
 
     this.eventAggregator.publish(environment.events.navBar.showTools, this.process);
     this.eventAggregator.publish(environment.events.statusBar.showXMLButton);
+
+    this._heatmap = heatmap.create({
+      container: this.detailView,
+    });
   }
 
   public detached(): void {
