@@ -116,6 +116,18 @@ export class ProcessDefDetail {
     this._heatmap = heatmap.create({
       container: this.detailView,
     });
+
+    setInterval(() => {
+      // tslint:disable-next-line:no-magic-numbers
+      const x: number = Math.floor(Math.random() * 1000);
+      // tslint:disable-next-line:no-magic-numbers
+      const y: number = Math.floor(Math.random() * 1000);
+
+      // tslint:disable-next-line:no-magic-numbers
+      this._heatmap.addData({ x: x, y: y, value: 10});
+
+      this._heatmap.repaint();
+     }, 1);
   }
 
   public detached(): void {
