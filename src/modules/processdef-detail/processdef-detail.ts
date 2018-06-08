@@ -54,7 +54,7 @@ export class ProcessDefDetail {
   @bindable() public name: string;
   @bindable() public startedProcessId: string;
   @bindable({ defaultBindingMode: bindingMode.oneWay }) public initialLoadingFinished: boolean = false;
-  public detailView: any;
+  public detailView: HTMLElement;
 
   constructor(processEngineService: IProcessEngineService,
               eventAggregator: EventAggregator,
