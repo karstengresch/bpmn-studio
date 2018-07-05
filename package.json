@@ -63,7 +63,12 @@
           "name": "BPMN"
         }
       ]
-    }
+    },
+    "protocols": [{
+      "name": "bpmn-studio",
+      "role": "Viewer",
+      "schemes": ["bpmn-studio"]
+    }]
   },
   "files": [
     "scripts",

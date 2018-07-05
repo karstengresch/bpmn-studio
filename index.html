@@ -5,6 +5,9 @@
     <title>BPMN-Studio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- <base href="/Users/seb/_dev/Contrib/ProcessEngine/process_engine_meta/bpmn-studio/"> -->
+    
   </head>
 
   <body>
@@ -22,11 +25,6 @@
         }
       </script>
       <script src="scripts/vendor-bundle.js" data-main="aurelia-bootstrapper"></script>
-      <script>
-        // this disables a bluebird-memory-leak and drastically improves performance!
-        // see https://github.com/aurelia/framework/issues/755
-        Promise.config({ longStackTraces: false });
-      </script>
     </div>
   </body>
 </html>

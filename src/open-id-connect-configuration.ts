@@ -1,12 +1,12 @@
 import { OpenIdConnectConfiguration } from 'aurelia-open-id-connect';
-import { UserManagerSettings, WebStorageStateStore } from 'oidc-client';
+import { Log, WebStorageStateStore } from 'oidc-client';
 import environment from './environment';
 
 export const oidcConfig: OpenIdConnectConfiguration = {
-  loginRedirectRoute: '',
-  logoutRedirectRoute: '',
-  unauthorizedRedirectRoute: '',
-  logLevel: 0,
+  loginRedirectRoute: 'bpmn-studio://',
+  logoutRedirectRoute: 'bpmn-studio://',
+  unauthorizedRedirectRoute: 'bpmn-studio://',
+  logLevel: Log.DEBUG,
   userManagerSettings: {
     accessTokenExpiringNotificationTime: 1,
     authority: environment.openIdConnect.authority,

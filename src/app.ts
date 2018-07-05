@@ -2,6 +2,7 @@ import { autoinject } from 'aurelia-framework';
 import { OpenIdConnect, OpenIdConnectRoles } from 'aurelia-open-id-connect';
 import {Router, RouterConfiguration} from 'aurelia-router';
 import { User } from 'oidc-client';
+import {oidcConfig} from './open-id-connect-configuration';
 
 @autoinject()
 export class App {
@@ -14,10 +15,37 @@ export class App {
     this._openIdConnect.observeUser((user: User) => this._user = user);
   }
 
+  private _parseDeepLinkingUrl(url: string): string {
+    const customProtocolPrefix: string = 'bpmn-studio://';
+    const urlFragment: string = url.substring(customProtocolPrefix.length);
+    return urlFragment;
+  }
+
+  private _processDeepLinkingRequest(url: string): void {
+    const urlFragment: string = this._parseDeepLinkingUrl(url);
+    this._router.navigate(urlFragment);
+  }
+
   public configureRouter(config: RouterConfiguration, router: Router): void {
     this._router = router;
 
+    if ((<any> window).nodeRequire) {
+      const ipcRenderer: any = (<any> window).nodeRequire('electron').ipcRenderer;
+      ipcRenderer.on('deep-linking-request', (event: any, url: string) => {
+        console.log('deep linking request received: ', event, url);
+        this._processDeepLinkingRequest(url);
+      });
+      ipcRenderer.on('deep-linking-request-in-runtime', (event: any, url: string) => {
+        const urlFragment: string = this._parseDeepLinkingUrl(url);
+        console.log('signinresponse::: ' + urlFragment);
+        this._openIdConnect.userManager.processSigninResponse(urlFragment, oidcConfig.userManagerSettings.userStore);
+        this._router.navigate('/');
+      });
+      ipcRenderer.send('deep-linking-ready');
+    }
+
     config.options.pushState = true;
+    // config.options.root = '/';
     config.title = 'BPMN-Studio';
 
     config.map([
@@ -73,6 +101,8 @@ export class App {
         moduleId: 'modules/waiting-room/waiting-room',
       },
     ]);
+
+    config.fallbackRoute('');
 
     this._openIdConnect.configure(config);
   }

@@ -1,0 +1,10 @@
+{
+  "User": {
+    "data": [{
+      "id": "61d7f2e3-3387-4115-895e-b04a49967b27",
+      "name": "admin",
+      "password": "admin",
+      "roles": ["administrator"]
+    }]
+  }
+}

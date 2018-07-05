@@ -5,8 +5,46 @@ import {IFileInfo} from './contracts/processengine/index';
 import {NotificationService} from './modules/notification/notification.service';
 import {TokenRepository} from './modules/token-repository/token.repository';
 
+import { resolve } from 'dns';
 import environment from './environment';
 import {oidcConfig} from './open-id-connect-configuration';
+
+function ensureProcessEngineStarted(aurelia: Aurelia): Promise<void> {
+
+  return new Promise((resolve, reject) => {
+
+    // check if the processengine started successfull
+    if ((<any> window).nodeRequire) {
+      const ipcRenderer: any = (<any> window).nodeRequire('electron').ipcRenderer;
+      // subscribe to processengine status
+      ipcRenderer.send('add_internal_processengine_status_listener');
+      // wait for status to be reported
+
+      ipcRenderer.on('internal_processengine_status', (event: any, status: string, error: string) => {
+        if (status !== 'error') {
+          return resolve();
+        }
+        /* This is the URL to an issue in GitHub, describing
+        * what the user can do about this failure.
+        *
+        * TODO: Implement a proper FAQ section and link to that.
+        */
+        // tslint:disable-next-line: max-line-length
+        const targetHref: string = `<a href="javascript:nodeRequire('open')('https://github.com/process-engine/bpmn-studio/issues/316')">click here</a>`;
+
+        const errorMessage: string = `Failed to start ProcessEngine. This might be related to ${targetHref}.`;
+        console.log(error);
+        const notificationService: NotificationService = aurelia.container.get('NotificationService');
+
+        notificationService.showNonDisappearingNotification(NotificationType.ERROR, errorMessage);
+        reject(error);
+      });
+    }
+
+    resolve();
+
+  });
+}
 
 export function configure(aurelia: Aurelia): void {
 
@@ -24,6 +62,8 @@ export function configure(aurelia: Aurelia): void {
     const fileInfo: IFileInfo = ipcRenderer.sendSync('get_opened_file');
     aurelia.container.registerInstance('FileContent', fileInfo);
     localStorage.setItem('processEngineRoute', `http://${newHost}`);
+
+    console.log(`process engine route: http://${newHost}`);
   }
 
   if (window.localStorage.getItem('processEngineRoute')) {
@@ -59,32 +99,10 @@ export function configure(aurelia: Aurelia): void {
   }
 
   aurelia.start().then(() => {
-    aurelia.setRoot();
+        aurelia.setRoot();
 
-    // check if the processengine started successfull
-    if ((<any> window).nodeRequire) {
-      const ipcRenderer: any = (<any> window).nodeRequire('electron').ipcRenderer;
-      // subscribe to processengine status
-      ipcRenderer.send('add_internal_processengine_status_listener');
-      // wait for status to be reported
+        ensureProcessEngineStarted(aurelia);
 
-      ipcRenderer.on('internal_processengine_status', (event: any, status: string, error: string) => {
-        if (status !== 'error') {
-          return;
-        }
-        /* This is the URL to an issue in GitHub, describing
-         * what the user can do about this failure.
-         *
-         * TODO: Implement a proper FAQ section and link to that.
-         */
-        // tslint:disable-next-line: max-line-length
-        const targetHref: string = `<a href="javascript:nodeRequire('open')('https://github.com/process-engine/bpmn-studio/issues/316')">click here</a>`;
-
-        const errorMessage: string = `Failed to start ProcessEngine. For further information ${targetHref}.`;
-        const notificationService: NotificationService = aurelia.container.get('NotificationService');
-
-        notificationService.showNonDisappearingNotification(NotificationType.ERROR, errorMessage);
       });
-    }
-  });
+
 }

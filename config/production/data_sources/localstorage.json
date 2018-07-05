@@ -1,0 +1,7 @@
+{
+  "adapter": {
+    "name": "Localstorage",
+    "skipMigration": false
+  },
+  "schemaMode": "full"
+}

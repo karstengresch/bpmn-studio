@@ -1,0 +1,11 @@
+{
+  "initializeAllEntityTypesOnStartup": true,
+  "data_sources": {
+    "default": {
+      "$ref": "#/data_sources/localstorage"
+    }
+  },
+  "default_data": {
+    "$ref": "#/default_data/datastore"
+  }
+}

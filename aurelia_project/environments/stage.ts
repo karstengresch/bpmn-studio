@@ -1,9 +1,11 @@
 const processEngineRoute: string = 'http://localhost:8000';
+const appHost: string = 'bpmn-studio:/';
 
 // tslint:disable-next-line no-default-export
 export default {
   debug: true,
   testing: false,
+  appHost: appHost,
   processlist: {
     pageLimit: 10,
   },
