@@ -3,6 +3,7 @@ import { OpenIdConnect, OpenIdConnectRoles } from 'aurelia-open-id-connect';
 import {Router, RouterConfiguration} from 'aurelia-router';
 import { User } from 'oidc-client';
 import {oidcConfig} from './open-id-connect-configuration';
+import { SigninResponse } from './openIdSignInResponse';
 
 @autoinject()
 export class App {
@@ -31,14 +32,18 @@ export class App {
 
     if ((<any> window).nodeRequire) {
       const ipcRenderer: any = (<any> window).nodeRequire('electron').ipcRenderer;
-      ipcRenderer.on('deep-linking-request', (event: any, url: string) => {
+      ipcRenderer.on('deep-linking-request-in-runtime', (event: any, url: string) => {
         console.log('deep linking request received: ', event, url);
         this._processDeepLinkingRequest(url);
       });
-      ipcRenderer.on('deep-linking-request-in-runtime', (event: any, url: string) => {
+      ipcRenderer.on('deep-linking-request', async(event: any, url: string) => {
         const urlFragment: string = this._parseDeepLinkingUrl(url);
         console.log('signinresponse::: ' + urlFragment);
-        this._openIdConnect.userManager.processSigninResponse(urlFragment, oidcConfig.userManagerSettings.userStore);
+        const user: User = new User(new SigninResponse(urlFragment));
+        this._user = user;
+        console.log(user);
+        console.log(user.profile.name);
+        // await this._openIdConnect.userManager.processSigninResponse(urlFragment, oidcConfig.userManagerSettings.userStore);
         this._router.navigate('/');
       });
       ipcRenderer.send('deep-linking-ready');

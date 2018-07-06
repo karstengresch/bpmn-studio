@@ -56,17 +56,20 @@ Main._initializeApplication = function () {
     app.setAsDefaultProtocolClient('bpmn-studio');
 
     app.on('open-url', (event, url) => {
-      console.log('open-url called', event, url);
+      console.log('open-url called', url);
       event.preventDefault();
-      if (!Main._window) {
-        console.log('no mainWindow');
-        Main._startupUrl = url;
-      } else {
-        console.log('mainWindow exists');
-        Main._bringExistingInstanceToForeground();
-        Main._window.webContents.send('deep-linking-request-in-runtime', url);
-        console.log('done sending in runtime');
-      }
+
+      // This bug seems to be causing the oidc-client to use a hard redirect
+      // instead of using an iFrame:
+      // https://github.com/electron/electron/issues/9581
+      //
+      // As a workaround we 
+
+      Main._startupUrl = url;
+      Main._bringExistingInstanceToForeground();
+      Main._window.close();
+      Main._createMainWindow();
+
     });
   }
 
@@ -181,8 +184,9 @@ Main._createMainWindow = function () {
         titleBarStyle: 'hidden-inset'
       });
 
-      electron.ipcMain.once('deep-linking-ready', (event) => {
+      electron.ipcMain.on('deep-linking-ready', (event) => {
         if (Main._startupUrl) {
+          console.log('sending startup uri: ' + Main._startupUrl);
           Main._window.webContents.send('deep-linking-request', Main._startupUrl);
         }
       });
