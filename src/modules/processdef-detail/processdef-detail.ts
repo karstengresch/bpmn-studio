@@ -108,6 +108,10 @@ export class ProcessDefDetail {
     this._eventAggregator.publish(environment.events.navBar.showTools, this.process);
     this._eventAggregator.publish(environment.events.navBar.showStartButton);
     this._eventAggregator.publish(environment.events.statusBar.showDiagramViewButtons);
+
+    window.onbeforeunload = (): void => {
+      return;
+   };
   }
 
   public determineActivationStrategy(): string {
