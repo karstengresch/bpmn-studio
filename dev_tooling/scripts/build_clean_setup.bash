@@ -12,9 +12,9 @@ echo "Removing Node Modules...."
 rm -rf node_modules/
 
 # Remove the package-lock file if it exists.
-if [[ -e "package-lock.json" ]]; then
+if [[ -e "$(pwd)/package-lock.json" ]]; then
   echo "Removing package lock file..."
-  rm package-lock.json
+  rm $(pwd)/package-lock.json
 fi
 
 # Clear the npm cache
