@@ -27,6 +27,18 @@
   margin-top: 100px;
 }
 
+/*
+ * Modal Import Dialogs
+ */
+.modal-dialog__headline {
+  font-size: 30px;
+}
+
+.modal-dialog__import-bpmn {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
 .process-name-table-entry {
   height: 50px;
   overflow: hidden;
