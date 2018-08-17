@@ -185,6 +185,12 @@ export class App {
         name: 'waiting-room',
         moduleId: 'modules/waiting-room/waiting-room',
       },
+      {
+        route: 'process/:processModelId/heatmap',
+        title: 'Heatmap',
+        name: 'heatmap',
+        moduleId: 'modules/heatmap/heatmap',
+      },
     ]);
 
     this._openIdConnect.configure(config);
