@@ -18,6 +18,9 @@
       <div class="menu__menu-tabbed-link" class.bind="activeRouteName === 'dashboard' || activeRouteName === 'heatmap' ? 'menu__menu-tabbed-link--active' : ''">
         <a id="navbarInspectLink" class="menu-tabbed-link" route-href="route: dashboard">Inspect</a>
       </div>
+      <div class="menu__menu-tabbed-link" class.bind="activeRouteName === 'heatmap' ? 'menu__menu-tabbed-link--active' : ''">
+        <a class="menu-tabbed-link menu-tabbed-link--disabled">Heatmap</a>
+      </div>
     </div>
     <div class="menu-bar__menu menu-bar__menu--center" id="navBarCenter">
       <div class="menu__element menu__element--title btn-group" if.bind="showTools" ref="diagramInfo">
