@@ -18,7 +18,11 @@ export class NavBar {
   public showTools: boolean = false;
   public disableStartButton: boolean = true;
   public disableSaveButton: boolean = false;
+<<<<<<< HEAD
   public disableDiagramUploadButton: boolean = true;
+=======
+  public showDiagramUploadButton: boolean = false;
+>>>>>>> :lipstick: Improve Variable Name
   public diagramContainsUnsavedChanges: boolean = false;
 
   private _router: Router;
