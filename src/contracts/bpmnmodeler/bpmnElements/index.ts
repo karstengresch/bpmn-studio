@@ -20,3 +20,4 @@ export {IScriptTaskElement} from './IScriptTaskElement';
 export {ISignal} from './ISignal';
 export {ISignalElement} from './ISignalElement';
 export {IEnumValue} from './IEnumValue';
+export {IConnection} from './IConnection';

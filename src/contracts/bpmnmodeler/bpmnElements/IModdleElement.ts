@@ -29,4 +29,5 @@ export interface IModdleElement {
   body?: string;
   variableName?: string;
   variableEvent?: string;
+  text?: string;
 }
