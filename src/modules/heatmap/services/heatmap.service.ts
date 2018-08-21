@@ -36,16 +36,19 @@ export class HeatmapService implements IHeatmapService {
       }
 
       const elementIsAssociation: boolean = element.type === 'bpmn:Association';
-      const associationShowsTiming: boolean = element.target.businessObject.text.includes('RT:');
+      const annotationHasRuntime: boolean = element.target.businessObject.text.includes('RT:');
 
-      return elementIsAssociation && associationShowsTiming;
+      return elementIsAssociation && annotationHasRuntime;
     });
 
     associations.forEach((association: IConnection) => {
+
+      const medianRunTime: number = this._getMedianRunTimeForAssociation(association);
+
       const flowNodeAssociation: IFlowNodeAssociation = {
         associationId: association.id,
         sourceId: association.source.id,
-        runtime_timeSpecification: association.target.businessObject.text,
+        runtime_medianInMs: medianRunTime,
       };
 
       flowNodeAssociations.push(flowNodeAssociation);
@@ -65,8 +68,6 @@ export class HeatmapService implements IHeatmapService {
     const elementsToColor: Array<FlowNodeRuntimeInformation> = this._getElementsToColor(associations, flowNodeRuntimeInformation);
     const shapesToColor: Array<IShape> = this._getShapesToColor(elementRegistry, elementsToColor);
 
-    console.log('elements', elementsToColor);
-    console.log('associations', associations);
     modeling.setColor(shapesToColor, {
       stroke: '#E53935',
       fill: '#FFCDD2',
@@ -117,5 +118,18 @@ export class HeatmapService implements IHeatmapService {
     });
 
     return saveXmlPromise;
+  }
+
+  private _getMedianRunTimeForAssociation(association: IConnection): number {
+    const annotationText: string = association.target.businessObject.text;
+    const startRunTimeText: number = annotationText.search('RT:') + 4;
+    const lengthOfRunTimeText: number = 12;
+
+    const runTimeTimeStamp: string = annotationText.substr(startRunTimeText, lengthOfRunTimeText);
+
+    const date: Date = new Date('1970-01-01T' + runTimeTimeStamp);
+
+    console.log(date, date.getTime());
+    return 5;
   }
 }

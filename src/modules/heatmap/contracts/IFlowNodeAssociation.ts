@@ -1,5 +1,5 @@
 export interface IFlowNodeAssociation {
   associationId: string;
   sourceId: string;
-  runtime_timeSpecification: string;
+  runtime_medianInMs: number;
 }
