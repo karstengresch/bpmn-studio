@@ -39,6 +39,8 @@ export default {
       hideTools: 'navbar:tools:hide',
       disableStartButton: 'navbar:startButton:disable',
       enableStartButton: 'navbar:startButton:enable',
+      showProcessName: 'navbar:processName:show',
+      hideProcessName: 'navbar:processName:hide',
       updateProcess: 'navbar:process:update',
       disableSaveButton: 'navbar:saveButton:disable',
       enableSaveButton: 'navbar:saveButton:enable',

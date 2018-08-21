@@ -18,6 +18,7 @@ export class NavBar {
   public showTools: boolean = false;
   public disableStartButton: boolean = true;
   public disableSaveButton: boolean = false;
+  public showProcessName: boolean = false;
   public disableDiagramUploadButton: boolean = true;
   public diagramContainsUnsavedChanges: boolean = false;
 
@@ -45,6 +46,11 @@ export class NavBar {
         this.process = process;
       }),
 
+      this._eventAggregator.subscribe(environment.events.navBar.showProcessName, (process: IDiagram) => {
+        this.showProcessName = true;
+        this.process = process;
+      }),
+
       this._eventAggregator.subscribe(environment.events.navBar.hideTools, () => {
         this.showTools = false;
       }),
@@ -52,6 +58,10 @@ export class NavBar {
       this._eventAggregator.subscribe(environment.events.navBar.updateProcess, (process: IDiagram) => {
         this.process = process;
         this.diagramContainsUnsavedChanges = false;
+      }),
+
+      this._eventAggregator.subscribe(environment.events.navBar.hideProcessName, () => {
+        this.showProcessName = false;
       }),
 
       this._eventAggregator.subscribe(environment.events.navBar.disableSaveButton, () => {

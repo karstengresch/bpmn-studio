@@ -133,6 +133,7 @@ export class ProcessDefDetail {
     this._eventAggregator.publish(environment.events.navBar.showTools, this.process);
     this._eventAggregator.publish(environment.events.navBar.enableStartButton);
     this._eventAggregator.publish(environment.events.navBar.disableDiagramUploadButton);
+    this._eventAggregator.publish(environment.events.navBar.showProcessName, this.process);
     this._eventAggregator.publish(environment.events.statusBar.showDiagramViewButtons);
   }
 
@@ -229,6 +230,7 @@ export class ProcessDefDetail {
     this._eventAggregator.publish(environment.events.navBar.disableStartButton);
     this._eventAggregator.publish(environment.events.navBar.enableDiagramUploadButton);
     this._eventAggregator.publish(environment.events.statusBar.hideDiagramViewButtons);
+    this._eventAggregator.publish(environment.events.navBar.hideProcessName);
   }
 
   public async startProcess(): Promise<void> {
