@@ -27,9 +27,18 @@ export class HeatmapService implements IHeatmapService {
     const flowNodeAssociations: Array<IFlowNodeAssociation> = [];
 
     const associations: Array<IConnection> = elementRegistry.filter((element: IShape) => {
-      const elementIsAssociation: boolean = element.type === 'bpmn:Association';
+      const elementIsNoValidAssociation: boolean = element.target === undefined ||
+                                                   element.target.businessObject === undefined ||
+                                                   element.target.businessObject.text === undefined;
 
-      return elementIsAssociation;
+      if (elementIsNoValidAssociation) {
+        return false;
+      }
+
+      const elementIsAssociation: boolean = element.type === 'bpmn:Association';
+      const associationShowsTiming: boolean = element.target.businessObject.text.includes('RT:');
+
+      return elementIsAssociation && associationShowsTiming;
     });
 
     associations.forEach((association: IConnection) => {
@@ -56,6 +65,8 @@ export class HeatmapService implements IHeatmapService {
     const elementsToColor: Array<FlowNodeRuntimeInformation> = this._getElementsToColor(associations, flowNodeRuntimeInformation);
     const shapesToColor: Array<IShape> = this._getShapesToColor(elementRegistry, elementsToColor);
 
+    console.log('elements', elementsToColor);
+    console.log('associations', associations);
     modeling.setColor(shapesToColor, {
       stroke: '#E53935',
       fill: '#FFCDD2',
