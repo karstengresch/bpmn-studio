@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
 
-import {FlowNodeRuntimeInformation} from '@process-engine/kpi_api_contracts';
+import {ActiveToken, FlowNodeRuntimeInformation} from '@process-engine/kpi_api_contracts';
 import {ManagementApiClientService} from '@process-engine/management_api_client';
 import {ManagementContext, ProcessModelExecution} from '@process-engine/management_api_contracts';
 
@@ -139,6 +139,117 @@ export class HeatmapMockRepository implements IHeatmapRepository {
     },
   ];
 
+  private _mockDataForActiveTokens: Array<ActiveToken> = [
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'Task_1sy1ibw',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'Task_1sy1ibw',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'Task_1sy1ibw',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'Task_0julnc5',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'Task_0julnc5',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'Task_0julnc5',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'Task_0julnc5',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'Task_0julnc5',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'Task_04fbo5q',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
+  ];
+
   constructor(manegementApiClient: ManagementApiClientService, authenticationService: IAuthenticationService) {
     this._managementApiClient = manegementApiClient;
     this._authenticationService = authenticationService;
@@ -147,6 +258,12 @@ export class HeatmapMockRepository implements IHeatmapRepository {
   public getRuntimeInformationForProcessModel(processModelId: string): Promise<Array<FlowNodeRuntimeInformation>> {
     return new Promise ((resolve: Function, reject: Function): void => {
       resolve(this._mockDataForHeatmapSampleProcess);
+    });
+  }
+
+  public getActiveTokensForProcessModel(processModelId: string): Promise<Array<ActiveToken>> {
+    return new Promise ((resolve: Function, reject: Function): void => {
+      resolve(this._mockDataForActiveTokens);
     });
   }
 
