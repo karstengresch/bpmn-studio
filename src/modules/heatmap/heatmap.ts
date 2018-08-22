@@ -1,11 +1,11 @@
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {inject} from 'aurelia-framework';
 
-import {IBpmnModeler, IElementRegistry} from '../../contracts';
+import {IBpmnModeler, IElementRegistry, IOverlay} from '../../contracts';
 import {IFlowNodeAssociation, IHeatmapService} from './contracts';
 
 import * as bundle from '@process-engine/bpmn-js-custom-bundle';
-import {FlowNodeRuntimeInformation} from '@process-engine/kpi_api_contracts';
+import {ActiveToken, FlowNodeRuntimeInformation} from '@process-engine/kpi_api_contracts';
 import {ProcessModelExecution} from '@process-engine/management_api_contracts';
 import environment from '../../environment';
 
@@ -56,7 +56,13 @@ export class Heatmap {
       ],
     });
 
-    this._importXML(xml, this._viewer);
+    await this._importXML(xml, this._viewer);
+
+    const activeTokens: Array<ActiveToken> = await this._heatmapService.getActiveTokensForProcessModel(processModelId);
+
+    const overlays: IOverlay = this._viewer.get('overlays');
+
+    this._heatmapService.addOverlaysForTokens(overlays, activeTokens);
   }
 
   public attached(): void {

@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
 
-import {FlowNodeRuntimeInformation} from '@process-engine/kpi_api_contracts';
+import {ActiveToken, FlowNodeRuntimeInformation} from '@process-engine/kpi_api_contracts';
 import {ProcessModelExecution} from '@process-engine/management_api_contracts';
 
 import {
@@ -10,6 +10,7 @@ import {
   IConnection,
   IElementRegistry,
   IModeling,
+  IOverlay,
   IShape,
 } from '../../../contracts/index';
 import {IFlowNodeAssociation, IHeatmapRepository, IHeatmapService} from '../contracts';
@@ -24,6 +25,22 @@ export class HeatmapService implements IHeatmapService {
 
   public getRuntimeInformationForProcessModel(processModelId: string): Promise<Array<FlowNodeRuntimeInformation>> {
     return this._heatmapRepository.getRuntimeInformationForProcessModel(processModelId);
+  }
+
+  public getActiveTokensForProcessModel(processModelId: string): Promise<Array<ActiveToken>> {
+    return this._heatmapRepository.getActiveTokensForProcessModel(processModelId);
+  }
+
+  public addOverlaysForTokens(overlays: IOverlay, activeTokens: Array<ActiveToken>): void {
+    console.log(activeTokens);
+
+    overlays.add('Task_0julnc5', {
+      position: {
+        left: 80,
+        top: 70,
+      },
+      html: '<div class="overlay">15</div>',
+    });
   }
 
   public getProcess(processModelId: string): Promise<ProcessModelExecution.ProcessModel> {
