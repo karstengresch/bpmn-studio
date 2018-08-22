@@ -3,7 +3,15 @@ import {inject} from 'aurelia-framework';
 import {FlowNodeRuntimeInformation} from '@process-engine/kpi_api_contracts';
 import {ProcessModelExecution} from '@process-engine/management_api_contracts';
 
-import {IBpmnModeler, IConnection, IElementRegistry, IModeling, IShape} from '../../../contracts';
+import {
+  defaultBpmnColors,
+  IBpmnModeler,
+  IColorPickerColor,
+  IConnection,
+  IElementRegistry,
+  IModeling,
+  IShape,
+} from '../../../contracts/index';
 import {IFlowNodeAssociation, IHeatmapRepository, IHeatmapService} from '../contracts';
 
 @inject('HeatmapMockRepository')
@@ -66,16 +74,32 @@ export class HeatmapService implements IHeatmapService {
     const modeling: IModeling = modeler.get('modeling');
 
     const elementsToColor: Array<FlowNodeRuntimeInformation> = this._getElementsToColor(associations, flowNodeRuntimeInformation);
-    const shapesToColor: Array<IShape> = this._getShapesToColor(elementRegistry, elementsToColor);
 
-    modeling.setColor(shapesToColor, {
-      stroke: '#E53935',
-      fill: '#FFCDD2',
+    associations.forEach((association: IFlowNodeAssociation) => {
+      const elementToColor: FlowNodeRuntimeInformation =  elementsToColor.find((element: FlowNodeRuntimeInformation) => {
+        return element.flowNodeId === association.sourceId;
+      });
+
+      const shapeToColor: IShape = this._getShapeToColor(elementRegistry, elementToColor);
+
+      if (elementToColor.medianRuntimeInMs > association.runtime_medianInMs) {
+        this.colorElement(modeling, shapeToColor, defaultBpmnColors.red);
+      } else {
+        this.colorElement(modeling, shapeToColor, defaultBpmnColors.green);
+      }
+
     });
 
     const xml: string = await this._getXmlFromModeler(modeler);
 
     return xml;
+  }
+
+  private colorElement(modeling: IModeling, shapeToColor: IShape, color: IColorPickerColor): void {
+    modeling.setColor(shapeToColor, {
+      stroke: color.border,
+      fill: color.fill,
+    });
   }
 
   private _getElementsToColor(
@@ -93,15 +117,10 @@ export class HeatmapService implements IHeatmapService {
     return elementsToColor;
   }
 
-  private _getShapesToColor(elementRegistry: IElementRegistry, elementsToColor: Array<FlowNodeRuntimeInformation>): Array<IShape> {
-    const elementShapes: Array<any> = [];
+  private _getShapeToColor(elementRegistry: IElementRegistry, elementToColor: FlowNodeRuntimeInformation): IShape {
+    const elementShape: IShape = elementRegistry.get(elementToColor.flowNodeId);
 
-    elementsToColor.forEach((element: FlowNodeRuntimeInformation) => {
-      const elementShape: IShape = elementRegistry.get(element.flowNodeId);
-      elementShapes.push(elementShape);
-    });
-
-    return elementShapes;
+    return elementShape;
   }
 
   private async _getXmlFromModeler(modeler: IBpmnModeler): Promise<string> {
