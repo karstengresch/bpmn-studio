@@ -17,3 +17,5 @@ export {IKeyboard} from './IKeyboard';
 export {IEditorActions} from './IEditorActions';
 export {IEventFunction} from './IEventFunction';
 export {IBpmnXmlSaveOptions} from './IBpmnXmlSaveOptions';
+export {IOverlay} from './IOverlay';
+export {IOverlayDescriptor} from './IOverlayDescriptor';
