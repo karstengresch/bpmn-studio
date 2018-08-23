@@ -11,13 +11,13 @@
     </div>
     <div class="status-bar__center-bar" id="statusBarCenter">
       <div class="center-bar__diff-view-buttons" if.bind="diffIsShown">
-        <a class="status-bar__element" class.bind="currentDiffMode === DiffMode.BeforeVsAfter ? 'status-bar__element--active' : ''" click.delegate="changeDiffMode(DiffMode.BeforeVsAfter)" title="Compare the last saved diagram with the current diagram">
+        <a class="status-bar__element" class.bind="currentDiffMode === DiffMode.BeforeVsAfter ? 'status-bar__element--active' : ''" click.delegate="changeDiffMode(DiffMode.BeforeVsAfter)" title="Compare the last saved diagram with the current diagram" id="statusBarBeforeVsAfter">
           Before vs. After <i class="fa fa-arrow-right"></i>
         </a>
-        <a class="status-bar__element" class.bind="showChangeList ? 'status-bar__element--active' : ''" click.delegate="toggleChangeList()" title="Toggle visibility of the Change List">
+        <a class="status-bar__element" class.bind="showChangeList ? 'status-bar__element--active' : ''" click.delegate="toggleChangeList()" title="Toggle visibility of the Change List" id="statusBarChangesLog">
           <i class="fas fa-bars"></i>
         </a>
-        <a class="status-bar__element" class.bind="currentDiffMode === DiffMode.AfterVsBefore ? 'status-bar__element--active' : ''" click.delegate="changeDiffMode(DiffMode.AfterVsBefore)" title="Compare the current diagram with the last saved diagram">
+        <a class="status-bar__element" class.bind="currentDiffMode === DiffMode.AfterVsBefore ? 'status-bar__element--active' : ''" click.delegate="changeDiffMode(DiffMode.AfterVsBefore)" title="Compare the current diagram with the last saved diagram" id="statusBarAfterVsBefore">
           <i class="fa fa-arrow-left"></i> After vs. Before
         </a>
       </div>
@@ -27,13 +27,13 @@
         <a class="status-bar__element" click.delegate="toggleXMLView()" if.bind="!xmlIsShown" id="statusBarXMLViewButton">
           <i class="fas fa-file-code"></i> Show XML
         </a>
-        <a class="status-bar__element" click.delegate="toggleXMLView()" if.bind="xmlIsShown">
+        <a class="status-bar__element" click.delegate="toggleXMLView()" if.bind="xmlIsShown" id="statusBarDisableXMLViewButton">
           <i class="fas fa-file-code"></i> Show Diagram
         </a>
-        <a class="status-bar__element" click.delegate="toggleDiffView()" if.bind="!diffIsShown">
+        <a class="status-bar__element" click.delegate="toggleDiffView()" if.bind="!diffIsShown" id="statusBarDiffViewButton">
           <i class="fa fa-object-group"></i> Show Diff
         </a>
-        <a class="status-bar__element" click.delegate="toggleDiffView()" if.bind="diffIsShown">
+        <a class="status-bar__element" click.delegate="toggleDiffView()" if.bind="diffIsShown" id="statusBarDisableDiffViewButton">
           <i class="fa fa-object-group"></i> Show Diagram
         </a>
       </template>
