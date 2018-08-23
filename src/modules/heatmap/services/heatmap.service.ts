@@ -41,7 +41,7 @@ export class HeatmapService implements IHeatmapService {
           left: 80,
           top: 70,
         },
-        html: `<div class="overlay">${token.count}</div>`,
+        html: `<div class="overlay" title="This element has actual ${token.count} token.">${token.count}</div>`,
       });
     });
   }
