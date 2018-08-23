@@ -11,9 +11,10 @@ import {
   IElementRegistry,
   IModeling,
   IOverlay,
+  IOverlayPosition,
   IShape,
 } from '../../../contracts/index';
-import {IFlowNodeAssociation, IHeatmapRepository, IHeatmapService} from '../contracts';
+import {defaultOverlayPositions, IFlowNodeAssociation, IHeatmapRepository, IHeatmapService} from '../contracts/index';
 
 @inject('HeatmapMockRepository')
 export class HeatmapService implements IHeatmapService {
@@ -31,19 +32,84 @@ export class HeatmapService implements IHeatmapService {
     return this._heatmapRepository.getActiveTokensForProcessModel(processModelId);
   }
 
-  public addOverlaysForTokens(overlays: IOverlay, activeTokens: Array<ActiveToken>): void {
+  public addOverlays(overlays: IOverlay, elementRegistry: IElementRegistry, activeTokens: Array<ActiveToken>): void {
     const tokenToCount: Array<ActiveToken> = this._getTokenToCount(activeTokens);
     const tokenWithIdAndLength: Array<{flowNodeId: string, count: number}> = this._getTokenWithIdAndCount(activeTokens, tokenToCount);
+    const elementsWithoutToken: Array<IShape> = this._getElementsWithoutToken(elementRegistry, tokenWithIdAndLength);
 
-    tokenWithIdAndLength.forEach((token: {flowNodeId: string, count: number}) => {
-      overlays.add(token.flowNodeId, {
+    const addOverlay: ((elementId: string,
+                        count: number,
+                        position: IOverlayPosition,
+                      ) => void) = ((elementId: string,
+                                     count: number,
+                                     position: IOverlayPosition,
+                                    ): void => {
+      overlays.add(elementId, {
         position: {
-          left: 80,
-          top: 70,
+          left: position.left,
+          top: position.top,
         },
-        html: `<div class="overlay" title="This element has actual ${token.count} token.">${token.count}</div>`,
+        html: `<div class="overlay" title="This element has actual ${count} token.">${count}</div>`,
       });
     });
+
+    tokenWithIdAndLength.forEach((token: {flowNodeId: string, count: number}) => {
+      const tokenShape: IShape = this._getShape(elementRegistry, token);
+      const tokenShapeIsGateway: boolean = tokenShape.type === 'bpmn:ExclusiveGateway';
+      const tokenShapeIsEvent: boolean = tokenShape.type === 'bpmn:EndEvent' || tokenShape.type === 'bpmn:StartEvent';
+
+      if (tokenShapeIsGateway) {
+        addOverlay(token.flowNodeId, token.count, defaultOverlayPositions.gateways);
+      } else if (tokenShapeIsEvent) {
+        addOverlay(token.flowNodeId, token.count, defaultOverlayPositions.events);
+      } else {
+        addOverlay(token.flowNodeId, token.count, defaultOverlayPositions.tasks);
+      }
+    });
+
+    elementsWithoutToken.forEach((element: IShape) => {
+      const elementIsGateway: boolean = element.type === 'bpmn:ExclusiveGateway';
+      const elementIsEvent: boolean = element.type === 'bpmn:EndEvent' || element.type === 'bpmn:StartEvent';
+
+      if (elementIsGateway) {
+        addOverlay(element.id, 0, defaultOverlayPositions.gateways);
+      } else if (elementIsEvent) {
+        addOverlay(element.id, 0, defaultOverlayPositions.events);
+      } else {
+        addOverlay(element.id, 0, defaultOverlayPositions.tasks);
+      }
+    });
+  }
+
+  private _getElementsWithoutToken(
+    elementRegistry: IElementRegistry,
+    tokenWithIdAndLength: Array<{flowNodeId: string, count: number}>,
+  ): Array<IShape> {
+    const allElements: Array<IShape> = elementRegistry.getAll();
+    const filteredElements: Array<IShape> = allElements.filter((element: IShape) => {
+      const condition: boolean = element.type !== 'bpmn:Association'
+                              && element.type !== 'bpmn:SequenceFlow'
+                              && element.type !== 'bpmn:TextAnnotation'
+                              && element.type !== 'bpmn:Participant'
+                              && element.type !== 'bpmn:Collaboration'
+                              && element.type !== 'bpmn:Lane'
+                              && element.type !== 'label';
+
+      return condition;
+    });
+
+    const filterWithActiveToken: Array<IShape> = filteredElements.filter((element: IShape) => {
+      const token: {flowNodeId: string, count: number} = tokenWithIdAndLength.find((activeToken: {flowNodeId: string, count: number}) => {
+        return activeToken.flowNodeId === element.id;
+      });
+      if (token === undefined) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    return filterWithActiveToken;
   }
 
   public getProcess(processModelId: string): Promise<ProcessModelExecution.ProcessModel> {
@@ -100,7 +166,7 @@ export class HeatmapService implements IHeatmapService {
         return element.flowNodeId === association.sourceId;
       });
 
-      const shapeToColor: IShape = this._getShapeToColor(elementRegistry, elementToColor);
+      const shapeToColor: IShape = this._getShape(elementRegistry, elementToColor);
 
       if (elementToColor.medianRuntimeInMs > association.runtime_medianInMs) {
         this.colorElement(modeling, shapeToColor, defaultBpmnColors.red);
@@ -137,7 +203,7 @@ export class HeatmapService implements IHeatmapService {
     return elementsToColor;
   }
 
-  private _getShapeToColor(elementRegistry: IElementRegistry, elementToColor: FlowNodeRuntimeInformation): IShape {
+  private _getShape(elementRegistry: IElementRegistry, elementToColor: FlowNodeRuntimeInformation | {flowNodeId: string, count: number}): IShape {
     const elementShape: IShape = elementRegistry.get(elementToColor.flowNodeId);
 
     return elementShape;
