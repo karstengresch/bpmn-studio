@@ -248,6 +248,42 @@ export class HeatmapMockRepository implements IHeatmapRepository {
       flowNodeInstanceId: '<flownodeinstanceidhere>',
       payload: '',
     },
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'EndEvent_0eie6q6',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'EndEvent_0eie6q6',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
+    {
+      processInstanceId: 'test',
+      processModelId: 'heatmap_sample',
+      correlationId: 'test',
+      identity: {
+        token: 'test',
+      },
+      createdAt: new Date(),
+      flowNodeId: 'EndEvent_0eie6q6',
+      flowNodeInstanceId: '<flownodeinstanceidhere>',
+      payload: '',
+    },
   ];
 
   constructor(manegementApiClient: ManagementApiClientService, authenticationService: IAuthenticationService) {
