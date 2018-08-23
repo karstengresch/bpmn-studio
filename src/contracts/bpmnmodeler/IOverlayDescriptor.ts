@@ -1,10 +1,7 @@
+import {IOverlayPosition} from './IOverlayPosition';
+
 export interface IOverlayDescriptor {
-  position: {
-    bottom?: number,
-    right?: number,
-    top?: number,
-    left?: number,
-  };
+  position: IOverlayPosition;
   html: string;
   // configure scale=false to use non-scaling overlays
   // configure scale={ min: 1 } to use non-shrinking overlays
