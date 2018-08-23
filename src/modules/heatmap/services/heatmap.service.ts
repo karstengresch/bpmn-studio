@@ -32,14 +32,17 @@ export class HeatmapService implements IHeatmapService {
   }
 
   public addOverlaysForTokens(overlays: IOverlay, activeTokens: Array<ActiveToken>): void {
-    console.log(activeTokens);
+    const tokenToCount: Array<ActiveToken> = this._getTokenToCount(activeTokens);
+    const tokenWithIdAndLength: Array<{flowNodeId: string, count: number}> = this._getTokenWithIdAndCount(activeTokens, tokenToCount);
 
-    overlays.add('Task_0julnc5', {
-      position: {
-        left: 80,
-        top: 70,
-      },
-      html: '<div class="overlay">15</div>',
+    tokenWithIdAndLength.forEach((token: {flowNodeId: string, count: number}) => {
+      overlays.add(token.flowNodeId, {
+        position: {
+          left: 80,
+          top: 70,
+        },
+        html: `<div class="overlay">${token.count}</div>`,
+      });
     });
   }
 
@@ -167,4 +170,39 @@ export class HeatmapService implements IHeatmapService {
 
     return medianRunTimeInMs;
   }
+
+  private _getTokenWithIdAndCount(activeTokens: Array<ActiveToken>, tokenToCount: Array<ActiveToken>): Array<{flowNodeId: string, count: number}> {
+    const tokenWithIdAndLength: Array<{flowNodeId: string, count: number}> = [];
+    tokenToCount.forEach((token: ActiveToken) => {
+      const tokenOfAnElement: Array<ActiveToken> =  activeTokens.filter((activeToken: ActiveToken) => {
+        return activeToken.flowNodeId === token.flowNodeId;
+      });
+
+      tokenWithIdAndLength.push({
+        flowNodeId: token.flowNodeId,
+        count: tokenOfAnElement.length,
+      });
+    });
+
+    return tokenWithIdAndLength;
+  }
+
+  private _getTokenToCount(activeTokens: Array<ActiveToken>): Array<ActiveToken> {
+    const tokenToCount: Array<ActiveToken> = [];
+
+    for (const token of activeTokens) {
+      const tokenIsInArray: ActiveToken = tokenToCount.find((element: ActiveToken) => {
+        return element.flowNodeId === token.flowNodeId;
+      });
+
+      if (tokenIsInArray !== undefined) {
+        continue;
+      } else {
+        tokenToCount.push(token);
+      }
+    }
+
+    return tokenToCount;
+  }
+
 }
