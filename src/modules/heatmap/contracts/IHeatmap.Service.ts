@@ -13,5 +13,5 @@ export interface IHeatmapService {
     modeler: IBpmnModeler,
    ): Promise<string>;
   getActiveTokensForProcessModel(processModelId: string): Promise<Array<ActiveToken>>;
-  addOverlaysForTokens(overlays: IOverlay, activeTokens: Array<ActiveToken>): void;
+  addOverlays(overlays: IOverlay, elementRegistry: IElementRegistry, activeTokens: Array<ActiveToken>): void;
 }

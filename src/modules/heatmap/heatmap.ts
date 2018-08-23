@@ -62,7 +62,7 @@ export class Heatmap {
 
     const overlays: IOverlay = this._viewer.get('overlays');
 
-    this._heatmapService.addOverlaysForTokens(overlays, activeTokens);
+    this._heatmapService.addOverlays(overlays, elementRegistry, activeTokens);
   }
 
   public attached(): void {
