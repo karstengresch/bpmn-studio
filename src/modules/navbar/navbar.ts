@@ -43,7 +43,6 @@ export class NavBar {
 
       this._eventAggregator.subscribe(environment.events.navBar.showTools, (process: IDiagram) => {
         this.showTools = true;
-        this.process = process;
       }),
 
       this._eventAggregator.subscribe(environment.events.navBar.showProcessName, (process: IDiagram) => {
