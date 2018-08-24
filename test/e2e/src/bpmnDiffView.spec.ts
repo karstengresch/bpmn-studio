@@ -1,6 +1,6 @@
 import {browser, protractor, ProtractorExpectedConditions} from 'protractor';
 
-import {BpmnDiffView} from './pages/bpmn-diff-view';
+import {BpmnDiffView} from './pages/bpmnDiffView';
 import {BpmnIo} from './pages/bpmn-io';
 import {General} from './pages/general';
 import {NavBar} from './pages/navbar';
