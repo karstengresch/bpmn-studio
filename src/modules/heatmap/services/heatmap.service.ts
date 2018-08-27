@@ -79,9 +79,13 @@ export class HeatmapService implements IHeatmapService {
         addOverlay(element.id, 0, defaultOverlayPositions.tasks);
       }
     });
-  }
 
-
+    const participantShape: IShape = this._getParticipantShape(elementRegistry);
+    addOverlay(participantShape.id, activeTokens.length, {
+      // tslint:disable-next-line:no-magic-numbers
+      left: participantShape.width - 18,
+      // tslint:disable-next-line:no-magic-numbers
+      top: participantShape.height - 20,
     });
   }
 
@@ -180,6 +184,18 @@ export class HeatmapService implements IHeatmapService {
     const elementShape: IShape = elementRegistry.get(elementToColor.flowNodeId);
 
     return elementShape;
+  }
+
+  private _getParticipantShape(elementRegistry: IElementRegistry): IShape {
+    const allElements: Array<IShape> = elementRegistry.getAll();
+
+    const participantShape: IShape = allElements.find((element: IShape) => {
+      const elementIsParticipant: boolean = element.type === 'bpmn:Participant';
+
+      return elementIsParticipant;
+    });
+
+    return participantShape;
   }
 
   private _getElementsWithoutToken(
