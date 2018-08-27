@@ -81,35 +81,8 @@ export class HeatmapService implements IHeatmapService {
     });
   }
 
-  private _getElementsWithoutToken(
-    elementRegistry: IElementRegistry,
-    tokenWithIdAndLength: Array<{flowNodeId: string, count: number}>,
-  ): Array<IShape> {
-    const allElements: Array<IShape> = elementRegistry.getAll();
-    const filteredElements: Array<IShape> = allElements.filter((element: IShape) => {
-      const condition: boolean = element.type !== 'bpmn:Association'
-                              && element.type !== 'bpmn:SequenceFlow'
-                              && element.type !== 'bpmn:TextAnnotation'
-                              && element.type !== 'bpmn:Participant'
-                              && element.type !== 'bpmn:Collaboration'
-                              && element.type !== 'bpmn:Lane'
-                              && element.type !== 'label';
 
-      return condition;
     });
-
-    const filterWithActiveToken: Array<IShape> = filteredElements.filter((element: IShape) => {
-      const token: {flowNodeId: string, count: number} = tokenWithIdAndLength.find((activeToken: {flowNodeId: string, count: number}) => {
-        return activeToken.flowNodeId === element.id;
-      });
-      if (token === undefined) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-
-    return filterWithActiveToken;
   }
 
   public getProcess(processModelId: string): Promise<ProcessModelExecution.ProcessModel> {
@@ -207,6 +180,37 @@ export class HeatmapService implements IHeatmapService {
     const elementShape: IShape = elementRegistry.get(elementToColor.flowNodeId);
 
     return elementShape;
+  }
+
+  private _getElementsWithoutToken(
+    elementRegistry: IElementRegistry,
+    tokenWithIdAndLength: Array<{flowNodeId: string, count: number}>,
+  ): Array<IShape> {
+    const allElements: Array<IShape> = elementRegistry.getAll();
+    const filteredElements: Array<IShape> = allElements.filter((element: IShape) => {
+      const condition: boolean = element.type !== 'bpmn:Association'
+                              && element.type !== 'bpmn:SequenceFlow'
+                              && element.type !== 'bpmn:TextAnnotation'
+                              && element.type !== 'bpmn:Participant'
+                              && element.type !== 'bpmn:Collaboration'
+                              && element.type !== 'bpmn:Lane'
+                              && element.type !== 'label';
+
+      return condition;
+    });
+
+    const filterWithActiveToken: Array<IShape> = filteredElements.filter((element: IShape) => {
+      const token: {flowNodeId: string, count: number} = tokenWithIdAndLength.find((activeToken: {flowNodeId: string, count: number}) => {
+        return activeToken.flowNodeId === element.id;
+      });
+      if (token === undefined) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    return filterWithActiveToken;
   }
 
   private async _getXmlFromModeler(modeler: IBpmnModeler): Promise<string> {
