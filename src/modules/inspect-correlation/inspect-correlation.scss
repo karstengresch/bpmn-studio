@@ -7,10 +7,10 @@
 .inspect-correlation__correlations {
   position: relative;
   height: 175px;
-  overflow: hidden;
   margin-top: 20px;
   margin-right: 20px;
   margin-left: 20px;
+  overflow: hidden;
   background-color: #f7f7f7;
   border: 2px solid #ccc;
   user-select: none;
@@ -27,26 +27,25 @@
 }
 
 .inspect-correlation__correlation-table-headlines {
-  width: 100%;
   display: flex;
+  width: 100%;
 }
 
 .inspect-correlation__correlation-table-headlines > th {
-  font-weight: 900;
-  padding: 5px;
   width: 25% !important;
-  text-overflow: ellipsis;
+  padding: 5px;
+  overflow: hidden;
   border-bottom: 1px solid #ccc;
   font-size: 18px;
-  overflow: hidden;
+  font-weight: 900;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .inspect-correlation__correlation-table-body {
-  height: 100%;
   display: block;
-  overflow: auto;
   height: 100%;
+  overflow: auto;
   cursor: pointer;
 }
 
@@ -58,9 +57,9 @@
 .inspect-correlation__correlation-table-body > tr > td{
   width: 25% !important;
   padding: 5px;
-  text-overflow: ellipsis;
-  border-bottom: 1px solid #ccc;
   overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  text-overflow: ellipsis;
 }
 
 .inspect-correlation__heading {
@@ -93,42 +92,42 @@
   position: relative;
   height: calc(50% - 14px);
   margin-bottom: 21px;
-  border: 1px solid #ccc;
-  background: #f7f7f7;
   overflow: hidden;
+  background: #f7f7f7;
+  border: 1px solid #ccc;
 }
 
 .inspect-correlation__tokenViewer {
   position: relative;
   height: calc(25% - 14px);
   margin-bottom: 21px;
-  border: 1px solid #ccc;
-  background: #f7f7f7;
   overflow: hidden;
+  background: #f7f7f7;
+  border: 1px solid #ccc;
 }
 
 .inspect-correlation__logViewer {
   position: relative;
   height: calc(25% - 14px);
-  border: 1px solid #ccc;
-  background: #f7f7f7;
   overflow: hidden;
+  background: #f7f7f7;
+  border: 1px solid #ccc;
 }
 
 .inspect-correlation__viewer-headline {
   margin-left: 10px;
-  font-size: 16px;
-  font-weight: 900;
   cursor: pointer;
   user-select: none;
+  font-size: 16px;
+  font-weight: 900;
 }
 
 .inspect-correlation__viewer-body {
   position: absolute;
   top: 25px;
-  left: 0px;
-  bottom: 0px;
   right: 5px;
+  bottom: 0px;
+  left: 0px;
   overflow: auto;
   border-top: 1px solid #ccc;
 }
