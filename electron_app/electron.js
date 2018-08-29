@@ -161,6 +161,11 @@ Main._initializeApplication = function () {
         message: 'Update failed',
         buttons: [dismissButtonText],
       });
+
+      electron.ipcMain.on('add_error_log_listener', (event) => {
+        event.sender.send('error_log', error);
+      });
+      
       notification.on('buttonClicked', (text, buttonIndex, options) => {
         notification.close();
       });
@@ -495,7 +500,7 @@ Main._startInternalProcessEngine = function () {
 
           console.log('Internal ProcessEngine started successfully.');
           internalProcessEngineStatus = 'success';
-
+          
           _publishProcessEngineStatus();
 
         }).catch((error) => {
