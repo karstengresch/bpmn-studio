@@ -501,6 +501,11 @@ Main._startInternalProcessEngine = function () {
         }).catch((error) => {
 
           console.error('Failed to start internal ProcessEngine: ', error);
+
+          electron.ipcMain.on('add_error_log_listener', (event) => {
+            event.sender.send('error_log', error);
+          });
+
           internalProcessEngineStatus = 'error';
           internalProcessEngineStartupError = error;
 

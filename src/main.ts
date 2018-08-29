@@ -80,6 +80,7 @@ export function configure(aurelia: Aurelia): void {
       // subscribe to processengine status
       ipcRenderer.send('add_internal_processengine_status_listener');
       ipcRenderer.send('add_autoupdater_listener');
+      ipcRenderer.send('add_error_log_listener');
 
       // wait for status to be reported
 
@@ -110,6 +111,10 @@ export function configure(aurelia: Aurelia): void {
         const notificationService: NotificationService = aurelia.container.get('NotificationService');
 
         notificationService.showNonDisappearingNotification(NotificationType.INFO, infoMessage);
+      });
+
+      ipcRenderer.on('error_log', (event: Event, error: Error) => {
+        throw error;
       });
     }
   });
