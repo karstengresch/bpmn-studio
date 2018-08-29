@@ -1,0 +1,8 @@
+<template>
+  <require from="./diagram-viewer.css"></require>
+  <div class="diagram-viewer" class.bind="showDiagram ? '' : 'diagram-viewer__collapsed'">
+    <span class="diagram-viewer__headline" click.delegate="toggleDiagramVisibility()">
+      <i class="fas" class.bind="showDiagram ? 'fa-caret-down' : 'fa-caret-right'"></i> Diagram</span>
+    <div ref="canvasModel" class="diagram-viewer__body" class.bind="showDiagram ? '' : 'diagram-viewer__canvas__hide'"></div>
+  </div>
+</template>

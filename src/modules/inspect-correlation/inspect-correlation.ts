@@ -1,6 +1,5 @@
 import {inject} from 'aurelia-framework';
 
-import * as bundle from '@process-engine/bpmn-js-custom-bundle';
 import {
   Correlation,
   IManagementApiService,
@@ -8,17 +7,17 @@ import {
   ProcessModelExecution,
 } from '@process-engine/management_api_contracts';
 
-import {ProcessModel} from '@process-engine/consumer_api_contracts';
-import {IAuthenticationService, IBpmnModeler, NotificationType} from '../../contracts/index';
-import {NotificationService} from '../notification/notification.service';
+import {IAuthenticationService} from '../../contracts/index';
+import {DiagramViewer} from './components/diagram-viewer/diagram-viewer';
 import {IInspectCorrelationService} from './contracts';
 
 interface RouteParameters {
   processModelId: string;
 }
 
-@inject('InspectCorrelationService', 'NotificationService', 'ManagementApiClientService', 'AuthenticationService')
+@inject('InspectCorrelationService', 'ManagementApiClientService', 'AuthenticationService')
 export class InspectCorrelation {
+  public diagramViewer: DiagramViewer;
   public processModelCorrelations: Array<Correlation>;
   public correlationSelected: boolean;
   public canvasModel: HTMLElement;
@@ -29,18 +28,14 @@ export class InspectCorrelation {
   public showDiagram: boolean;
 
   private _inspectCorrelationService: IInspectCorrelationService;
-  private _notificationService: NotificationService;
   private _managementApiService: IManagementApiService;
   private _authenticationService: IAuthenticationService;
-  private _diagramViewer: IBpmnModeler;
 
   constructor(inspectCorrelationService: IInspectCorrelationService,
-              notificationService: NotificationService,
               managementApiService: IManagementApiService,
               authenticationService: IAuthenticationService) {
 
     this._inspectCorrelationService = inspectCorrelationService;
-    this._notificationService = notificationService;
     this._managementApiService = managementApiService;
     this._authenticationService = authenticationService;
   }
@@ -49,18 +44,6 @@ export class InspectCorrelation {
     const processModelId: string = routeParameters.processModelId;
 
     this.processModelCorrelations = await this._inspectCorrelationService.getAllCorrelationsForProcessModelId(processModelId);
-  }
-
-  public attached(): void {
-    this._diagramViewer = new bundle.viewer({
-      additionalModules:
-      [
-        bundle.ZoomScrollModule,
-        bundle.MoveCanvasModule,
-      ],
-    });
-
-    this._diagramViewer.attachTo(this.canvasModel);
   }
 
   public detached(): void {
@@ -76,7 +59,7 @@ export class InspectCorrelation {
     const processModel: ProcessModelExecution.ProcessModel = await this._managementApiService.getProcessModelById(managementContext, processModelId);
     const xml: string = processModel.xml;
 
-    this._importXml(xml);
+    this.diagramViewer.importXml(xml);
     const lorem: string = `Lorem ipsum dolor sit amet, consetetur sadipscing
     elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
     aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
@@ -109,31 +92,6 @@ export class InspectCorrelation {
 
   public toggleDiagramVisibility(): void {
     this.showDiagram = !this.showDiagram;
-  }
-
-  private async _importXml(xml: string): Promise <void> {
-    const xmlIsNotLoaded: boolean = (xml === undefined || xml === null);
-
-    if (xmlIsNotLoaded) {
-      const notificationMessage: string = 'The xml could not be loaded. Please try to reopen the Diff View or reload the Detail View.';
-      this._notificationService.showNotification(NotificationType.ERROR, notificationMessage);
-
-      return;
-    }
-
-    const xmlImportPromise: Promise<void> = new Promise((resolve: Function, reject: Function): void => {
-      this._diagramViewer.importXML(xml, (importXmlError: Error) => {
-        if (importXmlError) {
-          reject(importXmlError);
-
-          return;
-        }
-
-        resolve();
-      });
-    });
-
-    return xmlImportPromise;
   }
 
   private _getManagementContext(): ManagementContext {

@@ -1,0 +1,31 @@
+.diagram-viewer {
+  position: relative;
+  height: calc(50% - 14px);
+  margin-bottom: 21px;
+  overflow: hidden;
+  background: #f7f7f7;
+  border: 1px solid #ccc;
+}
+ .diagram-viewer__headline {
+  margin-left: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+  font-weight: 900;
+}
+ .diagram-viewer__body {
+  position: absolute;
+  top: 25px;
+  right: 5px;
+  bottom: 0px;
+  left: 0px;
+  overflow: auto;
+  border-top: 1px solid #ccc;
+}
+ .diagram-viewer__collapsed {
+  height: 25px;
+}
+ .diagram-viewer__canvas__hide {
+  height: 25px;
+  display: none;
+}
