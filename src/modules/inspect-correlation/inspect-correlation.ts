@@ -25,7 +25,6 @@ export class InspectCorrelation {
   public currentLog: string;
   public showToken: boolean;
   public showLog: boolean;
-  public showDiagram: boolean;
 
   private _inspectCorrelationService: IInspectCorrelationService;
   private _managementApiService: IManagementApiService;
@@ -88,10 +87,6 @@ export class InspectCorrelation {
 
   public toggleLogVisibility(): void {
     this.showLog = !this.showLog;
-  }
-
-  public toggleDiagramVisibility(): void {
-    this.showDiagram = !this.showDiagram;
   }
 
   private _getManagementContext(): ManagementContext {
