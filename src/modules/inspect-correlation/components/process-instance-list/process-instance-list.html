@@ -11,7 +11,7 @@
       </tr>
     </thead class="correlation-table__header">
     <tbody class="correlation-table__body">
-      <tr repeat.for="correlation of processModelCorrelations" click.delegate="selectCorrelation(correlation)">
+      <tr repeat.for="correlation of processModelCorrelations" class.bind="correlation.id === selectedCorrelation.id ? 'correlation-table__selected-entry': ''" click.delegate="selectCorrelation(correlation)">
         <td>${correlation.id}</td>
         <td>00.00.0000 00:00</td>
         <td>Finished</td>
