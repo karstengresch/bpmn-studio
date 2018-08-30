@@ -13,11 +13,11 @@ export class DiagramViewer {
   private _notificationService: NotificationService;
   private _diagramViewer: IBpmnModeler;
 
-   constructor(notificationService: NotificationService) {
+  constructor(notificationService: NotificationService) {
     this._notificationService = notificationService;
   }
 
-   public attached(): void {
+  public attached(): void {
     this._diagramViewer = new bundle.viewer({
       additionalModules:
       [
@@ -28,11 +28,11 @@ export class DiagramViewer {
     this._diagramViewer.attachTo(this.canvasModel);
   }
 
-   public toggleDiagramVisibility(): void {
+  public toggleDiagramVisibility(): void {
     this.showDiagram = !this.showDiagram;
   }
 
-   public async importXml(xml: string): Promise <void> {
+  public async importXml(xml: string): Promise <void> {
     const xmlIsNotLoaded: boolean = (xml === undefined || xml === null);
     if (xmlIsNotLoaded) {
       const notificationMessage: string = 'The xml could not be loaded. Please try to reopen the Diff View or reload the Detail View.';
