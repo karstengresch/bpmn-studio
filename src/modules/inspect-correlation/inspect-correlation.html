@@ -25,7 +25,7 @@
     </div>
     <div class="inspect-correlation__correlation-data" show.bind="correlationSelected">
       <diagram-viewer xml.bind="xml" foldable="true" title="Diagram"></diagram-viewer>
-      <token-viewer token.bind="token" foldable="false" title="Token"></token-viewer>
+      <token-viewer token.bind="token" foldable="true" title="Token"></token-viewer>
       <div class="inspect-correlation__logViewer" class.bind="showLog ? '' : 'inspect-correlation__viewer__hide-data'">
         <span class="inspect-correlation__viewer-headline"  click.delegate="toggleLogVisibility()">
           <i class="fas" class.bind="showLog ? 'fa-caret-down' : 'fa-caret-right'"></i> Log
