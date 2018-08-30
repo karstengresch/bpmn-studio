@@ -51,11 +51,9 @@ export class InspectCorrelation {
   public async selectCorrelation(selectedCorrelation: Correlation): Promise<void> {
     const managementContext: ManagementContext = this._getManagementContext();
     const processModelId: string = selectedCorrelation.processModelId;
+    const processModel: ProcessModelExecution.ProcessModel = await this._managementApiService.getProcessModelById(managementContext, processModelId);
 
     this.correlationSelected = true;
-
-    const processModel: ProcessModelExecution.ProcessModel = await this._managementApiService.getProcessModelById(managementContext, processModelId);
-    this.xml = processModel.xml;
 
     const lorem: string = `Lorem ipsum dolor sit amet, consetetur sadipscing
     elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
@@ -75,6 +73,7 @@ export class InspectCorrelation {
     dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
     feugait nulla facilisi. Lorem ipsum dolor sit amet,`;
 
+    this.xml = processModel.xml;
     this.token = `Token: ${lorem}`;
     this.log = `Log ${lorem}`;
   }
