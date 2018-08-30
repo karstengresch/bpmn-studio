@@ -25,6 +25,7 @@ export class InspectCorrelation {
   public showLog: boolean;
   public xml: string;
   public token: string;
+  public log: string;
 
   private _inspectCorrelationService: IInspectCorrelationService;
   private _managementApiService: IManagementApiService;
@@ -77,7 +78,7 @@ export class InspectCorrelation {
     feugait nulla facilisi. Lorem ipsum dolor sit amet,`;
 
     this.token = `Token: ${lorem}`;
-    this.currentLog = `Log ${lorem}`;
+    this.log = `Log ${lorem}`;
   }
 
   public toggleLogVisibility(): void {

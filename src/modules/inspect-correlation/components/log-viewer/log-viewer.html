@@ -1,0 +1,9 @@
+<template>
+  <require from="./log-viewer.css"></require>
+  <div class="log-viewer" class.bind="showLog ? '' : 'log-viewer__body__hide-data'">
+    <span if.bind="showHeadline" class="log-viewer__headline" class.bind="isFoldable ? 'diagram-viewer__foldable-headline' : ''" click.delegate="toggleLogVisibility()">
+      <i class="fas" class.bind="showLog ? 'fa-caret-down' : 'fa-caret-right'" class.bind="showToken ? 'fa-caret-down' : 'fa-caret-right'"></i> Log
+    </span>
+    <div class="log-viewer__body" class.bind="showHeadline ? 'log-viewer__body__top-spacing' : ''">${log}</div>
+  </div>
+</template>

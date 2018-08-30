@@ -1,0 +1,39 @@
+.log-viewer {
+  position: relative;
+  height: calc(25% - 14px);
+  overflow: hidden;
+  background: #f7f7f7;
+  border: 1px solid #ccc;
+}
+
+.log-viewer__headline {
+  margin-left: 10px;
+  cursor: default;
+  user-select: none;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.log-viewer__foldable-headline {
+  cursor: pointer;
+}
+
+.log-viewer__body {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow: auto;
+  border-top: 1px solid #ccc;
+}
+
+.log-viewer__body__top-spacing {
+  top: 25px;
+}
+
+.log-viewer__body__hide-data {
+  height: 25px;
+}

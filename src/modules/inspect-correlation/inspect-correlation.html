@@ -2,6 +2,7 @@
   <require from="./inspect-correlation.css"></require>
   <require from="./components/diagram-viewer/diagram-viewer"></require>
   <require from="./components/token-viewer/token-viewer"></require>
+  <require from="./components/log-viewer/log-viewer"></require>
   <div class="inspect-correlation__view">
     <div class="inspect-correlation__correlations">
       <table class=" table table-striped table-hover inspect-correlation__correlation-table">
@@ -26,12 +27,7 @@
     <div class="inspect-correlation__correlation-data" show.bind="correlationSelected">
       <diagram-viewer xml.bind="xml" foldable="true" title="Diagram"></diagram-viewer>
       <token-viewer token.bind="token" foldable="true" title="Token"></token-viewer>
-      <div class="inspect-correlation__logViewer" class.bind="showLog ? '' : 'inspect-correlation__viewer__hide-data'">
-        <span class="inspect-correlation__viewer-headline"  click.delegate="toggleLogVisibility()">
-          <i class="fas" class.bind="showLog ? 'fa-caret-down' : 'fa-caret-right'"></i> Log
-        </span>
-        <div class="inspect-correlation__viewer-body inspect-correlation__viewer-body__left-space">${currentLog}</div>
-      </div>
+      <log-viewer log.bind="log" foldable="true" title="Log"></log-viewer>
     </div>
   </div>
 </template>
