@@ -87,37 +87,3 @@
   height: calc(100% - 175px - 20px);
   padding: 20px;
 }
-
-.inspect-correlation__logViewer {
-  position: relative;
-  height: calc(25% - 14px);
-  overflow: hidden;
-  background: #f7f7f7;
-  border: 1px solid #ccc;
-}
-
-.inspect-correlation__viewer-headline {
-  margin-left: 10px;
-  cursor: pointer;
-  user-select: none;
-  font-size: 16px;
-  font-weight: 900;
-}
-
-.inspect-correlation__viewer-body {
-  position: absolute;
-  top: 25px;
-  right: 5px;
-  bottom: 0px;
-  left: 0px;
-  overflow: auto;
-  border-top: 1px solid #ccc;
-}
-
-.inspect-correlation__viewer-body__left-space {
-  left: 5px;
-}
-
-.inspect-correlation__viewer__hide-data {
-  height: 25px;
-}

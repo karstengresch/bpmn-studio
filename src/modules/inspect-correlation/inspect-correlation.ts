@@ -21,8 +21,6 @@ export class InspectCorrelation {
   public processModelCorrelations: Array<Correlation>;
   public correlationSelected: boolean;
   public canvasModel: HTMLElement;
-  public currentLog: string;
-  public showLog: boolean;
   public xml: string;
   public token: string;
   public log: string;
@@ -79,10 +77,6 @@ export class InspectCorrelation {
 
     this.token = `Token: ${lorem}`;
     this.log = `Log ${lorem}`;
-  }
-
-  public toggleLogVisibility(): void {
-    this.showLog = !this.showLog;
   }
 
   private _getManagementContext(): ManagementContext {
