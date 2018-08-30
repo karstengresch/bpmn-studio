@@ -21,11 +21,10 @@ export class InspectCorrelation {
   public processModelCorrelations: Array<Correlation>;
   public correlationSelected: boolean;
   public canvasModel: HTMLElement;
-  public currentToken: string;
   public currentLog: string;
-  public showToken: boolean;
   public showLog: boolean;
   public xml: string;
+  public token: string;
 
   private _inspectCorrelationService: IInspectCorrelationService;
   private _managementApiService: IManagementApiService;
@@ -77,12 +76,8 @@ export class InspectCorrelation {
     dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
     feugait nulla facilisi. Lorem ipsum dolor sit amet,`;
 
-    this.currentToken = `Token: ${lorem}`;
+    this.token = `Token: ${lorem}`;
     this.currentLog = `Log ${lorem}`;
-  }
-
-  public toggleTokenVisibility(): void {
-    this.showToken = !this.showToken;
   }
 
   public toggleLogVisibility(): void {
