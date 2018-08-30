@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
 
 import * as bundle from '@process-engine/bpmn-js-custom-bundle';
 
@@ -7,8 +7,11 @@ import {NotificationService} from '../../../notification/notification.service';
 
 @inject('NotificationService')
 export class DiagramViewer {
+  @bindable() public title: string;
+  @bindable() public foldable: string;
+  @bindable({ changeHandler: 'xmlChanged' }) public xml: string;
   public canvasModel: HTMLElement;
-  public showDiagram: boolean;
+  public showDiagram: boolean = true;
 
   private _notificationService: NotificationService;
   private _diagramViewer: IBpmnModeler;
@@ -29,10 +32,18 @@ export class DiagramViewer {
   }
 
   public toggleDiagramVisibility(): void {
-    this.showDiagram = !this.showDiagram;
+    const isFoldable: boolean = this.foldable === 'true';
+
+    if (isFoldable) {
+      this.showDiagram = !this.showDiagram;
+    }
   }
 
-  public async importXml(xml: string): Promise <void> {
+  public xmlChanged(newXml: string): void {
+    this._importXml(newXml);
+  }
+
+  private async _importXml(xml: string): Promise <void> {
     const xmlIsNotLoaded: boolean = (xml === undefined || xml === null);
     if (xmlIsNotLoaded) {
       const notificationMessage: string = 'The xml could not be loaded. Please try to reopen the Diff View or reload the Detail View.';

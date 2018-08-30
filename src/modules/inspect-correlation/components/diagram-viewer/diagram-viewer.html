@@ -1,8 +1,8 @@
 <template>
   <require from="./diagram-viewer.css"></require>
   <div class="diagram-viewer" class.bind="showDiagram ? '' : 'diagram-viewer__collapsed'">
-    <span class="diagram-viewer__headline" click.delegate="toggleDiagramVisibility()">
-      <i class="fas" class.bind="showDiagram ? 'fa-caret-down' : 'fa-caret-right'"></i> Diagram</span>
-    <div ref="canvasModel" class="diagram-viewer__body" class.bind="showDiagram ? '' : 'diagram-viewer__canvas__hide'"></div>
+    <span if.bind="title !== ''" class="diagram-viewer__headline" class.bind="foldable === 'true' ? 'diagram-viewer__foldable-headline' : ''" click.delegate="toggleDiagramVisibility()">
+      <i if.bind="foldable === 'true'" class="fas" class.bind="showDiagram ? 'fa-caret-down' : 'fa-caret-right'"></i> ${title}</span>
+    <div ref="canvasModel" class="diagram-viewer__body" class.bind="title !== '' ? 'diagram-viewer__body__top-spacing' : ''" class.bind="showDiagram ? '' : 'diagram-viewer__canvas__hide'"></div>
   </div>
 </template>

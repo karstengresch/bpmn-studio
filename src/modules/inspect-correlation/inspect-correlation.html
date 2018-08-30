@@ -23,7 +23,7 @@
       </table>
     </div>
     <div class="inspect-correlation__correlation-data" show.bind="correlationSelected">
-      <diagram-viewer view-model.ref="diagramViewer"></diagram-viewer>
+      <diagram-viewer xml.bind="xml" foldable="true" title="Diagram"></diagram-viewer>
       <div class="inspect-correlation__tokenViewer" class.bind="showToken ? '' : 'inspect-correlation__viewer__hide-data'">
         <span class="inspect-correlation__viewer-headline" click.delegate="toggleTokenVisibility()">
           <i class="fas" class.bind="showToken ? 'fa-caret-down' : 'fa-caret-right'"></i> Token

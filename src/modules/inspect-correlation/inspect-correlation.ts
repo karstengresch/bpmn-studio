@@ -25,6 +25,7 @@ export class InspectCorrelation {
   public currentLog: string;
   public showToken: boolean;
   public showLog: boolean;
+  public xml: string;
 
   private _inspectCorrelationService: IInspectCorrelationService;
   private _managementApiService: IManagementApiService;
@@ -56,9 +57,8 @@ export class InspectCorrelation {
     this.correlationSelected = true;
 
     const processModel: ProcessModelExecution.ProcessModel = await this._managementApiService.getProcessModelById(managementContext, processModelId);
-    const xml: string = processModel.xml;
+    this.xml = processModel.xml;
 
-    this.diagramViewer.importXml(xml);
     const lorem: string = `Lorem ipsum dolor sit amet, consetetur sadipscing
     elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
     aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
