@@ -1,0 +1,22 @@
+<template>
+  <require from="./process-instance-list.css"></require>
+  <span if.bind="processModelCorrelations.length === 0" class="correlation-table__empty-message">No correlations found.</span>
+  <table else class="table table-striped table-hover correlation-table">
+    <thead>
+      <tr class="correlation-table__headlines">
+        <th>Number</th>
+        <th>Started at</th>
+        <th>Status</th>
+        <th>User</th>
+      </tr>
+    </thead class="correlation-table__header">
+    <tbody class="correlation-table__body">
+      <tr repeat.for="correlation of processModelCorrelations" click.delegate="selectCorrelation(correlation)">
+        <td>${correlation.id}</td>
+        <td>00.00.0000 00:00</td>
+        <td>Finished</td>
+        <td>No User</td>
+      </tr>
+    </tbody>
+  </table>
+</template>

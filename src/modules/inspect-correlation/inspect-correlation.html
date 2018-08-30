@@ -1,30 +1,14 @@
 <template>
   <require from="./inspect-correlation.css"></require>
+  <require from="./components/process-instance-list/process-instance-list"></require>
   <require from="./components/diagram-viewer/diagram-viewer"></require>
   <require from="./components/token-viewer/token-viewer"></require>
   <require from="./components/log-viewer/log-viewer"></require>
   <div class="inspect-correlation">
     <div class="inspect-correlation__correlation-selection">
-      <table class=" table table-striped table-hover inspect-correlation__correlation-table">
-        <thead>
-          <tr class="inspect-correlation__correlation-table-headlines">
-            <th>Number</th>
-            <th>Started at</th>
-            <th>Status</th>
-            <th>User</th>
-          </tr>
-        </thead class="inspect-correlation__table-header">
-        <tbody class="inspect-correlation__correlation-table-body">
-          <tr repeat.for="correlation of processModelCorrelations"click.delegate="selectCorrelation(correlation)">
-            <td>${correlation.id}</td>
-            <td>00.00.0000 00:00</td>
-            <td>Finished</td>
-            <td>No User</td>
-          </tr>
-        </tbody>
-      </table>
+      <process-instance-list process-model-correlations.bind="processModelCorrelations" correlation.two-way="correlation"></process-instance-list>
     </div>
-    <div class="inspect-correlation__correlation-data" show.bind="correlationSelected">
+    <div class="inspect-correlation__correlation-data" show.bind="correlation">
       <diagram-viewer xml.bind="xml" foldable="true" title="Diagram"></diagram-viewer>
       <token-viewer token.bind="token" foldable="true" title="Token"></token-viewer>
       <log-viewer log.bind="log" foldable="true" title="Log"></log-viewer>
