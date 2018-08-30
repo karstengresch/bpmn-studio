@@ -6,7 +6,7 @@
   <require from="./components/log-viewer/log-viewer"></require>
   <div class="inspect-correlation">
     <div class="inspect-correlation__correlation-selection">
-      <process-instance-list process-model-correlations.bind="processModelCorrelations" correlation.two-way="correlation"></process-instance-list>
+      <process-instance-list process-model-correlations.bind="processModelCorrelations" selected-correlation.two-way="correlation"></process-instance-list>
     </div>
     <div class="inspect-correlation__correlation-data" show.bind="correlation">
       <diagram-viewer xml.bind="xml" foldable="true" title="Diagram"></diagram-viewer>
