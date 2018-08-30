@@ -30,6 +30,7 @@ export class DiagramViewer {
         bundle.MoveCanvasModule,
       ],
     });
+
     this._diagramViewer.attachTo(this.canvasModel);
   }
 
@@ -56,9 +57,11 @@ export class DiagramViewer {
 
   private async _importXml(xml: string): Promise <void> {
     const xmlIsNotLoaded: boolean = (xml === undefined || xml === null);
+
     if (xmlIsNotLoaded) {
       const notificationMessage: string = 'The xml could not be loaded. Please try to reopen the Diff View or reload the Detail View.';
       this._notificationService.showNotification(NotificationType.ERROR, notificationMessage);
+
       return;
     }
 
@@ -66,11 +69,13 @@ export class DiagramViewer {
       this._diagramViewer.importXML(xml, (importXmlError: Error) => {
         if (importXmlError) {
           reject(importXmlError);
+
           return;
         }
         resolve();
       });
     });
+
     return xmlImportPromise;
   }
 }
