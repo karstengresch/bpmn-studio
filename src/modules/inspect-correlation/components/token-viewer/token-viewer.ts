@@ -1,16 +1,27 @@
 import {bindable} from 'aurelia-framework';
 
 export class TokenViewer {
-  @bindable() public title: string;
-  @bindable() public foldable: string;
+  @bindable({ changeHandler: 'titleChanged' }) public title: string;
+  @bindable({ changeHandler: 'foldableChanged' }) public foldable: string;
   @bindable() public token: string;
   public showToken: boolean = true;
+  public showHeadline: boolean;
+  public isFoldable: boolean;
 
   public toggleTokenVisibility(): void {
-    const isFoldable: boolean = this.foldable === 'true';
-
-    if (isFoldable) {
+    if (this.isFoldable) {
       this.showToken = !this.showToken;
     }
+  }
+
+  public foldableChanged(): void {
+    this.isFoldable = this.foldable === 'true';
+    this.showHeadline = this.title !== ''
+                     || this.isFoldable;
+  }
+
+  public titleChanged(): void {
+    this.showHeadline = this.title !== ''
+                     || this.isFoldable;
   }
 }
