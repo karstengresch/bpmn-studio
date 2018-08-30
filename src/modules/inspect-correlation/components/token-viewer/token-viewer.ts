@@ -17,6 +17,7 @@ export class TokenViewer {
   public foldableChanged(): void {
     this.isFoldable = this.foldable === 'true';
     this.showHeadline = this.title !== ''
+                     || this.title === undefined
                      || this.isFoldable;
   }
 
