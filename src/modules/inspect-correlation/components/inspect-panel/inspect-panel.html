@@ -1,3 +1,9 @@
 <template>
   <require from="./inspect-panel.css"></require>
+  <require from="./components/log-viewer/log-viewer"></require>
+  <require from="./components/process-instance-list/process-instance-list"></require>
+  <div class="inspect-panel" if.bind="showInspectPanel">
+    <log-viewer></log-viewer>
+    <process-instance-list></process-instance-list>
+  </div>
 </template>
