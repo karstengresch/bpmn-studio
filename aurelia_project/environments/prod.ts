@@ -34,6 +34,7 @@ export default {
     statusBar: {
       showDiagramViewButtons: 'statusbar:diagramviewbuttons:show',
       hideDiagramViewButtons: 'statusbar:diagramviewbuttons:hide',
+      showInspectViewButtons: 'statusbar:inspectviewbuttons',
     },
     configPanel: {
       processEngineRouteChanged: 'configpanel:processEngineRoute:changed',
@@ -69,6 +70,9 @@ export default {
     processSolutionPanel: {
       toggleProcessSolutionExplorer: 'processSolutionPanel:processsolutionexplorer:toggle',
       openProcessEngineIndexCard: 'processSolutionPanel:processEngineIndexCard:toggle',
+    },
+    inspectView: {
+      showInspectPanel: 'inspectView:inspectPanel:show',
     },
   },
   baseRoute: processEngineRoute,

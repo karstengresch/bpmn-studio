@@ -1,3 +1,4 @@
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {bindable, inject} from 'aurelia-framework';
 
 import {
@@ -8,13 +9,14 @@ import {
 } from '@process-engine/management_api_contracts';
 
 import {IAuthenticationService} from '../../contracts/index';
+import environment from '../../environment';
 import {IInspectCorrelationService} from './contracts';
 
 interface RouteParameters {
   processModelId: string;
 }
 
-@inject('InspectCorrelationService', 'ManagementApiClientService', 'AuthenticationService')
+@inject('InspectCorrelationService', 'ManagementApiClientService', 'AuthenticationService', EventAggregator)
 export class InspectCorrelation {
   public correlations: Array<Correlation>;
   @bindable({ changeHandler: 'selectedCorrelationChanged'}) public selectedCorrelation: Correlation;
@@ -25,20 +27,31 @@ export class InspectCorrelation {
   private _managementApiService: IManagementApiService;
   private _authenticationService: IAuthenticationService;
   private _inspectCorrelationService: IInspectCorrelationService;
+  private _eventAggragator: EventAggregator;
 
   constructor(inspectCorrelationService: IInspectCorrelationService,
               managementApiService: IManagementApiService,
-              authenticationService: IAuthenticationService) {
+              authenticationService: IAuthenticationService,
+              eventAggregator: EventAggregator) {
 
     this._inspectCorrelationService = inspectCorrelationService;
     this._managementApiService = managementApiService;
     this._authenticationService = authenticationService;
+    this._eventAggragator = eventAggregator;
   }
 
   public async activate(routeParameters: RouteParameters): Promise<void> {
     const processModelId: string = routeParameters.processModelId;
 
     this.correlations = await this._inspectCorrelationService.getAllCorrelationsForProcessModelId(processModelId);
+  }
+
+  public attached(): void {
+    this._eventAggragator.publish(environment.events.statusBar.showInspectViewButtons, true);
+  }
+
+  public detached(): void {
+    this._eventAggragator.publish(environment.events.statusBar.showInspectViewButtons, false);
   }
 
   public async selectedCorrelationChanged(selectedCorrelation: Correlation): Promise<void> {
