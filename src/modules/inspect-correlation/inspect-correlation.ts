@@ -16,8 +16,8 @@ interface RouteParameters {
 
 @inject('InspectCorrelationService', 'ManagementApiClientService', 'AuthenticationService')
 export class InspectCorrelation {
-  public processModelCorrelations: Array<Correlation>;
-  @bindable({ changeHandler: 'correlationChanged'}) public correlation: Correlation;
+  public correlations: Array<Correlation>;
+  @bindable({ changeHandler: 'selectedCorrelationChanged'}) public selectedCorrelation: Correlation;
   public xml: string;
   public token: string;
   public log: string;
@@ -38,11 +38,12 @@ export class InspectCorrelation {
   public async activate(routeParameters: RouteParameters): Promise<void> {
     const processModelId: string = routeParameters.processModelId;
 
-    this.processModelCorrelations = await this._inspectCorrelationService.getAllCorrelationsForProcessModelId(processModelId);
+    this.correlations = await this._inspectCorrelationService.getAllCorrelationsForProcessModelId(processModelId);
   }
 
-  public async correlationChanged(correlation: Correlation): Promise<void> {
-    const processModelId: string = correlation.processModelId;
+  public async selectedCorrelationChanged(selectedCorrelation: Correlation): Promise<void> {
+    const processModelId: string = selectedCorrelation.processModelId;
+    console.log(selectedCorrelation);
 
     this.log = this._getLog();
     this.token = this._getToken();

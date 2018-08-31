@@ -1,6 +1,6 @@
 <template>
   <require from="./process-instance-list.css"></require>
-  <span if.bind="processModelCorrelations.length === 0" class="correlation-table__empty-message">No correlations found.</span>
+  <span if.bind="correlations.length === 0" class="correlation-table__empty-message">No correlations found.</span>
   <table else class="table table-striped table-hover correlation-table">
     <thead>
       <tr class="correlation-table__headlines">
@@ -8,14 +8,16 @@
         <th>Started at</th>
         <th>State</th>
         <th>User</th>
+        <th>Correlation Id</th>
       </tr>
     </thead class="correlation-table__header">
     <tbody class="correlation-table__body">
-      <tr repeat.for="correlation of processModelCorrelations" class.bind="correlation.id === selectedCorrelation.id ? 'correlation-table__selected-entry': ''" click.delegate="selectCorrelation(correlation)">
-        <td>${correlation.id}</td>
-        <td>00.00.0000 00:00</td>
-        <td>Finished</td>
-        <td>No User</td>
+      <tr repeat.for="tableEntry of tableData" class.bind="tableEntry.correlationId === selectedCorrelation.id ? 'correlation-table__selected-entry': ''" click.delegate="selectCorrelation(tableEntry)">
+        <td>${tableEntry.index}</td>
+        <td>${tableEntry.startedAt}</td>
+        <td>${tableEntry.state}</td>
+        <td>${tableEntry.user}</td>
+        <td>${tableEntry.correlationId}</td>
       </tr>
     </tbody>
   </table>
