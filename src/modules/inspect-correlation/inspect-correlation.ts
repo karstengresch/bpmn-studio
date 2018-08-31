@@ -56,7 +56,6 @@ export class InspectCorrelation {
 
   public async selectedCorrelationChanged(selectedCorrelation: Correlation): Promise<void> {
     const processModelId: string = selectedCorrelation.processModelId;
-    console.log(selectedCorrelation);
 
     this.log = this._getLog();
     this.token = this._getToken();
