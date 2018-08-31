@@ -127,16 +127,16 @@ export class HeatmapMockRepository implements IHeatmapRepository {
       minRuntimeInMs: NaN,
       maxRuntimeInMs: NaN,
     },
-    {
-      processModelId: 'heatmap_sample',
-      flowNodeId: 'SequenceFlow_1ejes54',
-      arithmeticMeanRuntimeInMs: 1000.0,
-      firstQuartileRuntimeInMs: NaN,
-      medianRuntimeInMs: 10100.5,
-      thirdQuartileRuntimeInMs: NaN,
-      minRuntimeInMs: NaN,
-      maxRuntimeInMs: NaN,
-    },
+    // {
+    //   processModelId: 'DemoNutztierRiss',
+    //   flowNodeId: 'SequenceFlow_0jc0guj',
+    //   arithmeticMeanRuntimeInMs: 1000.0,
+    //   firstQuartileRuntimeInMs: NaN,
+    //   medianRuntimeInMs: 10100.5,
+    //   thirdQuartileRuntimeInMs: NaN,
+    //   minRuntimeInMs: NaN,
+    //   maxRuntimeInMs: NaN,
+    // },
   ];
 
   private _mockDataForActiveTokens: Array<ActiveToken> = [

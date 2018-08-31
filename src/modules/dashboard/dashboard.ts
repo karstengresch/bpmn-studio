@@ -39,24 +39,25 @@ export class Dashboard {
     this._router = router;
   }
 
-  public async canActivate(): Promise<boolean> {
-    const managementContext: ManagementContext = this._getManagementContext();
+  // public async canActivate(): Promise<boolean> {
+  //   console.log('canactivate done');
+  //   const managementContext: ManagementContext = this._getManagementContext();
 
-    const hasClaimsForTaskList: boolean = await this._hasClaimsForTaskList(managementContext);
-    const hasClaimsForProcessList: boolean = await this._hasClaimsForProcessList(managementContext);
+  //   const hasClaimsForTaskList: boolean = await this._hasClaimsForTaskList(managementContext);
+  //   const hasClaimsForProcessList: boolean = await this._hasClaimsForProcessList(managementContext);
 
-    if (!hasClaimsForProcessList && !hasClaimsForTaskList) {
-      this._notificationService.showNotification(NotificationType.ERROR, 'You don\'t have the permission to use the dashboard features.');
-      this._router.navigateToRoute('start-page');
+  //   if (!hasClaimsForProcessList && !hasClaimsForTaskList) {
+  //     this._notificationService.showNotification(NotificationType.ERROR, 'You don\'t have the permission to use the dashboard features.');
+  //     this._router.navigateToRoute('start-page');
 
-      return false;
-    }
+  //     return false;
+  //   }
 
-    this.showTaskList = hasClaimsForTaskList;
-    this.showProcessList = hasClaimsForProcessList;
+  //   this.showTaskList = hasClaimsForTaskList;
+  //   this.showProcessList = hasClaimsForProcessList;
 
-    return true;
-  }
+  //   return true;
+  // }
 
   private async _hasClaimsForTaskList(managementContext: ManagementContext): Promise<boolean> {
     try {

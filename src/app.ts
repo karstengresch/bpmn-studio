@@ -191,6 +191,12 @@ export class App {
         name: 'heatmap',
         moduleId: 'modules/heatmap/heatmap',
       },
+      {
+        route: ['inspect', 'inspect/:processModelId?/:view?'],
+        title: 'Inspect',
+        name: 'inspect',
+        moduleId: 'modules/inspect/inspect',
+      },
     ]);
 
     this._openIdConnect.configure(config);

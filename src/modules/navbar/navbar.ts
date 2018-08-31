@@ -21,6 +21,7 @@ export class NavBar {
   public showProcessName: boolean = false;
   public disableDiagramUploadButton: boolean = true;
   public diagramContainsUnsavedChanges: boolean = false;
+  public inspectView: string = 'dashboard';
 
   private _router: Router;
   private _eventAggregator: EventAggregator;
@@ -93,6 +94,14 @@ export class NavBar {
 
       this._eventAggregator.subscribe(environment.events.processDefDetail.saveDiagram, () => {
         this.diagramContainsUnsavedChanges = false;
+      }),
+
+      this._eventAggregator.subscribe('navbarNavigateToHeatmap', () => {
+        this.inspectView = 'heatmap';
+      }),
+
+      this._eventAggregator.subscribe('navigateToDashboard', () => {
+        this.inspectView = 'dashboard';
       }),
     ];
   }

@@ -65,6 +65,9 @@ export class ProcessSolutionPanel {
   public fileSystemIndexCardIsActive: boolean = false;
   public processEngineIndexCardIsActive: boolean = true;
 
+  public routeee: string = 'processdef-detail';
+  public inspectView: string;
+
   private _subscriptions: Array<Subscription> = [];
   private _eventAggregator: EventAggregator;
   private _router: Router;
@@ -245,9 +248,23 @@ export class ProcessSolutionPanel {
       this._eventAggregator.subscribe(environment.events.processSolutionPanel.openProcessEngineIndexCard, () => {
         this.openProcessEngineIndexCard();
       }),
+      this._eventAggregator.subscribe('solutionExplorerNavigateToHeatmap', () => {
+        this.routeee = 'inspect';
+        this.inspectView = 'heatmap';
+      }),
+
+      this._eventAggregator.subscribe('solutionExplorerNavigateToDetail', () => {
+        this.routeee = 'processdef-detail';
+        // this.inspectView = 'dashboard';
+      }),
     ];
   }
 
+  public bla(index: number): void {
+    console.log(this.routeee);
+    console.log(this.inspectView);
+    console.log(this.openedProcessEngineSolution.diagrams[index].name);
+  }
   public detached(): void {
     for (const subscription of this._subscriptions) {
       subscription.dispose();

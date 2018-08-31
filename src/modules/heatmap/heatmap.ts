@@ -1,5 +1,5 @@
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {inject} from 'aurelia-framework';
+import {bindable, inject, view} from 'aurelia-framework';
 
 import {IBpmnModeler, IElementRegistry, IOverlay} from '../../contracts';
 import {IFlowNodeAssociation, IHeatmapService} from './contracts';
@@ -16,6 +16,8 @@ interface RouteParameters {
 @inject('HeatmapService', EventAggregator)
 export class Heatmap {
   public viewerContainer: HTMLDivElement;
+  @bindable() public processmodelid: string;
+  public test: HTMLElement;
 
   private _processModel: ProcessModelExecution.ProcessModel;
   private _heatmapService: IHeatmapService;
@@ -28,8 +30,22 @@ export class Heatmap {
     this._eventAggregator = eventAggregator;
   }
 
-  public async activate(routeParameters: RouteParameters): Promise<void> {
-    const processModelId: string = routeParameters.processModelId;
+  public processmodelidChanged(): void {
+    if (!this.viewerContainer === undefined) {
+      this.test.removeChild(this.viewerContainer);
+    }
+    if (!this._viewer === undefined) {
+      this._viewer.detach();
+      this._viewer.destroy();
+    }
+
+    this.attached();
+  }
+
+  public async attached(): Promise<void> {
+    // const processModelId: string = routeParameters.processModelId;
+
+    console.log(this.processmodelid);
 
     this._modeler = new bundle.modeler({
       moddleExtensions: {
@@ -37,14 +53,14 @@ export class Heatmap {
       },
     });
 
-    this._processModel = await this._heatmapService.getProcess(processModelId);
+    this._processModel = await this._heatmapService.getProcess(this.processmodelid);
     await this._importXML(this._processModel.xml, this._modeler);
 
     const elementRegistry: IElementRegistry  = this._modeler.get('elementRegistry');
     const associations: Array<IFlowNodeAssociation> = await this._heatmapService.getFlowNodeAssociations(elementRegistry);
     const flowNodeRuntimeInformation: Array<FlowNodeRuntimeInformation> = await this
       ._heatmapService
-      .getRuntimeInformationForProcessModel(processModelId);
+      .getRuntimeInformationForProcessModel(this.processmodelid);
 
     const xml: string = await this._heatmapService.getColoredXML(associations, flowNodeRuntimeInformation, this._modeler);
 
@@ -58,15 +74,14 @@ export class Heatmap {
 
     await this._importXML(xml, this._viewer);
 
-    const activeTokens: Array<ActiveToken> = await this._heatmapService.getActiveTokensForProcessModel(processModelId);
+    const activeTokens: Array<ActiveToken> = await this._heatmapService.getActiveTokensForProcessModel(this.processmodelid);
 
     const overlays: IOverlay = this._viewer.get('overlays');
 
     this._heatmapService.addOverlays(overlays, elementRegistry, activeTokens);
-  }
 
-  public attached(): void {
     this._eventAggregator.publish(environment.events.navBar.showProcessName, this._processModel);
+
     this._viewer.attachTo(this.viewerContainer);
   }
 

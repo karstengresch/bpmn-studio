@@ -1,0 +1,24 @@
+.inspect {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 20px;
+}
+
+.inspect-layout__tools-right {
+  border-left: 2px solid #dcdbdb;
+  width: 36px;
+  background-color: #f7f7f7;
+  right: 0px;
+  top: 42px;
+  bottom: 0;
+  position: fixed;
+}
+
+.inspect__heatmap-container {
+  height: 100%;
+  margin-right: 36px;
+}
+
+.dashboard__heatmap-container {
+  margin-right: 36px;
+}
