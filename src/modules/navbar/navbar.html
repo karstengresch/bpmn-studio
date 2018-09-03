@@ -13,7 +13,7 @@
         <a id="navbarThinkLink" class="menu-tabbed-link" route-href="route: processdef-list">Think</a>
       </div>
       <div class="menu__menu-tabbed-link" class.bind="activeRouteName === 'processdef-detail' || activeRouteName === 'diagram-detail' ? 'menu__menu-tabbed-link--active' : ''">
-        <a id="navbarDesignLink" class="menu-tabbed-link menu-tabbed-link--disabled">Design</a>
+        <a id="navbarDesignLink" class.bind="disableDesignLink ? 'menu-tabbed-link menu-tabbed-link--disabled' : 'menu-tabbed-link'" click.delegate="navigateToDesigner()">Design</a>
       </div>
       <div class="menu__menu-tabbed-link" class.bind="activeRouteName === 'inspect' ? 'menu__menu-tabbed-link--active' : ''">
         <a id="navbarInspectLink" class="menu-tabbed-link" route-href="route: inspect; params.bind: {processModelId: process.id, view: inspectView}">Inspect</a>

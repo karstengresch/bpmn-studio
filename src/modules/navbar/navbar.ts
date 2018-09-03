@@ -22,6 +22,7 @@ export class NavBar {
   public disableDiagramUploadButton: boolean = true;
   public diagramContainsUnsavedChanges: boolean = false;
   public inspectView: string = 'dashboard';
+  public disableDesignLink: boolean = true;
 
   private _router: Router;
   private _eventAggregator: EventAggregator;
@@ -122,6 +123,18 @@ export class NavBar {
 
   public navigateBack(): void {
     this._router.navigateBack();
+  }
+
+  public navigateToDesigner(): void {
+    const processIsUndefined: boolean = this.process === undefined;
+
+    if (processIsUndefined) {
+      return;
+    }
+
+    this._router.navigateToRoute('processdef-detail', {
+      processModelId: this.process.id,
+    });
   }
 
   public toggleSolutionExplorer(): void {
