@@ -64,7 +64,7 @@ export class ProcessInstanceList {
   }
 
   private _getMonth(date: Date): string {
-    const month: string = `${date.getMonth()}`;
+    const month: string = `${date.getMonth() + 1}`;
 
     if (month.length === 1) {
       return `0${month}`;
