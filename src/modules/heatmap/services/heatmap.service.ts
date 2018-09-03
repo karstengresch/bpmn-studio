@@ -36,6 +36,7 @@ export class HeatmapService implements IHeatmapService {
     const tokenToCount: Array<ActiveToken> = this._getTokenToCount(activeTokens);
     const tokenWithIdAndLength: Array<{flowNodeId: string, count: number}> = this._getTokenWithIdAndCount(activeTokens, tokenToCount);
     const elementsWithoutToken: Array<IShape> = this._getElementsWithoutToken(elementRegistry, tokenWithIdAndLength);
+    let participantsTokenCount: number = 0;
 
     const addOverlay: ((elementId: string,
                         count: number,
@@ -68,6 +69,8 @@ export class HeatmapService implements IHeatmapService {
       } else {
         addOverlay(token.flowNodeId, token.count, defaultOverlayPositions.tasks);
       }
+
+      participantsTokenCount += token.count;
     });
 
     elementsWithoutToken.forEach((element: IShape) => {
@@ -84,7 +87,7 @@ export class HeatmapService implements IHeatmapService {
     });
 
     const participantShape: IShape = this._getParticipantShape(elementRegistry);
-    addOverlay(participantShape.id, activeTokens.length, {
+    addOverlay(participantShape.id, participantsTokenCount, {
       // tslint:disable-next-line:no-magic-numbers
       left: participantShape.width - 18,
       // tslint:disable-next-line:no-magic-numbers
