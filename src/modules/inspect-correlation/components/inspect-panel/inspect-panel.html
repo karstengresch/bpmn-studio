@@ -3,7 +3,21 @@
   <require from="./components/log-viewer/log-viewer"></require>
   <require from="./components/process-instance-list/process-instance-list"></require>
   <div class="inspect-panel" if.bind="showInspectPanel">
-    <log-viewer></log-viewer>
-    <process-instance-list></process-instance-list>
+    <div class="inspect-panel__tabs">
+      <button class="inspect-panel__tabs__tab"
+              class.bind="showProcessInstanceList ? 'inspect-panel__tabs__active-tab' : ''"
+              click.delegate="changeTab(NavigationButton.ProcessInstanceList)">
+        Process Instance List
+      </button>
+      <button class="inspect-panel__tabs__tab"
+              class.bind="showLogViewer ? 'inspect-panel__tabs__active-tab' : ''"
+              click.delegate="changeTab(NavigationButton.LogViewer)">
+        Log Viewer
+      </button>
+    </div>
+    <div class="inspect-panel__body">
+      <process-instance-list if.bind="showProcessInstanceList" correlations.bind="correlations" selected-correlation.bind="selectedCorrelation"></process-instance-list>
+      <log-viewer if.bind="showLogViewer"></log-viewer>
+    </div>
   </div>
 </template>

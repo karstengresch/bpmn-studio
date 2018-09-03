@@ -1,10 +1,23 @@
 import {EventAggregator, Subscription} from 'aurelia-event-aggregator';
-import {inject} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
+
+import {Correlation} from '@process-engine/management_api_contracts';
+
 import environment from '../../../../environment';
+
+enum NavigationButton {
+  ProcessInstanceList = 'processInstanceList',
+  LogViewer = 'LogViewer',
+}
 
 @inject(EventAggregator)
 export class InspectPanel {
+  @bindable() public correlations: Array<Correlation>;
+  @bindable() public selectedCorrelation: Correlation;
+  public NavigationButton: typeof NavigationButton = NavigationButton;
   public showInspectPanel: boolean;
+  public showProcessInstanceList: boolean;
+  public showLogViewer: boolean;
 
   private _eventAggregator: EventAggregator;
   private _subscriptions: Array<Subscription>;
@@ -24,6 +37,27 @@ export class InspectPanel {
   public detached(): void {
     for (const subscription of this._subscriptions) {
       subscription.dispose();
+    }
+  }
+
+  public changeTab(navigationButton: NavigationButton): void {
+    console.log(navigationButton);
+    switch (navigationButton) {
+      case NavigationButton.ProcessInstanceList:
+        this.showProcessInstanceList = true;
+        this.showLogViewer = false;
+        break;
+
+      case NavigationButton.LogViewer:
+        this.showProcessInstanceList = false;
+        this.showLogViewer = true;
+        break;
+
+      default:
+        console.log('default');
+        this.showProcessInstanceList = false;
+        this.showLogViewer = false;
+        break;
     }
   }
 }

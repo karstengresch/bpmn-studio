@@ -1,0 +1,36 @@
+.inspect-panel {
+  position: absolute;
+  width: 100%;
+  height: 250px;
+  bottom: 22px;
+  right: 0px;
+  background: whitesmoke;
+}
+
+.inspect-panel__tabs {
+  height: 40px;
+  background: whitesmoke;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.inspect-panel__tabs__tab {
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 100%;
+  background: whitesmoke;
+  border: none;
+  float: left;
+}
+
+.inspect-panel__tabs__tab:hover {
+  background: #eaeaea;
+}
+
+.inspect-panel__tabs__active-tab {
+  border-bottom: 1px solid lightblue;
+}
+
+.inspect-panel__body {
+  height: calc(100% - 50px);
+}
