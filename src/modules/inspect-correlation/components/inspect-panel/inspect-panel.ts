@@ -60,7 +60,6 @@ export class InspectPanel {
         break;
 
       default:
-        console.log('default');
         this.showProcessInstanceList = false;
         this.showLogViewer = false;
         break;
