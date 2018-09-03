@@ -1,7 +1,6 @@
 .heatmap {
   width: 100%;
   height: 100%;
-  // padding-bottom: 20px;
 }
 
 .heatmap__viewer-container {
@@ -19,12 +18,13 @@
 .heatmap__legend-entry {
   display: block;
   margin: 0 10px;
+  font-size: 13px;
 }
 
 .heatmap__legend-entry-first {
   margin-top: 10px;
   margin-bottom: 2px;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: bold;
 }
 
