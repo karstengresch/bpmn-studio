@@ -10,7 +10,7 @@
         <th>User</th>
         <th>Correlation Id</th>
       </tr>
-    </thead class="correlation-table__header">
+    </thead>
     <tbody class="correlation-table__body">
       <tr repeat.for="tableEntry of tableData" class.bind="tableEntry.correlationId === selectedCorrelation.id ? 'correlation-table__selected-entry': ''" click.delegate="selectCorrelation(tableEntry)">
         <td>${tableEntry.index}</td>
