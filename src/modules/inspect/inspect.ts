@@ -4,6 +4,8 @@ import {bindable, inject} from 'aurelia-framework';
 import {Dashboard} from '../dashboard/dashboard';
 import {Heatmap} from '../heatmap/heatmap';
 
+import environment from '../../environment';
+
 export interface IInspectRouteParameters {
   processModelId?: string;
   view?: string;
@@ -26,6 +28,8 @@ export class Inspect {
 
   public activate(routeParameters: IInspectRouteParameters): void {
     console.log('testtesttest');
+    this._eventAggregator.publish(environment.events.processSolutionPanel.navigateToHeatmap);
+
     const noRouteParameters: boolean = routeParameters.processModelId === undefined || routeParameters.view === undefined;
     if (noRouteParameters) {
       return;
@@ -39,15 +43,13 @@ export class Inspect {
     } else if (routeParameters.view === 'heatmap') {
       this.showDashboard = false;
       this.showHeatmap = true;
+      this._eventAggregator.publish(environment.events.navBar.enableDesignLink);
     }
-
-    this._eventAggregator.publish('solutionExplorerNavigateToHeatmap');
 
   }
 
   public deactivate(): void {
-    this._eventAggregator.publish('navigateToDashboard');
-    this._eventAggregator.publish('navigateToDetail');
-    this._eventAggregator.publish('solutionExplorerNavigateToDetail');
+    this._eventAggregator.publish(environment.events.navBar.inspectNavigateToDashboard);
+    this._eventAggregator.publish(environment.events.processSolutionPanel.navigateToDesigner);
   }
 }

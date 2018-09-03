@@ -248,14 +248,13 @@ export class ProcessSolutionPanel {
       this._eventAggregator.subscribe(environment.events.processSolutionPanel.openProcessEngineIndexCard, () => {
         this.openProcessEngineIndexCard();
       }),
-      this._eventAggregator.subscribe('solutionExplorerNavigateToHeatmap', () => {
-        this.routeee = 'inspect';
+      this._eventAggregator.subscribe(environment.events.processSolutionPanel.navigateToHeatmap, () => {
+        this.diagramRoute = 'inspect';
         this.inspectView = 'heatmap';
       }),
 
-      this._eventAggregator.subscribe('solutionExplorerNavigateToDetail', () => {
-        this.routeee = 'processdef-detail';
-        // this.inspectView = 'dashboard';
+      this._eventAggregator.subscribe(environment.events.processSolutionPanel.navigateToDesigner, () => {
+        this.diagramRoute = 'processdef-detail';
       }),
     ];
   }

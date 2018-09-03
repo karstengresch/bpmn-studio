@@ -50,6 +50,9 @@ export default {
       enableSaveButton: 'navbar:saveButton:enable',
       disableDiagramUploadButton: 'navbar:diagramUploadButton:disable',
       enableDiagramUploadButton: 'navbar:diagramUploadButton:enable',
+      inspectNavigateToHeatmap: 'navbar:inspectLink:navigateToHeatmap',
+      inspectNavigateToDashboard: 'navbar:inspectLink:navigateToDashboard',
+      enableDesignLink: 'navbar:designLink:enable',
     },
     processDefDetail: {
       printDiagram: 'processdefdetail:diagram:print',
@@ -71,6 +74,8 @@ export default {
     processSolutionPanel: {
       toggleProcessSolutionExplorer: 'processSolutionPanel:processsolutionexplorer:toggle',
       openProcessEngineIndexCard: 'processSolutionPanel:processEngineIndexCard:toggle',
+      navigateToHeatmap: 'processSolutionPanel:processEngineLinks:navigateToHeatmap',
+      navigateToDesigner: 'processSolutionPanel:processEngineLinks:navigateToDesigner',
     },
   },
   baseRoute: processEngineRoute,

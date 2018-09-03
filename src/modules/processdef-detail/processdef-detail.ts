@@ -135,7 +135,8 @@ export class ProcessDefDetail {
     this._eventAggregator.publish(environment.events.navBar.disableDiagramUploadButton);
     this._eventAggregator.publish(environment.events.navBar.showProcessName, this.process);
     this._eventAggregator.publish(environment.events.statusBar.showDiagramViewButtons);
-    this._eventAggregator.publish('navbarNavigateToHeatmap');
+    this._eventAggregator.publish(environment.events.navBar.inspectNavigateToHeatmap);
+    this._eventAggregator.publish(environment.events.navBar.enableDesignLink);
   }
 
   public determineActivationStrategy(): string {
@@ -232,7 +233,7 @@ export class ProcessDefDetail {
     this._eventAggregator.publish(environment.events.navBar.enableDiagramUploadButton);
     this._eventAggregator.publish(environment.events.statusBar.hideDiagramViewButtons);
     this._eventAggregator.publish(environment.events.navBar.hideProcessName);
-    this._eventAggregator.publish('navigateToDashboard');
+    this._eventAggregator.publish(environment.events.navBar.inspectNavigateToDashboard);
   }
 
   public async startProcess(): Promise<void> {
