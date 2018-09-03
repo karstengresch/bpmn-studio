@@ -14,6 +14,7 @@ enum NavigationButton {
 export class InspectPanel {
   @bindable() public correlations: Array<Correlation>;
   @bindable() public selectedCorrelation: Correlation;
+  @bindable() public log: string;
   public NavigationButton: typeof NavigationButton = NavigationButton;
   public showInspectPanel: boolean;
   public showProcessInstanceList: boolean;
