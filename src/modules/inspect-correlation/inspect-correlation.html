@@ -4,7 +4,7 @@
   <require from="./components/diagram-viewer/diagram-viewer"></require>
   <require from="./components/token-viewer/token-viewer"></require>
   <div class="inspect-correlation">
-    <inspect-panel></inspect-panel>
+    <inspect-panel correlations.bind="correlations" selected-correlation.bind="selectedCorrelation"></inspect-panel>
     <!-- <div class="inspect-correlation__correlation-selection">
       <process-instance-list correlations.bind="correlations" selected-correlation.two-way="selectedCorrelation"></process-instance-list>
     </div>
