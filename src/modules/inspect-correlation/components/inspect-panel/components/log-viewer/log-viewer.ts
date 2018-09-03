@@ -1,4 +1,5 @@
 import {bindable} from 'aurelia-framework';
+import * as clipboard from 'clipboard-polyfill';
 
 interface LogEntry {
   timestamp: number;
@@ -8,6 +9,10 @@ interface LogEntry {
 
 export class LogViewer {
   @bindable() public log: Array<LogEntry>;
+
+  public copyToClipboard(text: string): void {
+    clipboard.writeText(text);
+  }
 
   public getFormattedDate(timestamp: number): string {
     const date: Date = new Date(timestamp);

@@ -11,7 +11,7 @@
         </tr>
       </thead class="log-table__header">
       <tbody class="log-table__body">
-        <tr repeat.for="logEntry of log">
+        <tr repeat.for="logEntry of log" click.delegate="copyToClipboard(logEntry.message)">
           <td class="log-table__time-column">${getFormattedDate(logEntry.timestamp)}</td>
           <td class="log-table__message-column">${logEntry.message}</td>
           <td class="log-table__log-level-column">${logEntry.logLevel}</td>

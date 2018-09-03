@@ -104,6 +104,7 @@
     "aurelia-open-id-connect": "1.0.3",
     "aurelia-validation": "^1.1.2",
     "bpmn-js-differ": "2.0.2",
+    "clipboard-polyfill": "^2.5.4",
     "electron-is-dev": "^0.3.0",
     "electron-notifications": "^1.0.0",
     "electron-updater": "^2.19.1",
