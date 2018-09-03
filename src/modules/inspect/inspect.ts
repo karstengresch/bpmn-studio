@@ -27,7 +27,6 @@ export class Inspect {
   }
 
   public activate(routeParameters: IInspectRouteParameters): void {
-    console.log('testtesttest');
     this._eventAggregator.publish(environment.events.processSolutionPanel.navigateToHeatmap);
 
     const noRouteParameters: boolean = routeParameters.processModelId === undefined || routeParameters.view === undefined;

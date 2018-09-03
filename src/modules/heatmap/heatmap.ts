@@ -1,5 +1,5 @@
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {bindable, inject, view} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
 
 import {IBpmnModeler, IElementRegistry, IOverlay} from '../../contracts';
 import {IFlowNodeAssociation, IHeatmapService} from './contracts';
@@ -43,10 +43,6 @@ export class Heatmap {
   }
 
   public async attached(): Promise<void> {
-    // const processModelId: string = routeParameters.processModelId;
-
-    console.log(this.processmodelid);
-
     this._modeler = new bundle.modeler({
       moddleExtensions: {
         camunda: bundle.camundaModdleDescriptor,

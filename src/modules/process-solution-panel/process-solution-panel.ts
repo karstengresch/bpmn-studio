@@ -259,11 +259,6 @@ export class ProcessSolutionPanel {
     ];
   }
 
-  public bla(index: number): void {
-    console.log(this.routeee);
-    console.log(this.inspectView);
-    console.log(this.openedProcessEngineSolution.diagrams[index].name);
-  }
   public detached(): void {
     for (const subscription of this._subscriptions) {
       subscription.dispose();
