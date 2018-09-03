@@ -42,7 +42,6 @@ export class InspectPanel {
   }
 
   public changeTab(navigationButton: NavigationButton): void {
-    console.log(navigationButton);
     switch (navigationButton) {
       case NavigationButton.ProcessInstanceList:
         this.showProcessInstanceList = true;
