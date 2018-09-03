@@ -45,3 +45,12 @@
 .correlation-table__selected-entry {
   background-color: #e6e6e6 !important;
 }
+
+.correlation-table__empty-message {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  font-size: 24px;
+  font-weight: 900;
+}

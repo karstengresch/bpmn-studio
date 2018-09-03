@@ -21,12 +21,3 @@
   height: calc(100% - 175px - 20px);
   padding: 20px;
 }
-
-.correlation-table__empty-message {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  font-size: 24px;
-  font-weight: 900;
-}
