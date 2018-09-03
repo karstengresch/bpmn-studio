@@ -11,6 +11,7 @@
       </button>
       <button class="inspect-panel__tabs__tab"
               class.bind="showLogViewer ? 'inspect-panel__tabs__active-tab' : ''"
+              disabled.bind="selectedCorrelation === undefined"
               click.delegate="changeTab(NavigationButton.LogViewer)">
         Log Viewer
       </button>
