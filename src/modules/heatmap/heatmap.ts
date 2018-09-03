@@ -1,7 +1,7 @@
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {bindable, inject} from 'aurelia-framework';
 
-import {IBpmnModeler, IElementRegistry, IOverlay} from '../../contracts';
+import {IBpmnModeler, IElementRegistry, IOverlay} from '../../contracts/index';
 import {IFlowNodeAssociation, IHeatmapService} from './contracts';
 
 import * as bundle from '@process-engine/bpmn-js-custom-bundle';
@@ -31,10 +31,15 @@ export class Heatmap {
   }
 
   public processmodelidChanged(): void {
-    if (!this.viewerContainer === undefined) {
-      this.test.removeChild(this.viewerContainer);
+    const viewerContainerIsAttached: boolean = this.viewerContainer !== undefined && this.viewerContainer !== null;
+    const viewerIsInitialized: boolean = this._viewer !== undefined;
+
+    if (viewerContainerIsAttached) {
+      const attachedViewer: Element = document.getElementsByClassName('bjs-container')[0];
+      this.viewerContainer.removeChild(attachedViewer);
     }
-    if (!this._viewer === undefined) {
+
+    if (viewerIsInitialized) {
       this._viewer.detach();
       this._viewer.destroy();
     }
