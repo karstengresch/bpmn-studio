@@ -16,13 +16,19 @@ interface RouteParameters {
   processModelId: string;
 }
 
+interface LogEntry {
+  timestamp: number;
+  message: string;
+  logLevel: string;
+}
+
 @inject('InspectCorrelationService', 'ManagementApiClientService', 'AuthenticationService', EventAggregator)
 export class InspectCorrelation {
   public correlations: Array<Correlation>;
   @bindable({ changeHandler: 'selectedCorrelationChanged'}) public selectedCorrelation: Correlation;
   public xml: string;
   public token: string;
-  public log: string;
+  public log: Array<LogEntry>;
 
   private _managementApiService: IManagementApiService;
   private _authenticationService: IAuthenticationService;
@@ -91,26 +97,46 @@ export class InspectCorrelation {
     return lorem;
   }
 
-  private _getLog(): string {
-    const lorem: string = `Lorem ipsum dolor sit amet, consetetur sadipscing
-    elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-    aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-    est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-    sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-    et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-    takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-    amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-    ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-    accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-    takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure
-    dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
-    dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
-    dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
-    feugait nulla facilisi. Lorem ipsum dolor sit amet,`;
+  private _getLog(): Array<LogEntry> {
+    const log: Array<LogEntry> = [
+      {
+        timestamp: 30767606000,
+        message: 'Process started.',
+        logLevel: 'info',
+      },
+      {
+        timestamp: 30854006000,
+        message: 'Service Task with id fetchData finished.',
+        logLevel: 'info',
+      },
+      {
+        timestamp: 1460454317000,
+        message: 'User Task with id enterEmail was finished with incompatible data!',
+        logLevel: 'error',
+      },
+      {
+        timestamp: 1460454377000,
+        message: 'User Task with id enterEmail finished.',
+        logLevel: 'info',
+      },
+      {
+        timestamp: 1535981475000,
+        message: 'User Task with id enterEmail finished.',
+        logLevel: 'info',
+      },
+      {
+        timestamp: 1747054117000,
+        message: 'Service Task with id sendEmail finished.',
+        logLevel: 'info',
+      },
+      {
+        timestamp: 2177449199000,
+        message: 'Process finished.',
+        logLevel: 'info',
+      },
+    ];
 
-    return lorem;
+    return log;
   }
 
   private _getManagementContext(): ManagementContext {

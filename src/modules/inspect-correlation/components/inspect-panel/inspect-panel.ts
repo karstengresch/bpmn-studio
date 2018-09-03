@@ -10,11 +10,17 @@ enum NavigationButton {
   LogViewer = 'LogViewer',
 }
 
+interface LogEntry {
+  timestamp: number;
+  message: string;
+  logLevel: string;
+}
+
 @inject(EventAggregator)
 export class InspectPanel {
   @bindable() public correlations: Array<Correlation>;
   @bindable() public selectedCorrelation: Correlation;
-  @bindable() public log: string;
+  @bindable() public log: Array<LogEntry>;
   public NavigationButton: typeof NavigationButton = NavigationButton;
   public showInspectPanel: boolean;
   public showProcessInstanceList: boolean;

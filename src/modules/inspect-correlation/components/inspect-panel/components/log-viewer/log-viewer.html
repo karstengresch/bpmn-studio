@@ -1,6 +1,21 @@
 <template>
   <require from="./log-viewer.css"></require>
   <div class="log-viewer">
-    <div class="log-viewer__body">${log}</div>
+    <table class="table table-striped table-hover log-table">
+      <thead>
+        <tr class="log-table__headlines">
+          <th class="log-table__time-column">Time</th>
+          <th class="log-table__message-column">Message</th>
+          <th class="log-table__log-level-column">Log Level</th>
+        </tr>
+      </thead class="log-table__header">
+      <tbody class="log-table__body">
+        <tr repeat.for="logEntry of log">
+          <td class="log-table__time-column">${getFormattedDate(logEntry.timestamp)}</td>
+          <td class="log-table__message-column">${logEntry.message}</td>
+          <td class="log-table__log-level-column">${logEntry.logLevel}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
