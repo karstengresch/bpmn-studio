@@ -1,7 +1,8 @@
 <template>
   <require from="./log-viewer.css"></require>
   <div class="log-viewer">
-    <table class="table table-striped table-hover log-table">
+    <span if.bind="log.length === 0" class="log-table__empty-message">For this process instance are no logs existing.</span>
+    <table else class="table table-striped table-hover log-table">
       <thead>
         <tr class="log-table__headlines">
           <th class="log-table__time-column">Time</th>
