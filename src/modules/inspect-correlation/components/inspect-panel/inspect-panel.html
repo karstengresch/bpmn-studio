@@ -16,7 +16,7 @@
       </button>
     </div>
     <div class="inspect-panel__body">
-      <process-instance-list if.bind="showProcessInstanceList" correlations.bind="correlations" selected-correlation.bind="selectedCorrelation"></process-instance-list>
+      <process-instance-list if.bind="showProcessInstanceList" correlations.bind="correlations" selected-correlation.two-way="selectedCorrelation"></process-instance-list>
       <log-viewer if.bind="showLogViewer"></log-viewer>
     </div>
   </div>
