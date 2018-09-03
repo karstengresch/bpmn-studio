@@ -4,10 +4,11 @@ import {RouteConfig, Router} from 'aurelia-router';
 
 import {IDiagram} from '@process-engine/solutionexplorer.contracts';
 
-import {IEventFunction} from '../../contracts';
+import {IEventFunction, NotificationType} from '../../contracts/index';
 import environment from '../../environment';
+import {NotificationService} from '../notification/notification.service';
 
-@inject(Router, EventAggregator)
+@inject(Router, EventAggregator, 'NotificationService')
 export class NavBar {
 
   @bindable() public activeRouteName: string;
@@ -27,10 +28,12 @@ export class NavBar {
   private _router: Router;
   private _eventAggregator: EventAggregator;
   private _subscriptions: Array<Subscription>;
+  private _notificationService: NotificationService;
 
-  constructor(router: Router, eventAggregator: EventAggregator) {
+  constructor(router: Router, eventAggregator: EventAggregator, notificationService: NotificationService) {
     this._router = router;
     this._eventAggregator = eventAggregator;
+    this._notificationService = notificationService;
   }
 
   public attached(): void {
@@ -129,6 +132,7 @@ export class NavBar {
     const processIsUndefined: boolean = this.process === undefined;
 
     if (processIsUndefined) {
+      this._notificationService.showNotification(NotificationType.INFO, 'To open the designer, you must first select a diagram');
       return;
     }
 
