@@ -7,13 +7,7 @@ interface LogEntry {
 }
 
 export class LogViewer {
-  @bindable({ changeHandler: 'logChanged'}) public log: Array<LogEntry>;
-
-  public logChanged(): void {
-    for (const logEntry of this.log) {
-      console.log(this.getFormattedDate(logEntry.timestamp));
-    }
-  }
+  @bindable() public log: Array<LogEntry>;
 
   public getFormattedDate(timestamp: number): string {
     const date: Date = new Date(timestamp);
