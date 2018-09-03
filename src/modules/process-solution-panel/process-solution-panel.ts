@@ -65,7 +65,7 @@ export class ProcessSolutionPanel {
   public fileSystemIndexCardIsActive: boolean = false;
   public processEngineIndexCardIsActive: boolean = true;
 
-  public routeee: string = 'processdef-detail';
+  public diagramRoute: string = 'processdef-detail';
   public inspectView: string;
 
   private _subscriptions: Array<Subscription> = [];
