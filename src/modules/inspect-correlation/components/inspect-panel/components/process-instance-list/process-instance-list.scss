@@ -16,10 +16,10 @@
 }
 
 .correlation-table__headlines > th {
-  width: 25% !important;
-  padding: 5px;
+  width: 25%;
+  padding: 8px;
   overflow: hidden;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 2px solid #ccc !important;
   font-size: 18px;
   font-weight: 900;
   text-overflow: ellipsis;
@@ -39,9 +39,10 @@
 }
 
 .correlation-table__body > tr > td{
-  width: 25% !important;
-  padding: 5px;
+  width: 25%;
+  padding: 8px;
   overflow: hidden;
+  border-top: none !important;
   border-bottom: 1px solid #ccc;
   text-overflow: ellipsis;
 }
