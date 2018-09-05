@@ -70,15 +70,20 @@ pipeline {
       }
     }
     stage('build electron') {
-      when {
-        expression { branch_is_master || branch_is_develop }
-      }
+      // when {
+      //   expression { branch_is_master || branch_is_develop }
+      // }
       parallel {
         stage('Build on Linux') {
           agent {
-            label "linux"
+            docker {
+              image 'electronuserland/builder:10'
+              args "-it --tmpfs /.local --tmpfs /.cache --env ELECTRON_CACHE='${env.WORKSPACE}/.cache/electron' --env ELECTRON_BUILDER_CACHE='${env.WORKSPACE}/.cache/electron-builder'"
+            }
           }
           steps {
+            sh('mkdir .cache .npm .electron')
+
             unstash('post_build')
             unstash('post_build_node_modules')
 
