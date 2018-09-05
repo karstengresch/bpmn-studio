@@ -14,7 +14,11 @@
         <inspect-panel correlations.bind="correlations" selected-correlation.two-way="selectedCorrelation" log.bind="log"></inspect-panel>
       </div>
     </div>
-    <div class="inspect-correlation__right-toolbar"></div>
+    <div class="inspect-correlation__right-toolbar">
+      <div class="inspect-correlation__tool" class.bind="showTokenViewer ? 'inspect-correlation__active-tool' : ''" click.delegate="toggleTokenViewer()">
+          <i class="fas fa-book"></i>
+      </div>
+    </div>
     <!-- <div class="inspect-correlation__correlation-selection">
       <process-instance-list correlations.bind="correlations" selected-correlation.two-way="selectedCorrelation"></process-instance-list>
     </div>
