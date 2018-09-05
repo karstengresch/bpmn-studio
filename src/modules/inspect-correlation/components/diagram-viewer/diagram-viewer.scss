@@ -7,37 +7,3 @@
   border: 1px solid #ccc;
 }
 
-.diagram-viewer__headline {
-  margin-left: 10px;
-  cursor: default;
-  user-select: none;
-  font-size: 16px;
-  font-weight: 900;
-}
-
-.diagram-viewer__foldable-headline {
-  cursor: pointer;
-}
-
-.diagram-viewer__body {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  overflow: auto;
-}
-
-.diagram-viewer__body__top-spacing {
-  top: 25px;
-  border-top: 1px solid #ccc;
-}
-
-.diagram-viewer__collapsed {
-  height: 25px;
-}
-
-.diagram-viewer__canvas__hide {
-  height: 25px;
-  display: none;
-}

@@ -7,13 +7,9 @@ import {NotificationService} from '../../../notification/notification.service';
 
 @inject('NotificationService')
 export class DiagramViewer {
-  @bindable({ changeHandler: 'titleChanged' }) public title: string;
-  @bindable({ changeHandler: 'foldableChanged' }) public foldable: string;
   @bindable({ changeHandler: 'xmlChanged' }) public xml: string;
   public canvasModel: HTMLElement;
   public showDiagram: boolean = true;
-  public showHeadline: boolean;
-  public isFoldable: boolean;
 
   private _notificationService: NotificationService;
   private _diagramViewer: IBpmnModeler;
@@ -34,26 +30,8 @@ export class DiagramViewer {
     this._diagramViewer.attachTo(this.canvasModel);
   }
 
-  public toggleDiagramVisibility(): void {
-    if (this.isFoldable) {
-      this.showDiagram = !this.showDiagram;
-    }
-  }
-
   public xmlChanged(newXml: string): void {
     this._importXml(newXml);
-  }
-
-  public foldableChanged(): void {
-    this.isFoldable = this.foldable === 'true';
-    this.showHeadline = this.title !== ''
-                     || this.title === undefined
-                     || this.isFoldable;
-  }
-
-  public titleChanged(): void {
-    this.showHeadline = this.title !== ''
-                     || this.isFoldable;
   }
 
   private async _importXml(xml: string): Promise <void> {
