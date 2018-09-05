@@ -12,7 +12,7 @@ export class LogViewer {
   @bindable() public log: Array<LogEntry>;
 
   public copyToClipboard(text: string): void {
-    clipboard.writeText(text);
+    (clipboard as any).writeText(text);
   }
 
   public getFormattedDate(timestamp: number): string {
