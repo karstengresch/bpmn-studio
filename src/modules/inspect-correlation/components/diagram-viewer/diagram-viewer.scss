@@ -8,5 +8,16 @@
 }
 
 .diagram-viewer__body {
+  position: relative;
   height: 100%;
+}
+
+.diagram-viewer__empty-message {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  white-space: nowrap;
+  transform: translate3d(-50%, -50%, 0);
+  font-size: 24px;
+  font-weight: 900;
 }
