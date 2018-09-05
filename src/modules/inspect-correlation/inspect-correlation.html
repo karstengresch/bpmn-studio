@@ -4,6 +4,9 @@
   <require from="./components/diagram-viewer/diagram-viewer"></require>
   <require from="./components/token-viewer/token-viewer"></require>
   <div class="inspect-correlation">
+    <div class="inspect-correlation__middle-panel">
+      <diagram-viewer class="inspect-correlation__diagram-viewer" xml.bind="xml"></diagram-viewer>
+    </div>
     <div class="inspect-correlation__bottom-panel" show.bind="showInspectPanel">
       <inspect-panel correlations.bind="correlations" selected-correlation.two-way="selectedCorrelation" log.bind="log"></inspect-panel>
     </div>

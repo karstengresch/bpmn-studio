@@ -3,6 +3,9 @@
   height: 100%;
   position: relative;
   padding-bottom: 22px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .inspect-correlation__correlation-selection {
@@ -20,4 +23,18 @@
 .inspect-correlation__correlation-data {
   height: calc(100% - 175px - 20px);
   padding: 20px;
+}
+
+.inspect-correlation__bottom-panel {
+  width: 100%;
+  height: 250px;
+}
+
+.inspect-correlation__middle-panel {
+  display: flex;
+  flex-grow: 1;
+}
+
+.inspect-correlation__diagram-viewer {
+  flex-basis: 100%;
 }
