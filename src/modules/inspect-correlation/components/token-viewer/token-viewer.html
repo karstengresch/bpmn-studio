@@ -1,4 +1,7 @@
 <template>
   <require from="./token-viewer.css"></require>
-  <div class="token-viewer">${token}</div>
+  <div class="token-viewer">
+      <span class="token-viewer__headline">Token</span>
+      <pre class="token-viewer__token">${formattedToken}</pre>
+  </div>
 </template>
