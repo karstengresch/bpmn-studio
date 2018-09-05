@@ -1,9 +1,4 @@
 <template>
   <require from="./token-viewer.css"></require>
-  <div class="token-viewer" class.bind="showToken ? '' : 'token-viewer__body__hide-data'">
-    <span if.bind="showHeadline" class="token-viewer__headline" class.bind="isFoldable ? 'diagram-viewer__foldable-headline' : ''" click.delegate="toggleTokenVisibility()">
-      <i if.bind="isFoldable" class="fas" class.bind="showToken ? 'fa-caret-down' : 'fa-caret-right'"></i> ${title}
-    </span>
-    <div class="token-viewer__body" class.bind="showHeadline ? 'token-viewer__body__top-spacing' : ''">${token}</div>
-  </div>
+  <div class="token-viewer">${token}</div>
 </template>

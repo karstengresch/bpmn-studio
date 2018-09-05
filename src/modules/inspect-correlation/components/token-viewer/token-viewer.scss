@@ -1,40 +1,5 @@
 .token-viewer {
   position: relative;
-  height: calc(25% - 14px);
-  margin-bottom: 21px;
-  overflow: hidden;
   background: #f7f7f7;
-  border: 1px solid #ccc;
-}
-
-.token-viewer__headline {
-  margin-left: 10px;
-  cursor: default;
-  user-select: none;
-  font-size: 16px;
-  font-weight: 900;
-}
-
-.token-viewer__foldable-headline {
-  cursor: pointer;
-}
-
-.token-viewer__body {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  padding-right: 5px;
-  padding-left: 5px;
-  overflow: auto;
-  border-top: 1px solid #ccc;
-}
-
-.token-viewer__body__top-spacing {
-  top: 25px;
-}
-
-.token-viewer__body__hide-data {
-  height: 25px;
+  border-left: 2px solid #ccc;
 }
