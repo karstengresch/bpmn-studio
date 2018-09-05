@@ -9,9 +9,8 @@
               click.delegate="changeTab(NavigationButton.ProcessInstanceList)">
         Process Instance List
       </button>
-      <button class="inspect-panel__tabs__tab"
+      <button class="inspect-panel__tabs__tab ${showLogViewer ? 'inspect-panel__tabs__active-tab' : ''}"
               class.bind="selectedCorrelation === undefined ? 'inspect-panel__tabs__disabled-tab' : ''"
-              class.bind="showLogViewer ? 'inspect-panel__tabs__active-tab' : ''"
               disabled.bind="selectedCorrelation === undefined"
               title.bind="selectedCorrelation !== undefined ? 'Show log of process instance' : 'Select a process instance in order to toggle the log viewer'"
               click.delegate="changeTab(NavigationButton.LogViewer)">
