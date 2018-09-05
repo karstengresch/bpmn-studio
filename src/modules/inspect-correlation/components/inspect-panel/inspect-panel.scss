@@ -20,12 +20,17 @@
   float: left;
 }
 
-.inspect-panel__tabs__tab:hover {
+.inspect-panel__tabs__tab:hover:enabled {
   background: #eaeaea;
 }
 
 .inspect-panel__tabs__active-tab {
   border-bottom: 1px solid #5fa7f1;
+}
+
+.inspect-panel__tabs__disabled-tab {
+  color: #ccc;
+  cursor: default;
 }
 
 .inspect-panel__body {
