@@ -1,9 +1,15 @@
 .inspect-correlation {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
   padding-bottom: 22px;
+}
 
+.inspect-correlation__panels{
+  width: calc(100% - 72px);
+  height: 100%;
+  margin-left: 36px;
+  margin-right: 36px;
   display: flex;
   flex-direction: column;
 }
@@ -37,4 +43,24 @@
 
 .inspect-correlation__diagram-viewer {
   flex-basis: 100%;
+}
+
+.inspect-correlation__right-toolbar {
+  position: absolute;
+  width: 36px;
+  height: 100%;
+  background-color: #f7f7f7;
+  border-left: 2px solid #ccc;
+  right: 0px;
+  top: 0px;
+}
+
+.inspect-correlation__left-toolbar {
+  position: absolute;
+  width: 36px;
+  height: 100%;
+  background-color: #f7f7f7;
+  border-right: 2px solid #ccc;
+  left: 0px;
+  top: 0px;
 }

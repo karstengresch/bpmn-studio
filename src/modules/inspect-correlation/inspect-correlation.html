@@ -4,12 +4,16 @@
   <require from="./components/diagram-viewer/diagram-viewer"></require>
   <require from="./components/token-viewer/token-viewer"></require>
   <div class="inspect-correlation">
-    <div class="inspect-correlation__middle-panel">
-      <diagram-viewer class="inspect-correlation__diagram-viewer" xml.bind="xml"></diagram-viewer>
+    <div class="inspect-correlation__left-toolbar"></div>
+    <div class="inspect-correlation__panels">
+      <div class="inspect-correlation__middle-panel">
+        <diagram-viewer class="inspect-correlation__diagram-viewer" xml.bind="xml"></diagram-viewer>
+      </div>
+      <div class="inspect-correlation__bottom-panel" show.bind="showInspectPanel">
+        <inspect-panel correlations.bind="correlations" selected-correlation.two-way="selectedCorrelation" log.bind="log"></inspect-panel>
+      </div>
     </div>
-    <div class="inspect-correlation__bottom-panel" show.bind="showInspectPanel">
-      <inspect-panel correlations.bind="correlations" selected-correlation.two-way="selectedCorrelation" log.bind="log"></inspect-panel>
-    </div>
+    <div class="inspect-correlation__right-toolbar"></div>
     <!-- <div class="inspect-correlation__correlation-selection">
       <process-instance-list correlations.bind="correlations" selected-correlation.two-way="selectedCorrelation"></process-instance-list>
     </div>
@@ -18,5 +22,4 @@
       <token-viewer token.bind="token" foldable="true" title="Token"></token-viewer>
       <log-viewer log.bind="log" foldable="true" title="Log"></log-viewer>
     </div> -->
-  </div>
 </template>
