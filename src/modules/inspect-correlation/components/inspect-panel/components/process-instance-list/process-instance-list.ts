@@ -10,10 +10,30 @@ interface TableEntry {
   correlationId: string;
 }
 
+enum SortProperty {
+  Number = 'index',
+  StartedAt = 'startedAt',
+  State = 'state',
+  User = 'user',
+  CorrelationId = 'correlationId',
+}
+
+interface SortSettings {
+  ascending: boolean;
+  sortProperty: SortProperty;
+}
+
 export class ProcessInstanceList {
   @bindable({ defaultBindingMode: bindingMode.twoWay }) public selectedCorrelation: Correlation;
   @bindable({ changeHandler: 'correlationsChanged' }) public correlations: Array<Correlation>;
-  public tableData: Array<TableEntry> = [];
+  public sortedTableData: Array<TableEntry>;
+  public SortProperty: typeof SortProperty = SortProperty;
+
+  private _tableData: Array<TableEntry> = [];
+  private _sortSettings: SortSettings = {
+    ascending: false,
+    sortProperty: undefined,
+  };
 
   public selectCorrelation(selectedTableEntry: TableEntry): void {
     this.selectedCorrelation = this.correlations.find((correlation: Correlation) => {
@@ -23,6 +43,7 @@ export class ProcessInstanceList {
 
   public correlationsChanged(newCorrelations: Array<Correlation>): void {
     this._convertCorrelationsIntoTableData(newCorrelations);
+    this.sortList(SortProperty.Number);
   }
 
   private _convertCorrelationsIntoTableData(correlations: Array<any>): void {
@@ -37,8 +58,35 @@ export class ProcessInstanceList {
         correlationId: correlation.id,
       };
 
-      this.tableData.push(tableEntry);
+      this._tableData.push(tableEntry);
     }
+  }
+
+  public sortList(property: SortProperty): void {
+    this.sortedTableData = [];
+    const isSamePropertyAsPrevious: boolean = this._sortSettings.sortProperty === property;
+    const ascending: boolean = isSamePropertyAsPrevious ? !this._sortSettings.ascending
+                                                        : true;
+
+    const sortedTableData: Array<TableEntry> = this._tableData.sort((firstEntry: TableEntry, secondEntry: TableEntry) => {
+      const firstEntryIsBigger: boolean = firstEntry[property] > secondEntry[property];
+      if (firstEntryIsBigger) {
+        return 1;
+      }
+
+      const secondEntryIsBigger: boolean = firstEntry[property] < secondEntry[property];
+      if (secondEntryIsBigger) {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    this.sortedTableData = ascending ? sortedTableData
+                                     : sortedTableData.reverse();
+
+    this._sortSettings.ascending = ascending;
+    this._sortSettings.sortProperty = property;
   }
 
   private _formatDate(date: Date): string {

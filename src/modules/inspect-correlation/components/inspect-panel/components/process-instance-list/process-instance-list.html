@@ -4,15 +4,15 @@
   <table else class="table table-striped table-hover correlation-table">
     <thead>
       <tr class="correlation-table__headlines">
-        <th>Number</th>
-        <th>Started at</th>
-        <th>State</th>
-        <th>User</th>
-        <th>Correlation Id</th>
+        <th click.delegate="sortList(SortProperty.Number)">Number</th>
+        <th click.delegate="sortList(SortProperty.StartedAt)">Started at</th>
+        <th click.delegate="sortList(SortProperty.State)">State</th>
+        <th click.delegate="sortList(SortProperty.User)">User</th>
+        <th click.delegate="sortList(SortProperty.CorrelationId)">Correlation Id</th>
       </tr>
     </thead>
     <tbody class="correlation-table__body">
-      <tr repeat.for="tableEntry of tableData" class.bind="tableEntry.correlationId === selectedCorrelation.id ? 'correlation-table__selected-entry': ''" click.delegate="selectCorrelation(tableEntry)">
+      <tr repeat.for="tableEntry of sortedTableData" class.bind="tableEntry.correlationId === selectedCorrelation.id ? 'correlation-table__selected-entry': ''" click.delegate="selectCorrelation(tableEntry)">
         <td>${tableEntry.index}</td>
         <td>${tableEntry.startedAt}</td>
         <td>${tableEntry.state}</td>
