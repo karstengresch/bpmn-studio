@@ -1,4 +1,4 @@
-import {EventAggregator} from 'aurelia-event-aggregator';
+import {EventAggregator, Subscription} from 'aurelia-event-aggregator';
 import {bindable, inject} from 'aurelia-framework';
 
 import {
@@ -29,11 +29,13 @@ export class InspectCorrelation {
   public xml: string;
   public token: string;
   public log: Array<LogEntry>;
+  public showInspectPanel: boolean;
 
   private _managementApiService: IManagementApiService;
   private _authenticationService: IAuthenticationService;
   private _inspectCorrelationService: IInspectCorrelationService;
-  private _eventAggragator: EventAggregator;
+  private _eventAggregator: EventAggregator;
+  private _subscriptions: Array<Subscription>;
 
   constructor(inspectCorrelationService: IInspectCorrelationService,
               managementApiService: IManagementApiService,
@@ -43,7 +45,7 @@ export class InspectCorrelation {
     this._inspectCorrelationService = inspectCorrelationService;
     this._managementApiService = managementApiService;
     this._authenticationService = authenticationService;
-    this._eventAggragator = eventAggregator;
+    this._eventAggregator = eventAggregator;
   }
 
   public async activate(routeParameters: RouteParameters): Promise<void> {
@@ -53,11 +55,21 @@ export class InspectCorrelation {
   }
 
   public attached(): void {
-    this._eventAggragator.publish(environment.events.statusBar.showInspectViewButtons, true);
+    this._eventAggregator.publish(environment.events.statusBar.showInspectViewButtons, true);
+
+    this._subscriptions = [
+      this._eventAggregator.subscribe(environment.events.inspectView.showInspectPanel, (showInspectPanel: boolean) => {
+        this.showInspectPanel = showInspectPanel;
+      }),
+    ];
   }
 
   public detached(): void {
-    this._eventAggragator.publish(environment.events.statusBar.showInspectViewButtons, false);
+    this._eventAggregator.publish(environment.events.statusBar.showInspectViewButtons, false);
+
+    for (const subscription of this._subscriptions) {
+      subscription.dispose();
+    }
   }
 
   public async selectedCorrelationChanged(selectedCorrelation: Correlation): Promise<void> {
