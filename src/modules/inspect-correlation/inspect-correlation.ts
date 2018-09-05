@@ -29,7 +29,7 @@ export class InspectCorrelation {
   public xml: string;
   public token: string;
   public log: Array<LogEntry>;
-  public showInspectPanel: boolean;
+  public showInspectPanel: boolean = true;
 
   private _managementApiService: IManagementApiService;
   private _authenticationService: IAuthenticationService;

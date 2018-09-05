@@ -16,7 +16,7 @@ export class StatusBar {
   public showInspectViewButtons: boolean = false;
   public showChangeList: boolean = false;
   public isEncryptedCommunication: boolean = false;
-  public showInspectPanel: boolean = false;
+  public showInspectPanel: boolean = true;
 
   public DiffMode: typeof DiffMode = DiffMode;
 
