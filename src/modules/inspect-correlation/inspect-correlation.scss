@@ -45,6 +45,11 @@
   flex-basis: 100%;
 }
 
+.inspect-correlation__token-viewer {
+  width: 250px;
+  flex-shrink: 0;
+}
+
 .inspect-correlation__right-toolbar {
   position: absolute;
   width: 36px;

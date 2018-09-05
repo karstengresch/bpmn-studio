@@ -30,6 +30,7 @@ export class InspectCorrelation {
   public token: string;
   public log: Array<LogEntry>;
   public showInspectPanel: boolean = true;
+  public showTokenViewer: boolean = false;
 
   private _managementApiService: IManagementApiService;
   private _authenticationService: IAuthenticationService;
@@ -70,6 +71,10 @@ export class InspectCorrelation {
     for (const subscription of this._subscriptions) {
       subscription.dispose();
     }
+  }
+
+  public toggleTokenViewer(): void {
+    this.showTokenViewer = !this.showTokenViewer;
   }
 
   public async selectedCorrelationChanged(selectedCorrelation: Correlation): Promise<void> {
