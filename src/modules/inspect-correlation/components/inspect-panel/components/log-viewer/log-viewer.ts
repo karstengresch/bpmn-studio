@@ -1,4 +1,5 @@
 import {bindable} from 'aurelia-framework';
+
 import * as clipboard from 'clipboard-polyfill';
 
 interface LogEntry {
