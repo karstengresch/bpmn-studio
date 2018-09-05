@@ -71,3 +71,18 @@
   top: 0px;
   padding-bottom: 22px;
 }
+
+.inspect-correlation__tool {
+  padding: 5px;
+  margin: 0 5px;
+  opacity: 0.5;
+  text-align: center;
+}
+
+.inspect-correlation__active-tool {
+  opacity: 1;
+}
+
+.inspect-correlation__tool:hover {
+  opacity: 1;
+}
