@@ -10,6 +10,12 @@ interface TableEntry {
   correlationId: string;
 }
 
+interface NewCorrelation extends Correlation {
+  startedAt: number;
+  state: string;
+  user: string;
+}
+
 enum SortProperty {
   Number = 'index',
   StartedAt = 'startedAt',
@@ -24,8 +30,8 @@ interface SortSettings {
 }
 
 export class ProcessInstanceList {
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) public selectedCorrelation: Correlation;
-  @bindable({ changeHandler: 'correlationsChanged' }) public correlations: Array<Correlation>;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) public selectedCorrelation: NewCorrelation;
+  @bindable({ changeHandler: 'correlationsChanged' }) public correlations: Array<NewCorrelation>;
   public sortedTableData: Array<TableEntry>;
   public SortProperty: typeof SortProperty = SortProperty;
 
@@ -41,12 +47,12 @@ export class ProcessInstanceList {
     });
   }
 
-  public correlationsChanged(newCorrelations: Array<Correlation>): void {
+  public correlationsChanged(newCorrelations: Array<NewCorrelation>): void {
     this._convertCorrelationsIntoTableData(newCorrelations);
     this.sortList(SortProperty.Number);
   }
 
-  private _convertCorrelationsIntoTableData(correlations: Array<any>): void {
+  private _convertCorrelationsIntoTableData(correlations: Array<NewCorrelation>): void {
     for (const correlation of correlations) {
       const formattedStartedDate: string = this._formatDate(new Date(correlation.startedAt));
 
@@ -147,10 +153,10 @@ export class ProcessInstanceList {
     return minute;
   }
 
-  private _getIndexForCorrelation(correlation: any, correlations: Array<any>): number {
+  private _getIndexForCorrelation(correlation: NewCorrelation, correlations: Array<NewCorrelation>): number {
     const correlationStartedDate: number = correlation.startedAt;
 
-    const earlierStartedCorrelations: Array<any> = correlations.filter((entry: any) => {
+    const earlierStartedCorrelations: Array<NewCorrelation> = correlations.filter((entry: NewCorrelation) => {
       return entry.startedAt < correlationStartedDate;
     });
 
