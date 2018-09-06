@@ -42,9 +42,7 @@ export class ProcessInstanceList {
   };
 
   public selectCorrelation(selectedTableEntry: TableEntry): void {
-    this.selectedCorrelation = this.correlations.find((correlation: Correlation) => {
-      return correlation.id === selectedTableEntry.correlationId;
-    });
+    this.selectedCorrelation = this._getCorrelationForTableEntry(selectedTableEntry);
   }
 
   public correlationsChanged(newCorrelations: Array<NewCorrelation>): void {
@@ -93,6 +91,13 @@ export class ProcessInstanceList {
 
     this._sortSettings.ascending = ascending;
     this._sortSettings.sortProperty = property;
+  } 
+  private _getCorrelationForTableEntry(tableEntry: TableEntry): NewCorrelation {
+    const correlationForTableEntry: NewCorrelation = this.correlations.find((correlation: NewCorrelation) => {
+      return correlation.id === tableEntry.correlationId;
+    });
+
+    return correlationForTableEntry;
   }
 
   private _formatDate(date: Date): string {
