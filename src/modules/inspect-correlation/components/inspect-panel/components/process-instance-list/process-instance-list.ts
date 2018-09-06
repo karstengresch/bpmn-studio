@@ -200,7 +200,8 @@ export class ProcessInstanceList {
     });
 
     const amountOfEarlierStartedCorrelations: number = earlierStartedCorrelations.length;
+    const correlationIndex: number = amountOfEarlierStartedCorrelations + 1;
 
-    return amountOfEarlierStartedCorrelations;
+    return correlationIndex;
   }
 }
