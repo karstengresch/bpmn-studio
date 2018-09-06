@@ -72,6 +72,22 @@ export class ProcessInstanceList {
     const ascending: boolean = isSamePropertyAsPrevious ? !this._sortSettings.ascending
                                                         : true;
 
+    this._sortSettings.ascending = ascending;
+    this._sortSettings.sortProperty = property;
+
+    const sortByDate: boolean = property === SortProperty.StartedAt;
+    const sortByString: boolean = property === SortProperty.CorrelationId
+                               || property === SortProperty.State
+                               || property === SortProperty.User;
+
+    const sortedTableData: Array<TableEntry> = sortByDate ? this._sortListByStartDate()
+                                                          : this._sortList(property);
+
+    this.sortedTableData = ascending ? sortedTableData
+                                     : sortedTableData.reverse();
+  }
+
+  private _sortList(property: SortProperty): Array<TableEntry> {
     const sortedTableData: Array<TableEntry> = this._tableData.sort((firstEntry: TableEntry, secondEntry: TableEntry) => {
       const firstEntryIsBigger: boolean = firstEntry[property] > secondEntry[property];
       if (firstEntryIsBigger) {
@@ -86,12 +102,30 @@ export class ProcessInstanceList {
       return 0;
     });
 
-    this.sortedTableData = ascending ? sortedTableData
-                                     : sortedTableData.reverse();
+    return sortedTableData;
+  }
 
-    this._sortSettings.ascending = ascending;
-    this._sortSettings.sortProperty = property;
-  } 
+  private _sortListByStartDate(): Array<TableEntry> {
+    const sortedTableData: Array<TableEntry> = this._tableData.sort((firstEntry: TableEntry, secondEntry: TableEntry) => {
+      const firstCorrelation: NewCorrelation = this._getCorrelationForTableEntry(firstEntry);
+      const secondCorrelation: NewCorrelation = this._getCorrelationForTableEntry(secondEntry);
+
+      const firstEntryIsBigger: boolean = firstCorrelation.startedAt > secondCorrelation.startedAt;
+      if (firstEntryIsBigger) {
+        return 1;
+      }
+
+      const secondEntryIsBigger: boolean = firstCorrelation.startedAt < secondCorrelation.startedAt;
+      if (secondEntryIsBigger) {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    return sortedTableData;
+  }
+
   private _getCorrelationForTableEntry(tableEntry: TableEntry): NewCorrelation {
     const correlationForTableEntry: NewCorrelation = this.correlations.find((correlation: NewCorrelation) => {
       return correlation.id === tableEntry.correlationId;
