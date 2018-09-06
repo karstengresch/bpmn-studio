@@ -91,6 +91,34 @@ export class InspectCorrelationMockRepository implements IInspectCorrelationRepo
       state: 'terminated',
       user: 'User 3',
     },
+    {
+      id: 'heatmapSample13',
+      processModelId: 'heatmap_sample',
+      startedAt: 1534356243429,
+      state: 'terminated',
+      user: 'User 007',
+    },
+    {
+      id: 'heatmapSample14',
+      processModelId: 'heatmap_sample',
+      startedAt: 1534356343429,
+      state: 'terminated',
+      user: 'User 100',
+    },
+    {
+      id: 'heatmapSample15',
+      processModelId: 'heatmap_sample',
+      startedAt: 1534256143429,
+      state: 'terminated',
+      user: 'User 14',
+    },
+    {
+      id: 'heatmapSample16',
+      processModelId: 'heatmap_sample',
+      startedAt: 1534351143429,
+      state: 'terminated',
+      user: 'User 14',
+    },
   ];
 
   public getAllCorrelationsForProcessModelId(processModelId: string): Promise<Array<Correlation>> {
