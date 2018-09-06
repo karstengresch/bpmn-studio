@@ -34,12 +34,12 @@ export class ProcessInstanceList {
   @bindable({ changeHandler: 'correlationsChanged' }) public correlations: Array<NewCorrelation>;
   public sortedTableData: Array<TableEntry>;
   public SortProperty: typeof SortProperty = SortProperty;
-
-  private _tableData: Array<TableEntry> = [];
-  private _sortSettings: SortSettings = {
+  public sortSettings: SortSettings = {
     ascending: false,
     sortProperty: undefined,
   };
+
+  private _tableData: Array<TableEntry> = [];
 
   public selectCorrelation(selectedTableEntry: TableEntry): void {
     this.selectedCorrelation = this._getCorrelationForTableEntry(selectedTableEntry);
@@ -68,12 +68,12 @@ export class ProcessInstanceList {
 
   public sortList(property: SortProperty): void {
     this.sortedTableData = [];
-    const isSamePropertyAsPrevious: boolean = this._sortSettings.sortProperty === property;
-    const ascending: boolean = isSamePropertyAsPrevious ? !this._sortSettings.ascending
+    const isSamePropertyAsPrevious: boolean = this.sortSettings.sortProperty === property;
+    const ascending: boolean = isSamePropertyAsPrevious ? !this.sortSettings.ascending
                                                         : true;
 
-    this._sortSettings.ascending = ascending;
-    this._sortSettings.sortProperty = property;
+    this.sortSettings.ascending = ascending;
+    this.sortSettings.sortProperty = property;
 
     const sortByDate: boolean = property === SortProperty.StartedAt;
     const sortByString: boolean = property === SortProperty.CorrelationId
