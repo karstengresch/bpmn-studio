@@ -45,8 +45,8 @@ export class ProcessInstanceList {
     this.selectedCorrelation = this._getCorrelationForTableEntry(selectedTableEntry);
   }
 
-  public correlationsChanged(newCorrelations: Array<NewCorrelation>): void {
-    this._convertCorrelationsIntoTableData(newCorrelations);
+  public correlationsChanged(correlations: Array<NewCorrelation>): void {
+    this._convertCorrelationsIntoTableData(correlations);
     this.sortList(SortProperty.Number);
   }
 
