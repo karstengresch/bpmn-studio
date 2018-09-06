@@ -4,11 +4,21 @@
   <table else class="table table-striped table-hover correlation-table">
     <thead>
       <tr class="correlation-table__headlines">
-        <th click.delegate="sortList(SortProperty.Number)">Number</th>
-        <th click.delegate="sortList(SortProperty.StartedAt)">Started at</th>
-        <th click.delegate="sortList(SortProperty.State)">State</th>
-        <th click.delegate="sortList(SortProperty.User)">User</th>
-        <th click.delegate="sortList(SortProperty.CorrelationId)">Correlation Id</th>
+        <th click.delegate="sortList(SortProperty.Number)">
+          Number <i if.bind="sortSettings.sortProperty === SortProperty.Number" class.bind="sortSettings.ascending ? 'fas fa-caret-up' : ' fas fa-caret-down'"></i>
+        </th>
+        <th click.delegate="sortList(SortProperty.StartedAt)">
+          Started at <i if.bind="sortSettings.sortProperty === SortProperty.StartedAt" class.bind="sortSettings.ascending ? 'fas fa-caret-up' : ' fas fa-caret-down'"></i>
+        </th>
+        <th click.delegate="sortList(SortProperty.State)">
+          State <i if.bind="sortSettings.sortProperty == SortProperty.State" class.bind="sortSettings.ascending ? 'fas fa-caret-up' : ' fas fa-caret-down'"></i>
+        </th>
+        <th click.delegate="sortList(SortProperty.User)">
+          User <i if.bind="sortSettings.sortProperty === SortProperty.User" class.bind="sortSettings.ascending ? 'fas fa-caret-up' : ' fas fa-caret-down'"></i>
+        </th>
+        <th click.delegate="sortList(SortProperty.CorrelationId)">
+          Correlation Id <i if.bind="sortSettings.sortProperty === SortProperty.CorrelationId" class.bind="sortSettings.ascending ? 'fas fa-caret-up' : ' fas fa-caret-down'"></i>
+        </th>
       </tr>
     </thead>
     <tbody class="correlation-table__body">
