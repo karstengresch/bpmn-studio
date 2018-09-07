@@ -2,6 +2,7 @@
   <require from="./token-viewer.css"></require>
   <div class="token-viewer">
       <div class="token-viewer__headline">Token</div>
-      <pre class="token-viewer__token">${formattedToken}</pre>
+      <span if.bind="formattedToken === undefined || formattedToken === ''" >For this process instance is no token existing.</span>
+      <pre else class="token-viewer__token">${formattedToken}</pre>
   </div>
 </template>
