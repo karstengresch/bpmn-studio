@@ -13,6 +13,7 @@
 a,
 button {
   -webkit-app-region: no-drag;
+  color: inherit;
 }
 
 .bpmn-studio-navbar--macos .menu-bar__menu--left::before {
@@ -61,7 +62,7 @@ button {
 }
 
 .menu__menu-tabbed-link--active .menu-tabbed-link {
-  color: #5c5c5c;
+  color: inherit;
   text-decoration: none;
 }
 
@@ -69,12 +70,10 @@ button {
   display: block;
   text-decoration: none;
   line-height: 40px;
-  color: #a5a5a5;
 }
 
 .menu-tabbed-link:hover {
   cursor: default;
-  color: #5e5e5e;
   text-decoration: inherit;
   -webkit-user-drag: none;
 }
