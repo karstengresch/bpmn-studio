@@ -36,3 +36,15 @@ a:hover {
 .toast-bottom-left {
   bottom: 20px;
 }
+
+.button {
+  color: darkgray;
+}
+
+.button:hover {
+  color: #5e5e5e;
+}
+
+.button-disabled {
+  opacity: 0.1;
+}
