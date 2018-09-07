@@ -50,16 +50,7 @@
   display: block;
   padding: 2px;
   opacity: 0.5;
-  color: #5e5e5e;
   text-align: center;
-}
-
-.tool:hover {
-  opacity: 1;
-}
-
-.tool--active {
-  opacity: 1;
 }
 
 /*
@@ -118,14 +109,6 @@
 .menu-bar__menu-left--tool {
   background-color: inherit;
   border: none;
-}
-
-.menu-bar__menu-left--tool:focus {
-  color: black;
-}
-
-.tool__right:hover {
-  opacity: 1;
 }
 
 .djs-palette-override {
