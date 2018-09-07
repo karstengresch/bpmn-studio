@@ -2,7 +2,7 @@
   <require from="./diagram-tools-right.css"></require>
   <div class="diagram-tools-panel">
     <div class="btn-group">
-      <a class="dropdown-toggle tool" class.bind="colorPickerEnabled ? '' : 'tool--disabled'" disabled.bind="!colorPickerEnabled" data-toggle="dropdown" click.delegate="updateCustomColors()" title.bind="colorPickerEnabled ? 'Set a color for all selected elements' : 'Select an element to set a new color'">
+      <a class="button dropdown-toggle tool" class.bind="colorPickerEnabled ? '' : 'button--disabled tool--disabled'" disabled.bind="!colorPickerEnabled" data-toggle="dropdown" click.delegate="updateCustomColors()" title.bind="colorPickerEnabled ? 'Set a color for all selected elements' : 'Select an element to set a new color'">
         <i class="fas fa-eye-dropper"></i>
       </a>
       <ul class="dropdown-menu pull-left color-dropdown">
@@ -24,12 +24,13 @@
         <li><a click.delegate="removeColor()"><i class="fas fa-stop none"></i> None</a></li>
       </ul>
     </div>
-    <a class="tool" class.bind="distributeElementsEnabled ? '' : 'tool--disabled'" title.bind="distributeElementsEnabled ? 'Distribute Elements Vertically' : 'Select at least three elements to distribute them vertically'" click.delegate="distributeElementsVertically()" disabled.bind="!distributeElementsEnabled">
+    <a class="button tool" class.bind="distributeElementsEnabled ? '' : 'button--disabled tool--disabled'" title.bind="distributeElementsEnabled ? 'Distribute Elements Vertically' : 'Select at least three elements to distribute them vertically'" click.delegate="distributeElementsVertically()" disabled.bind="!distributeElementsEnabled">
       <i class="glyphicon glyphicon-object-align-vertical"></i>
     </a>
-    <a class="tool" class.bind="distributeElementsEnabled ? '' : 'tool--disabled'" title.bind="distributeElementsEnabled ? 'Distribute Elements Horizontally' : 'Select at least three elements to distribute them horizontally'" click.delegate="distributeElementsHorizontally()" disabled.bind="!distributeElementsEnabled">
+    <a class="button tool" class.bind="distributeElementsEnabled ? '' : 'button--disabled tool--disabled'" title.bind="distributeElementsEnabled ? 'Distribute Elements Horizontally' : 'Select at least three elements to distribute them horizontally'" click.delegate="distributeElementsHorizontally()" disabled.bind="!distributeElementsEnabled">
       <i class="glyphicon glyphicon-object-align-horizontal"></i>
     </a>
+    <!-- Why are these here?-->
     <div class="tool">
 
     </div>
