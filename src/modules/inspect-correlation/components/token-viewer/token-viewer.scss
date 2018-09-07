@@ -3,15 +3,18 @@
   height: 100%;
   background: #f7f7f7;
   border-left: 2px solid #ccc;
-  padding: 5px 10px;
   overflow: auto;
 }
 
 .token-viewer__headline {
   font-size: 18px;
   font-weight: 900;
+  padding-top: 10px;
+  padding-left: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
 .token-viewer__token {
   border: none;
+  font-size: 12px;
 }
