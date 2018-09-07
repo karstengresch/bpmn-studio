@@ -20,7 +20,7 @@
       <button class="remove-context-button" disabled.bind="!isFormSelected" click.delegate="removeSelectedForm()">
         <i class="fas fa-trash"></i>
       </button>
-      <button class="add-context-button" click.delegate="addForm()">
+      <button class="button add-context-button" click.delegate="addForm()">
         <i class="fas fa-plus"></i>
       </button>
     </div>
@@ -86,7 +86,7 @@
   <div class="section-panel panel--grow" if.bind="isFormSelected && selectedType === FormfieldTypes.enum">
     <div class="panel__heading">
       <span>Values</span>
-      <button class="add-context-button" click.delegate="addEnumValue()">
+      <button class="button add-context-button" click.delegate="addEnumValue()">
         <i class="fas fa-plus"></i>
       </button>
     </div>
@@ -100,7 +100,7 @@
             <input type="text" class="key-value-input" value.bind="newEnumValueNames[$index]" placeholder="Name" change.delegate="changeEnumValueName($index)">
           </td>
           <td>
-            <button class="key-value-delete-button" click.delegate="removeEnumValue($index)">
+            <button class="button key-value-delete-button" click.delegate="removeEnumValue($index)">
               <i class="fas fa-times"></i>
             </button>
           </td>

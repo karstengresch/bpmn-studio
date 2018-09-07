@@ -4,7 +4,7 @@
   <div class="section-panel panel--grow">
     <div class="panel__heading">
       Properties
-      <button class="add-context-button" click.delegate="addProperty()">
+      <button class="button add-context-button" click.delegate="addProperty()">
         <i class="fas fa-plus"></i>
       </button>
     </div>
@@ -18,7 +18,7 @@
             <input type="text" class="key-value-input" value.bind="newValues[$index]" placeholder="Value" change.delegate="changeValue($index)">
           </td>
           <td>
-            <button class="key-value-delete-button" click.delegate="removeProperty($index)">
+            <button class="button key-value-delete-button" click.delegate="removeProperty($index)">
               <i class="fas fa-times"></i>
             </button>
           </td>
