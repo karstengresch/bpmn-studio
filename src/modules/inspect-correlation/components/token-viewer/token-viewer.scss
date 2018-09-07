@@ -18,3 +18,14 @@
   border: none;
   font-size: 12px;
 }
+
+.token-viewer__empty-message {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+}
