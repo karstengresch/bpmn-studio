@@ -8,14 +8,14 @@
           <i class="fas fa-project-diagram"></i>
         </button>
       </div>
-      <div class="menu__menu-tabbed-link"
-      class.bind="activeRouteName === 'processdef-list' ? 'menu__menu-tabbed-link--active button--active' : ''">
+      <div class="button menu__menu-tabbed-link"
+      class.bind="activeRouteName === 'processdef-list' ? 'button--active menu__menu-tabbed-link--active' : ''">
         <a id="navbarThinkLink" class="menu-tabbed-link" route-href="route: processdef-list">Think</a>
       </div>
-      <div class="menu__menu-tabbed-link" class.bind="activeRouteName === 'processdef-detail' || activeRouteName === 'diagram-detail' ? 'menu__menu-tabbed-link--active' : ''">
-        <a id="navbarDesignLink" class="menu-tabbed-link menu-tabbed-link--disabled">Design</a>
+      <div class="button menu__menu-tabbed-link" class.bind="activeRouteName === 'processdef-detail' || activeRouteName === 'diagram-detail' ? 'button--active menu__menu-tabbed-link--active' : ''">
+        <a id="navbarDesignLink" class="menu-tabbed-link">Design</a>
       </div>
-      <div class="menu__menu-tabbed-link button" class.bind="activeRouteName === 'dashboard' || activeRouteName === 'heatmap' ? 'menu__menu-tabbed-link--active button--active' : ''">
+      <div class="button menu__menu-tabbed-link" class.bind="activeRouteName === 'dashboard' || activeRouteName === 'heatmap' ? 'button--active menu__menu-tabbed-link--active' : ''">
         <a id="navbarInspectLink" class="menu-tabbed-link" route-href="route: dashboard">Inspect</a>
       </div>
     </div>
