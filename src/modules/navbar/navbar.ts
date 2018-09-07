@@ -57,6 +57,10 @@ export class NavBar {
         this.diagramContainsUnsavedChanges = false;
       }),
 
+      this._eventAggregator.subscribe(environment.events.navBar.updateProcessName, (processName: string) => {
+        this.processName = processName;
+      }),
+
       this._eventAggregator.subscribe(environment.events.navBar.clearProcessData, () => {
         this.process = undefined;
         this.processName = undefined;
