@@ -67,14 +67,6 @@
   border: none;
 }
 
-.add-context-button:hover {
-  color: black;
-}
-
-.add-context-button:focus {
-  color: black;
-}
-
 .remove-context-button:disabled {
   cursor: default;
   opacity: 0.2;
@@ -86,28 +78,10 @@
   margin-left: 5px;
   background-color: transparent;
   border: none;
-  opacity: 1;
-}
-
-.remove-context-button:not(:disabled):hover {
-  color: black;
-}
-
-.remove-context-button:not(:disabled):focus {
-  color: black;
 }
 
 .key-value-delete-button {
   padding-top: 2px;
   background: transparent;
   border: none;
-  color: darkgray;
-}
-
-.key-value-delete-button:hover {
-  color: black;
-}
-
-.key-value-delete-button:focus {
-  color: black;
 }
