@@ -79,15 +79,6 @@ button {
   -webkit-user-drag: none;
 }
 
-.menu-tabbed-link--disabled:hover {
-  color: #a5a5a5;
-}
-
-.menu__menu-tabbed-link--active
-.menu-tabbed-link--disabled:hover {
-  color: #5c5c5c;
-}
-
 .action-button {
   background: inherit;
   border: none;
