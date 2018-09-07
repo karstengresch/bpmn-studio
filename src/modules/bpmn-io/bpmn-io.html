@@ -11,7 +11,7 @@
     -->
     <div class="bpmn-io-layout__tools-left">
       <div show.bind="!showXMLView && !showDiffView" class="tool-list tool-list--vertical">
-        <div class="tool">
+        <div class="button tool">
           <i class="fas fa-mouse-pointer"></i>
         </div>
         <div class="djs-palette-container tool-list tool-list--vertical" ref="paletteContainer">
@@ -44,7 +44,7 @@
     <div class="bpmn-io-layout__tools-right">
       <div show.bind="!showXMLView && !showDiffView" class="tool-list tool-list--vertical">
         <div ref="toggleButtonPropertyPanel" class="tool__right tool--active">
-          <button class="menu-bar__menu-left--tool" click.delegate="togglePanel()" title="Toggle visibility of the Property Panel">
+          <button class="button menu-bar__menu-left--tool" click.delegate="togglePanel()" title="Toggle visibility of the Property Panel">
             <i class="fas fa-sliders-h"></i>
           </button>
         </div>
