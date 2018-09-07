@@ -67,6 +67,7 @@ export class InspectCorrelation {
 
   public detached(): void {
     this._eventAggregator.publish(environment.events.statusBar.showInspectViewButtons, false);
+    this._eventAggregator.publish(environment.events.navBar.clearProcessData);
 
     for (const subscription of this._subscriptions) {
       subscription.dispose();

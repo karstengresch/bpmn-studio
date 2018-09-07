@@ -45,6 +45,7 @@ export default {
       disableStartButton: 'navbar:startButton:disable',
       enableStartButton: 'navbar:startButton:enable',
       updateProcess: 'navbar:process:update',
+      clearProcessData: 'navbar:process:clear',
       disableSaveButton: 'navbar:saveButton:disable',
       enableSaveButton: 'navbar:saveButton:enable',
       disableDiagramUploadButton: 'navbar:diagramUploadButton:disable',

@@ -57,6 +57,11 @@ export class NavBar {
         this.diagramContainsUnsavedChanges = false;
       }),
 
+      this._eventAggregator.subscribe(environment.events.navBar.clearProcessData, () => {
+        this.process = undefined;
+        this.processName = undefined;
+      }),
+
       this._eventAggregator.subscribe(environment.events.navBar.disableSaveButton, () => {
         this.disableSaveButton = true;
       }),
