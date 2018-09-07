@@ -37,6 +37,7 @@ export class InspectCorrelation {
   private _inspectCorrelationService: IInspectCorrelationService;
   private _eventAggregator: EventAggregator;
   private _subscriptions: Array<Subscription>;
+  private _processModelId: string;
 
   constructor(inspectCorrelationService: IInspectCorrelationService,
               managementApiService: IManagementApiService,
@@ -50,13 +51,15 @@ export class InspectCorrelation {
   }
 
   public async activate(routeParameters: RouteParameters): Promise<void> {
-    const processModelId: string = routeParameters.processModelId;
+    this._processModelId = routeParameters.processModelId;
 
-    this.correlations = await this._inspectCorrelationService.getAllCorrelationsForProcessModelId(processModelId);
+    this.correlations = await this._inspectCorrelationService.getAllCorrelationsForProcessModelId(this._processModelId);
+
   }
 
   public attached(): void {
     this._eventAggregator.publish(environment.events.statusBar.showInspectViewButtons, true);
+    this._eventAggregator.publish(environment.events.navBar.updateProcessName, this._processModelId);
 
     this._subscriptions = [
       this._eventAggregator.subscribe(environment.events.inspectView.showInspectPanel, (showInspectPanel: boolean) => {
