@@ -17,13 +17,13 @@
         Solution Explorer
         <div class="control-buttons">
           <!--Single Diagrams-->
-          <button ref="openSingleDiagramButton" class="control-buttons__open-single-file" click.delegate="singleDiagramInput.click()" title="Open a diagram">
+          <button ref="openSingleDiagramButton" class="button control-buttons__open-single-file" click.delegate="singleDiagramInput.click()" title="Open a diagram">
             <i class="fas fa-file"></i>
           </button>
-          <button ref="openSolutionButton" class="control-buttons__open-solution" click.delegate="solutionInput.click()" title="Open a solution">
+          <button ref="openSolutionButton" class="button control-buttons__open-solution" click.delegate="solutionInput.click()" title="Open a solution">
             <i class="fas fa-folder-open"></i>
           </button>
-          <button click.delegate="refreshSolutions()" class="control-buttons__refresh-explorer" title="Refresh explorer">
+          <button click.delegate="refreshSolutions()" class="button control-buttons__refresh-explorer" title="Refresh explorer">
             <i class="fas fa-sync"></i>
           </button>
         </div>
@@ -46,10 +46,10 @@
               ${solution.name}
             </div>
             <div class="solution-group__action-buttons">
-              <button title="Create a new diagram" click.delegate="showCreateDiagramInput(solution)">
+              <button class="button" title="Create a new diagram" click.delegate="showCreateDiagramInput(solution)">
                 <i class="fa fa-file-medical"></i>
               </button>
-              <button title="Close solution" click.delegate="closeFileSystemSolution(solution)">
+              <button class="button" title="Close solution" click.delegate="closeFileSystemSolution(solution)">
                 <i class="fas fa-times solution-close"></i>
               </button>
             </div>
