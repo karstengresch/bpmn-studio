@@ -49,8 +49,12 @@
 .tool__right {
   display: block;
   padding: 2px;
-  opacity: 0.5;
+  //opacity: 0.5;
   text-align: center;
+}
+
+.tool--active {
+  //opacity: 1;
 }
 
 /*

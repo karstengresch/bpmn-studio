@@ -4,7 +4,7 @@
   <div class="bpmn-studio-navbar bpmn-studio-navbar--macos" id="navBarContainer">
     <div class="menu-bar__menu menu-bar__menu--left" id="navBarLeft">
       <div class="menu__menu-tabbed-link">
-        <button id="navbarSolutionExplorerButton" class="menu-tabbed-link action-button button" class.bind="solutionExplorerIsActive ? 'button--active' : ''" click.delegate="toggleSolutionExplorer()" title="Toggle visibility of the Solution Explorer">
+        <button id="navbarSolutionExplorerButton" class="button menu-tabbed-link action-button" class.bind="solutionExplorerIsActive ? 'button--active' : ''" click.delegate="toggleSolutionExplorer()" title="Toggle visibility of the Solution Explorer">
           <i class="fas fa-project-diagram"></i>
         </button>
       </div>
@@ -54,12 +54,12 @@
         </button>
       </template>
       <template if.bind="showTools">
-        <button class="button menu-bar__menu-center--action-button" click.delegate="uploadProcess()" disabled.bind="validationError || disableDiagramUploadButton" title.bind="disableDiagramUploadButton ? 'This process is already deployed to the remote ProcessEngine' : 'Deploy to ProcessEngine'">
+        <button class="button menu-bar__menu-center--action-button" class.bind="validationError || disableDiagramUploadButton ? 'button--disabled' : ''" click.delegate="uploadProcess()" disabled.bind="validationError || disableDiagramUploadButton" title.bind="disableDiagramUploadButton ? 'This process is already deployed to the remote ProcessEngine' : 'Deploy to ProcessEngine'">
           <i class="fas fa-dolly-flatbed"></i>
         </button>
       </template>
       <template if.bind="showTools">
-          <button class="button menu-bar__menu-center--action-button" click.delegate="startProcess()" disabled.bind="validationError || disableStartButton" title.bind="disableStartButton ? 'Before starting the process please deploy it to the ProcessEngine' : 'Start Process'">
+          <button class="button menu-bar__menu-center--action-button" class.bind="validationError || disableDiagramUploadButton ? 'button--disabled' : ''" click.delegate="startProcess()" disabled.bind="validationError || disableStartButton" title.bind="disableStartButton ? 'Before starting the process please deploy it to the ProcessEngine' : 'Start Process'">
             <i class="fas fa-play"></i>
           </button>
         </template>
