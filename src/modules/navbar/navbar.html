@@ -4,18 +4,18 @@
   <div class="bpmn-studio-navbar bpmn-studio-navbar--macos" id="navBarContainer">
     <div class="menu-bar__menu menu-bar__menu--left" id="navBarLeft">
       <div class="menu__menu-tabbed-link">
-        <button id="navbarSolutionExplorerButton" class="menu-tabbed-link action-button" class.bind="solutionExplorerIsActive ? 'solution-explorer--active' : ''" click.delegate="toggleSolutionExplorer()" title="Toggle visibility of the Solution Explorer">
+        <button id="navbarSolutionExplorerButton" class="menu-tabbed-link action-button button" class.bind="solutionExplorerIsActive ? 'button--active' : ''" click.delegate="toggleSolutionExplorer()" title="Toggle visibility of the Solution Explorer">
           <i class="fas fa-project-diagram"></i>
         </button>
       </div>
       <div class="menu__menu-tabbed-link"
-      class.bind="activeRouteName === 'processdef-list' ? 'menu__menu-tabbed-link--active' : ''">
+      class.bind="activeRouteName === 'processdef-list' ? 'menu__menu-tabbed-link--active button--active' : ''">
         <a id="navbarThinkLink" class="menu-tabbed-link" route-href="route: processdef-list">Think</a>
       </div>
       <div class="menu__menu-tabbed-link" class.bind="activeRouteName === 'processdef-detail' || activeRouteName === 'diagram-detail' ? 'menu__menu-tabbed-link--active' : ''">
         <a id="navbarDesignLink" class="menu-tabbed-link menu-tabbed-link--disabled">Design</a>
       </div>
-      <div class="menu__menu-tabbed-link" class.bind="activeRouteName === 'dashboard' || activeRouteName === 'heatmap' ? 'menu__menu-tabbed-link--active' : ''">
+      <div class="menu__menu-tabbed-link button" class.bind="activeRouteName === 'dashboard' || activeRouteName === 'heatmap' ? 'menu__menu-tabbed-link--active button--active' : ''">
         <a id="navbarInspectLink" class="menu-tabbed-link" route-href="route: dashboard">Inspect</a>
       </div>
     </div>
@@ -28,17 +28,17 @@
     </div>
     <div class="menu-bar__menu menu-bar__menu--right" id="navBarRight">
       <template if.bind="showTools">
-        <button class="menu-bar__menu-center--action-button menu-bar__menu-center--back-button back-button" click.delegate="navigateBack()" title="Navigate back">
+        <button class="button menu-bar__menu-center--action-button menu-bar__menu-center--back-button back-button" click.delegate="navigateBack()" title="Navigate back">
           <i class="fas fa-arrow-circle-left"></i>
         </button>
       </template>
       <template if.bind="showTools">
-        <button class="menu-bar__menu-center--action-button" click.delegate="saveDiagram()" disabled.bind="disableSaveButton" title="Save Diagram">
+        <button class="button menu-bar__menu-center--action-button" click.delegate="saveDiagram()" disabled.bind="disableSaveButton" title="Save Diagram">
           <i class="fas fa-save"></i>
         </button>
       </template>
       <div class="btn-group" if.bind="showTools">
-        <button class="menu-bar__menu-center--action-button dropdown-toggle" title="Export Diagram" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="button menu-bar__menu-center--action-button dropdown-toggle" title="Export Diagram" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-upload"></i>
         </button>
         <ul class="dropdown-menu">
@@ -49,17 +49,17 @@
         </ul>
       </div>
       <template if.bind="showTools">
-        <button class="menu-bar__menu-center--action-button" click.delegate="printDiagram()" title="Print Diagram">
+        <button class="button menu-bar__menu-center--action-button" click.delegate="printDiagram()" title="Print Diagram">
           <i class="fas fa-print"></i>
         </button>
       </template>
       <template if.bind="showTools">
-        <button class="menu-bar__menu-center--action-button" click.delegate="uploadProcess()" disabled.bind="validationError || disableDiagramUploadButton" title.bind="disableDiagramUploadButton ? 'This process is already deployed to the remote ProcessEngine' : 'Deploy to ProcessEngine'">
+        <button class="button menu-bar__menu-center--action-button" click.delegate="uploadProcess()" disabled.bind="validationError || disableDiagramUploadButton" title.bind="disableDiagramUploadButton ? 'This process is already deployed to the remote ProcessEngine' : 'Deploy to ProcessEngine'">
           <i class="fas fa-dolly-flatbed"></i>
         </button>
       </template>
       <template if.bind="showTools">
-          <button class="menu-bar__menu-center--action-button" click.delegate="startProcess()" disabled.bind="validationError || disableStartButton" title.bind="disableStartButton ? 'Before starting the process please deploy it to the ProcessEngine' : 'Start Process'">
+          <button class="button menu-bar__menu-center--action-button" click.delegate="startProcess()" disabled.bind="validationError || disableStartButton" title.bind="disableStartButton ? 'Before starting the process please deploy it to the ProcessEngine' : 'Start Process'">
             <i class="fas fa-play"></i>
           </button>
         </template>
