@@ -18,7 +18,7 @@ export class InspectPanel {
   @bindable() public selectedCorrelation: Correlation;
   @bindable() public log: Array<LogEntry>;
   public NavigationButton: typeof NavigationButton = NavigationButton;
-  public showProcessInstanceList: boolean;
+  public showProcessInstanceList: boolean = true;
   public showLogViewer: boolean;
 
   public changeTab(navigationButton: NavigationButton): void {
