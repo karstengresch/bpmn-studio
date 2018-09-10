@@ -5,13 +5,19 @@
     <table else class="table table-striped table-hover log-table">
       <thead>
         <tr class="log-table__headlines">
-          <th class="log-table__time-column">Time</th>
-          <th class="log-table__message-column">Message</th>
-          <th class="log-table__log-level-column">Log Level</th>
+          <th class="log-table__time-column" click.delegate="sortList(LogSortProperty.Time)">
+            Time <i if.bind="sortSettings.sortProperty === LogSortProperty.Time" class.bind="sortSettings.ascending ? 'fas fa-caret-up' : ' fas fa-caret-down'"></i>
+          </th>
+          <th class="log-table__message-column" click.delegate="sortList(LogSortProperty.Message)">
+            Message <i if.bind="sortSettings.sortProperty === LogSortProperty.Message" class.bind="sortSettings.ascending ? 'fas fa-caret-up' : ' fas fa-caret-down'"></i>
+          </th>
+          <th class="log-table__log-level-column" click.delegate="sortList(LogSortProperty.LogLevel)">
+            Log Level <i if.bind="sortSettings.sortProperty === LogSortProperty.LogLevel" class.bind="sortSettings.ascending ? 'fas fa-caret-up' : ' fas fa-caret-down'"></i>
+          </th>
         </tr>
       </thead class="log-table__header">
       <tbody class="log-table__body">
-        <tr repeat.for="logEntry of log" click.delegate="copyToClipboard(logEntry.message)">
+        <tr repeat.for="logEntry of sortedLog" click.delegate="copyToClipboard(logEntry.message)">
           <td class="log-table__time-column">${getDateStringFromTimestamp(logEntry.timestamp)}</td>
           <td class="log-table__message-column">${logEntry.message}</td>
           <td class="log-table__log-level-column">${logEntry.logLevel}</td>
