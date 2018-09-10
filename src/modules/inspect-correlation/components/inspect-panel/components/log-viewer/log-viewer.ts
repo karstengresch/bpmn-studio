@@ -21,8 +21,8 @@ export class LogViewer {
     this._notificationService = notificationService;
   }
 
-  public copyToClipboard(text: string): void {
-    (clipboard as any).writeText(text);
+  public copyToClipboard(textToCopy: string): void {
+    (clipboard as any).writeText(textToCopy);
 
     this._notificationService.showNotification(NotificationType.SUCCESS, 'Successfully copied to clipboard.');
   }
