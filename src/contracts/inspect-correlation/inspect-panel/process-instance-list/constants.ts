@@ -1,4 +1,4 @@
-export enum SortProperty {
+export enum ProcessInstanceListSortProperty {
   Number = 'index',
   StartedAt = 'startedAt',
   State = 'state',

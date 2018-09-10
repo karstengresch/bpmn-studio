@@ -1,6 +1,6 @@
-import {SortProperty} from './index';
+import {ProcessInstanceListSortProperty} from './index';
 
 export interface IProcessInstanceSortSettings {
   ascending: boolean;
-  sortProperty: SortProperty;
+  sortProperty: ProcessInstanceListSortProperty;
 }

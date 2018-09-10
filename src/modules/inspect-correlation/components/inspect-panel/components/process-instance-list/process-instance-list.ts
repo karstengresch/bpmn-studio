@@ -2,7 +2,7 @@ import {bindable, bindingMode} from 'aurelia-framework';
 
 import {Correlation} from '@process-engine/management_api_contracts';
 
-import {IProcessInstanceSortSettings, IProcessInstanceTableEntry, SortProperty} from '../../../../../../contracts/index';
+import {IProcessInstanceSortSettings, IProcessInstanceTableEntry, ProcessInstanceListSortProperty} from '../../../../../../contracts/index';
 import {DateService} from '../../../../../date-service/date.service';
 
 interface NewCorrelation extends Correlation {
@@ -15,7 +15,7 @@ export class ProcessInstanceList {
   @bindable({ defaultBindingMode: bindingMode.twoWay }) public selectedCorrelation: NewCorrelation;
   @bindable({ changeHandler: 'correlationsChanged' }) public correlations: Array<NewCorrelation>;
   public sortedTableData: Array<IProcessInstanceTableEntry>;
-  public SortProperty: typeof SortProperty = SortProperty;
+  public ProcessInstanceListSortProperty: typeof ProcessInstanceListSortProperty = ProcessInstanceListSortProperty;
   public sortSettings: IProcessInstanceSortSettings = {
     ascending: false,
     sortProperty: undefined,
@@ -34,7 +34,7 @@ export class ProcessInstanceList {
 
   public correlationsChanged(correlations: Array<NewCorrelation>): void {
     this._convertCorrelationsIntoTableData(correlations);
-    this.sortList(SortProperty.Number);
+    this.sortList(ProcessInstanceListSortProperty.Number);
   }
 
   private _convertCorrelationsIntoTableData(correlations: Array<NewCorrelation>): void {
@@ -53,7 +53,7 @@ export class ProcessInstanceList {
     }
   }
 
-  public sortList(property: SortProperty): void {
+  public sortList(property: ProcessInstanceListSortProperty): void {
     this.sortedTableData = [];
     const isSamePropertyAsPrevious: boolean = this.sortSettings.sortProperty === property;
     const ascending: boolean = isSamePropertyAsPrevious ? !this.sortSettings.ascending
@@ -62,7 +62,7 @@ export class ProcessInstanceList {
     this.sortSettings.ascending = ascending;
     this.sortSettings.sortProperty = property;
 
-    const sortByDate: boolean = property === SortProperty.StartedAt;
+    const sortByDate: boolean = property === ProcessInstanceListSortProperty.StartedAt;
 
     const sortedTableData: Array<IProcessInstanceTableEntry> = sortByDate ? this._sortListByStartDate()
                                                           : this._sortList(property);
@@ -71,7 +71,7 @@ export class ProcessInstanceList {
                                      : sortedTableData.reverse();
   }
 
-  private _sortList(property: SortProperty): Array<IProcessInstanceTableEntry> {
+  private _sortList(property: ProcessInstanceListSortProperty): Array<IProcessInstanceTableEntry> {
     const sortedTableData: Array<IProcessInstanceTableEntry> =
       this._tableData.sort((firstEntry: IProcessInstanceTableEntry, secondEntry: IProcessInstanceTableEntry) => {
         const firstEntryIsBigger: boolean = firstEntry[property] > secondEntry[property];
