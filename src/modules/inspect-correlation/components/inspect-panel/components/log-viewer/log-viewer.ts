@@ -1,6 +1,9 @@
-import {bindable} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
 
 import * as clipboard from 'clipboard-polyfill';
+
+import {NotificationType} from '../../../../../../contracts/index';
+import {NotificationService} from '../../../../../notification/notification.service';
 
 interface LogEntry {
   timestamp: number;
@@ -8,11 +11,20 @@ interface LogEntry {
   logLevel: string;
 }
 
+@inject('NotificationService')
 export class LogViewer {
   @bindable() public log: Array<LogEntry>;
 
+  private _notificationService: NotificationService;
+
+  constructor(notificationService: NotificationService) {
+    this._notificationService = notificationService;
+  }
+
   public copyToClipboard(text: string): void {
     (clipboard as any).writeText(text);
+
+    this._notificationService.showNotification(NotificationType.SUCCESS, 'Successfully copied to clipboard.');
   }
 
   public getFormattedDate(timestamp: number): string {
