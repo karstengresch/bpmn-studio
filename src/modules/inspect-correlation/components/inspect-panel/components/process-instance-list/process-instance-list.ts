@@ -76,9 +76,6 @@ export class ProcessInstanceList {
     this.sortSettings.sortProperty = property;
 
     const sortByDate: boolean = property === SortProperty.StartedAt;
-    const sortByString: boolean = property === SortProperty.CorrelationId
-                               || property === SortProperty.State
-                               || property === SortProperty.User;
 
     const sortedTableData: Array<TableEntry> = sortByDate ? this._sortListByStartDate()
                                                           : this._sortList(property);
