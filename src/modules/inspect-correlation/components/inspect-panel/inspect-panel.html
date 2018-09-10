@@ -6,14 +6,14 @@
     <div class="inspect-panel__tabs">
       <button class="inspect-panel__tabs__tab"
               class.bind="showProcessInstanceList ? 'inspect-panel__tabs__active-tab' : ''"
-              click.delegate="changeTab(NavigationButton.ProcessInstanceList)">
+              click.delegate="changeTab(InspectPanelTab.ProcessInstanceList)">
         Process Instance List
       </button>
       <button class="inspect-panel__tabs__tab ${showLogViewer ? 'inspect-panel__tabs__active-tab' : ''}"
               class.bind="selectedCorrelation === undefined ? 'inspect-panel__tabs__disabled-tab' : ''"
               disabled.bind="selectedCorrelation === undefined"
               title.bind="selectedCorrelation !== undefined ? 'Show log of process instance' : 'Select a process instance in order to toggle the log viewer'"
-              click.delegate="changeTab(NavigationButton.LogViewer)">
+              click.delegate="changeTab(InspectPanelTab.LogViewer)">
         Log Viewer
       </button>
     </div>

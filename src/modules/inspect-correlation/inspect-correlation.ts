@@ -8,18 +8,12 @@ import {
   ProcessModelExecution,
 } from '@process-engine/management_api_contracts';
 
-import {IAuthenticationService} from '../../contracts/index';
+import {IAuthenticationService, ILogEntry} from '../../contracts/index';
 import environment from '../../environment';
 import {IInspectCorrelationService} from './contracts';
 
 interface RouteParameters {
   processModelId: string;
-}
-
-interface LogEntry {
-  timestamp: number;
-  message: string;
-  logLevel: string;
 }
 
 @inject('InspectCorrelationService', 'ManagementApiClientService', 'AuthenticationService', EventAggregator)
@@ -28,7 +22,7 @@ export class InspectCorrelation {
   @bindable({ changeHandler: 'selectedCorrelationChanged'}) public selectedCorrelation: Correlation;
   public xml: string;
   public token: string;
-  public log: Array<LogEntry>;
+  public log: Array<ILogEntry>;
   public showInspectPanel: boolean = true;
   public showTokenViewer: boolean = false;
 
@@ -135,8 +129,8 @@ export class InspectCorrelation {
     return token;
   }
 
-  private _getLog(): Array<LogEntry> {
-    const log: Array<LogEntry> = [
+  private _getLog(): Array<ILogEntry> {
+    const log: Array<ILogEntry> = [
       {
         timestamp: 30767606000,
         message: 'Process started.',

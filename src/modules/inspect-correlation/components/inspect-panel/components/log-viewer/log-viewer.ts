@@ -2,19 +2,13 @@ import {bindable, inject} from 'aurelia-framework';
 
 import * as clipboard from 'clipboard-polyfill';
 
-import {NotificationType} from '../../../../../../contracts/index';
+import {ILogEntry, NotificationType} from '../../../../../../contracts/index';
 import {DateService} from '../../../../../date-service/date.service';
 import {NotificationService} from '../../../../../notification/notification.service';
 
-interface LogEntry {
-  timestamp: number;
-  message: string;
-  logLevel: string;
-}
-
 @inject('NotificationService')
 export class LogViewer {
-  @bindable() public log: Array<LogEntry>;
+  @bindable() public log: Array<ILogEntry>;
 
   private _dateService: DateService;
   private _notificationService: NotificationService;
