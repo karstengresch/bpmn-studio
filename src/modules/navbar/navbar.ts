@@ -62,6 +62,13 @@ export class NavBar {
 
       this._eventAggregator.subscribe(environment.events.navBar.updateProcess, (process: IDiagram) => {
         this.process = process;
+
+        if (process.id === undefined) {
+          this.latestSource = 'file-system';
+        } else {
+          this.latestSource = 'process-engine';
+        }
+
         this.diagramContainsUnsavedChanges = false;
       }),
 
@@ -109,13 +116,13 @@ export class NavBar {
         this.inspectView = 'dashboard';
       }),
 
-      this._eventAggregator.subscribe(environment.events.navBar.fileSystemSource, () => {
-        this.latestSource = 'file-system';
-      }),
+      // this._eventAggregator.subscribe(environment.events.navBar.fileSystemSource, () => {
+      //   this.latestSource = 'file-system';
+      // }),
 
-      this._eventAggregator.subscribe(environment.events.navBar.processEngineSource, () => {
-        this.latestSource = 'process-engine';
-      }),
+      // this._eventAggregator.subscribe(environment.events.navBar.processEngineSource, () => {
+      //   this.latestSource = 'process-engine';
+      // }),
     ];
   }
 
