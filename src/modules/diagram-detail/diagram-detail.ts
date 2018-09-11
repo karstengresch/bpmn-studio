@@ -76,6 +76,7 @@ export class DiagramDetail {
     this._eventAggregator.publish(environment.events.navBar.enableDiagramUploadButton);
     this._eventAggregator.publish(environment.events.navBar.disableStartButton);
     this._eventAggregator.publish(environment.events.navBar.showProcessName, this.diagram);
+    this._eventAggregator.publish(environment.events.navBar.fileSystemSource);
 
     this._eventAggregator.publish(environment.events.statusBar.showDiagramViewButtons);
 

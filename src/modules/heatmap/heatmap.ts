@@ -55,6 +55,10 @@ export class Heatmap {
     });
 
     this._processModel = await this._heatmapService.getProcess(this.processmodelid);
+
+    this._eventAggregator.publish(environment.events.navBar.updateProcess, this._processModel);
+    this._eventAggregator.publish(environment.events.navBar.processEngineSource);
+
     await this._importXML(this._processModel.xml, this._modeler);
 
     const elementRegistry: IElementRegistry  = this._modeler.get('elementRegistry');

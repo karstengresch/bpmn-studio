@@ -91,9 +91,10 @@ export class ProcessList {
   }
 
   public attached(): void {
-    if (!this._getProcesses) {
+    if (this._getProcesses === undefined) {
       this._getProcesses = this.getAllProcesses;
     }
+
     this.updateProcesses();
 
     this._getProcessesIntervalId = window.setInterval(async() => {

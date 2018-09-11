@@ -136,7 +136,7 @@ export class ProcessDefDetail {
     this._eventAggregator.publish(environment.events.navBar.showProcessName, this.process);
     this._eventAggregator.publish(environment.events.statusBar.showDiagramViewButtons);
     this._eventAggregator.publish(environment.events.navBar.inspectNavigateToHeatmap);
-    this._eventAggregator.publish(environment.events.navBar.enableDesignLink);
+    this._eventAggregator.publish(environment.events.navBar.processEngineSource);
   }
 
   public determineActivationStrategy(): string {

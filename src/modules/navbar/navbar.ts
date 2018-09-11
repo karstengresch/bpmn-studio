@@ -23,7 +23,8 @@ export class NavBar {
   public disableDiagramUploadButton: boolean = true;
   public diagramContainsUnsavedChanges: boolean = false;
   public inspectView: string = 'dashboard';
-  public disableDesignLink: boolean = true;
+  public disableDesignLink: boolean = false;
+  public latestSource: string;
 
   private _router: Router;
   private _eventAggregator: EventAggregator;
@@ -108,8 +109,12 @@ export class NavBar {
         this.inspectView = 'dashboard';
       }),
 
-      this._eventAggregator.subscribe(environment.events.navBar.enableDesignLink, () => {
-        this.disableDesignLink = false;
+      this._eventAggregator.subscribe(environment.events.navBar.fileSystemSource, () => {
+        this.latestSource = 'file-system';
+      }),
+
+      this._eventAggregator.subscribe(environment.events.navBar.processEngineSource, () => {
+        this.latestSource = 'process-engine';
       }),
     ];
   }
@@ -136,9 +141,16 @@ export class NavBar {
       return;
     }
 
-    this._router.navigateToRoute('processdef-detail', {
-      processModelId: this.process.id,
-    });
+    if (this.latestSource === 'process-engine') {
+      this._router.navigateToRoute('processdef-detail', {
+        processModelId: this.process.id,
+      });
+    } else if (this.latestSource === 'file-system') {
+      this._router.navigateToRoute('diagram-detail', {
+        diagramUri: this.process.uri,
+      });
+    }
+
   }
 
   public toggleSolutionExplorer(): void {

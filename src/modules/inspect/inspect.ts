@@ -42,7 +42,6 @@ export class Inspect {
     } else if (routeParameters.view === 'heatmap') {
       this.showDashboard = false;
       this.showHeatmap = true;
-      this._eventAggregator.publish(environment.events.navBar.enableDesignLink);
     }
 
   }
