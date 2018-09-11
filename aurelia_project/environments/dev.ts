@@ -53,6 +53,8 @@ export default {
       inspectNavigateToHeatmap: 'navbar:inspectLink:navigateToHeatmap',
       inspectNavigateToDashboard: 'navbar:inspectLink:navigateToDashboard',
       enableDesignLink: 'navbar:designLink:enable',
+      fileSystemSource: 'navbar:source:fileSystem',
+      processEngineSource: 'navbar:source:processEngine',
     },
     processDefDetail: {
       printDiagram: 'processdefdetail:diagram:print',
