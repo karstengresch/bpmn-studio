@@ -31,7 +31,9 @@
     "jenkins-electron-rebuild-native": "electron-rebuild --force --which-module deasync",
     "jenkins-electron-build-windows": "build --publish never --windows",
     "jenkins-electron-build-macos": "build --publish never --macos",
-    "jenkins-electron-build-linux": "build --publish never --linux"
+    "jenkins-electron-build-linux": "build --publish never --linux",
+    "jenkins-run-end-to-end-tests": "au e2eDocker",
+    "jenkins-start-process-engine": "process-engine"
   },
   "build": {
     "extraFiles": [
@@ -93,7 +95,7 @@
     "@process-engine/consumer_api_contracts": "^0.15.0",
     "@process-engine/management_api_client": "^0.7.0",
     "@process-engine/management_api_contracts": "^0.8.0",
-    "@process-engine/process_engine_runtime": "2.0.4",
+    "@process-engine/process_engine_runtime": "feature~add_shebang_to_startup_file",
     "@process-engine/solutionexplorer.contracts": "1.0.0",
     "@process-engine/solutionexplorer.repository.contracts": "1.0.0",
     "@process-engine/solutionexplorer.repository.filesystem": "1.0.0",

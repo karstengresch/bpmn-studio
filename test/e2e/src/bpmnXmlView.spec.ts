@@ -8,7 +8,7 @@ import {
 import {BpmnIo} from './pages/bpmn-io';
 import {BpmnXmlView} from './pages/bpmnXmlView';
 import {General} from './pages/general';
-import {NavBar} from './pages/navbar';
+import {NavBar} from './pages/navBar';
 import {ProcessModel} from './pages/processModel';
 import {SolutionExplorer} from './pages/solutionExplorer';
 import {StatusBar} from './pages/statusBar';

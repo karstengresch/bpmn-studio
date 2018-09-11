@@ -69,6 +69,51 @@ pipeline {
         stash(includes: 'node_modules/', name: 'post_build_node_modules')
       }
     }
+    stage('end to end tests') {
+      agent any
+      steps {
+        script {
+          unstash('post_build')
+          unstash('post_build_node_modules')
+
+          def docker_e2e_image_name = "bpmn-studio_end-to-end"
+          def docker_e2e_container_name = "${docker_e2e_image_name}_container-b${env.BUILD_NUMBER}-${env.GIT_COMMIT}"
+
+          try {
+            sh("docker build --file test/Dockerfile --tag ${docker_e2e_image_name} .")
+
+            def docker_run_cmd = 'docker run'
+            docker_run_cmd += ' --user 112:116' // Use the jenkins system user.
+            docker_run_cmd += " --env HOME=${env.WORKSPACE}" // Override home folder.
+            docker_run_cmd += " --workdir \"${env.WORKSPACE}\"" // Use workspace as workdir.
+            docker_run_cmd += " --volume=\"${env.WORKSPACE}:${env.WORKSPACE}:Z\"" // Mount workspace into the container. Z flags fixes the permissions.
+            docker_run_cmd += ' --rm' // Delete container after run.
+            docker_run_cmd += " --name ${docker_e2e_container_name}" // Set the container name.
+            docker_run_cmd += " ${docker_e2e_image_name}" // The image to run.
+
+            sh("${docker_run_cmd} | tee e2e_test_results.txt")
+
+          } finally {
+            sh("docker rm ${docker_e2e_container_name} || true")
+          }
+
+          def parse_test_result_regex = /(\d+) specs, (\d+) failures/;
+
+          def test_result_log = readFile "e2e_test_results.txt"
+          def test_result_matcher = test_result_log =~ parse_test_result_regex
+
+          def total_tests_run = test_result_matcher[0][1] as Integer;
+          def tests_failed = test_result_matcher[0][2] as Integer;
+
+          echo "${total_tests_run} Tests run. ${tests_failed} Tests failed."
+
+          def some_tests_failed = tests_failed != 0;
+          if (some_tests_failed) {
+            error 'Some tests failed, build failed.';
+          }
+        }
+      }
+    }
     stage('build electron') {
       when {
         expression { branch_is_master || branch_is_develop }
@@ -149,12 +194,6 @@ pipeline {
             }
           }
         }
-      }
-    }
-    stage('test') {
-      steps {
-        sh('node --version')
-        sh('npm run test')
       }
     }
     stage('publish') {
