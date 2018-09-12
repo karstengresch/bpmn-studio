@@ -3,7 +3,7 @@ import {IDefaultOverlayPositions} from '../../../contracts';
 export const defaultOverlayPositions: IDefaultOverlayPositions = {
   tasks: {
     left: 80,
-    top: 70,
+    top: 60,
   },
   gateways: {
     left: 31,
