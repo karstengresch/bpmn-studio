@@ -20,6 +20,7 @@ interface RouteParameters {
 export class InspectCorrelation {
   public correlations: Array<Correlation>;
   @bindable({ changeHandler: 'selectedCorrelationChanged'}) public selectedCorrelation: Correlation;
+  @bindable() public inspectPanelFullscreen: boolean = false;
   public xml: string;
   public token: string;
   public log: Array<ILogEntry>;

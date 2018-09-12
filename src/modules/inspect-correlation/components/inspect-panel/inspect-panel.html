@@ -3,19 +3,24 @@
   <require from="./components/log-viewer/log-viewer"></require>
   <require from="./components/process-instance-list/process-instance-list"></require>
   <div class="inspect-panel">
-    <div class="inspect-panel__tabs">
-      <button class="inspect-panel__tabs__tab"
-              class.bind="showProcessInstanceList ? 'inspect-panel__tabs__active-tab' : ''"
-              click.delegate="changeTab(InspectPanelTab.ProcessInstanceList)">
-        Process Instance List
-      </button>
-      <button class="inspect-panel__tabs__tab ${showLogViewer ? 'inspect-panel__tabs__active-tab' : ''}"
-              class.bind="selectedCorrelation === undefined ? 'inspect-panel__tabs__disabled-tab' : ''"
-              disabled.bind="selectedCorrelation === undefined"
-              title.bind="selectedCorrelation !== undefined ? 'Show log of process instance' : 'Select a process instance in order to toggle the log viewer'"
-              click.delegate="changeTab(InspectPanelTab.LogViewer)">
-        Log Viewer
-      </button>
+    <div class="inspect-panel__control-bar">
+      <div class="inspect-panel__tabs">
+        <button class="inspect-panel__tab"
+                class.bind="showProcessInstanceList ? 'inspect-panel__active-tab' : ''"
+                click.delegate="changeTab(InspectPanelTab.ProcessInstanceList)">
+          Process Instance List
+        </button>
+        <button class="inspect-panel__tab ${showLogViewer ? 'inspect-panel__active-tab' : ''}"
+                class.bind="selectedCorrelation === undefined ? 'inspect-panel__disabled-tab' : ''"
+                disabled.bind="selectedCorrelation === undefined"
+                title.bind="selectedCorrelation !== undefined ? 'Show log of process instance' : 'Select a process instance in order to toggle the log viewer'"
+                click.delegate="changeTab(InspectPanelTab.LogViewer)">
+          Log Viewer
+        </button>
+      </div>
+      <div class="inspect-panel__fullscreen-button" click.delegate="toggleFullscreen()">
+        <i class="fas fa-arrows-alt-v"></i>
+      </div>
     </div>
     <div class="inspect-panel__body">
       <process-instance-list if.bind="showProcessInstanceList" correlations.bind="correlations" selected-correlation.two-way="selectedCorrelation"></process-instance-list>

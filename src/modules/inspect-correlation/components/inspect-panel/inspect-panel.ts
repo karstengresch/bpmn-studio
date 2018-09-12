@@ -7,9 +7,14 @@ export class InspectPanel {
   @bindable() public correlations: Array<Correlation>;
   @bindable() public selectedCorrelation: Correlation;
   @bindable() public log: Array<ILogEntry>;
+  @bindable() public fullscreen: boolean;
   public InspectPanelTab: typeof InspectPanelTab = InspectPanelTab;
   public showProcessInstanceList: boolean = true;
   public showLogViewer: boolean;
+
+  public toggleFullscreen(): void {
+    this.fullscreen = !this.fullscreen;
+  }
 
   public changeTab(inspectPanelTab: InspectPanelTab): void {
     switch (inspectPanelTab) {
