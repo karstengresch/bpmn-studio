@@ -41,10 +41,12 @@ export class ProcessInstanceList {
     for (const correlation of correlations) {
       const formattedStartedDate: string = this._dateService.getDateStringFromTimestamp(correlation.startedAt);
 
+      const state: string = correlation.state.charAt(0).toUpperCase() + correlation.state.slice(1);
+
       const tableEntry: IProcessInstanceTableEntry = {
         index: this._getIndexForCorrelation(correlation, correlations),
         startedAt: formattedStartedDate,
-        state: correlation.state,
+        state: state,
         user: correlation.user,
         correlationId: correlation.id,
       };
