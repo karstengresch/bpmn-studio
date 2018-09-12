@@ -13,10 +13,8 @@ import {IBpmnModdle,
         IDiagramPrintService,
         IDiffChanges,
         IEditorActions,
-        IEvent,
         IEventFunction,
         IKeyboard,
-        IShape,
         NotificationType,
       } from '../../contracts/index';
 import environment from '../../environment';
