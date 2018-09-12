@@ -16,7 +16,7 @@
         <a id="navbarDesignLink" class.bind="disableDesignLink ? 'menu-tabbed-link menu-tabbed-link--disabled' : 'menu-tabbed-link'" click.delegate="navigateToDesigner()">Design</a>
       </div>
       <div class="menu__menu-tabbed-link" class.bind="activeRouteName === 'inspect' ? 'menu__menu-tabbed-link--active' : ''">
-        <a id="navbarInspectLink" class="menu-tabbed-link" route-href="route: inspect; params.bind: {processModelId: process.id, view: inspectView}">Inspect</a>
+        <a id="navbarInspectLink" class="menu-tabbed-link" click.delegate="navigateToInspect()">Inspect</a>
       </div>
     </div> 
     <div class="menu-bar__menu menu-bar__menu--center" id="navBarCenter">

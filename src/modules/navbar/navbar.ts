@@ -166,6 +166,28 @@ export class NavBar {
     this._eventAggregator.publish(environment.events.processSolutionPanel.navigateToHeatmap, 'heatmap');
   }
 
+  public navigateToInspect(): void {
+    this._dertermineActiveRoute();
+
+    const activeRouteIsInspect: boolean = this.activeRouteName === 'inspect';
+
+    if (activeRouteIsInspect) {
+      return;
+    }
+
+    const activeRouteIsNotProcessEngineRoute: boolean = this.activeRouteName !== 'processdef-detail';
+
+    if (activeRouteIsNotProcessEngineRoute) {
+      this.showInspectTools = false;
+    }
+
+    this._router.navigateToRoute('inspect', {
+      processModelId: this.process ? this.process.id : undefined,
+      view: this.inspectView,
+      latestSource: undefined,
+    });
+  }
+
   public navigateToDesigner(): void {
     const processIsUndefined: boolean = this.process === undefined;
 
