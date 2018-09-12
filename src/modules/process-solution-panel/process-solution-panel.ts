@@ -248,9 +248,12 @@ export class ProcessSolutionPanel {
       this._eventAggregator.subscribe(environment.events.processSolutionPanel.openProcessEngineIndexCard, () => {
         this.openProcessEngineIndexCard();
       }),
-      this._eventAggregator.subscribe(environment.events.processSolutionPanel.navigateToHeatmap, () => {
+      // TODO: navigateToHeatmap umbenennen
+      this._eventAggregator.subscribe(environment.events.processSolutionPanel.navigateToHeatmap, (heatmapView?: string) => {
         this.diagramRoute = 'inspect';
-        this.inspectView = 'heatmap';
+
+        const heatmapViewIsDashboard: boolean = heatmapView === 'dashboard';
+        heatmapViewIsDashboard ? this.inspectView = 'dashboard' : this.inspectView = 'heatmap';
       }),
 
       this._eventAggregator.subscribe(environment.events.processSolutionPanel.navigateToDesigner, () => {
