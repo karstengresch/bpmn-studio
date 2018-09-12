@@ -48,6 +48,8 @@ export default {
       enableDiagramUploadButton: 'navbar:diagramUploadButton:enable',
       inspectNavigateToHeatmap: 'navbar:inspectLink:navigateToHeatmap',
       inspectNavigateToDashboard: 'navbar:inspectLink:navigateToDashboard',
+      showInspectButtons: 'navbar:tools:showButtonsOnInspect',
+      hideInspectButtons: 'navbar:tools:hideButtonsOnInspect',
     },
     processDefDetail: {
       printDiagram: 'processdefdetail:diagram:print',
