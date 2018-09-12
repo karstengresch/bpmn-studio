@@ -187,12 +187,16 @@ export class NavBar {
 
     const activeRouteIsNotProcessEngineRoute: boolean = this.activeRouteName !== 'processdef-detail';
 
+    let processModelId: string = this.process ? this.process.id : undefined;
+
     if (activeRouteIsNotProcessEngineRoute) {
       this.showInspectTools = false;
+      this.showProcessName = false;
+      processModelId = undefined;
     }
 
     this._router.navigateToRoute('inspect', {
-      processModelId: this.process ? this.process.id : undefined,
+      processModelId: processModelId,
       view: this.inspectView,
       latestSource: undefined,
     });
