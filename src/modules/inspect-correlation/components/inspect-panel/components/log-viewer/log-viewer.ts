@@ -25,6 +25,10 @@ export class LogViewer {
   }
 
   public logChanged(): void {
+    this.log.forEach((logEntry: ILogEntry) => {
+      logEntry.logLevel = logEntry.logLevel.charAt(0).toUpperCase() + logEntry.logLevel.slice(1);
+    });
+
     this.sortList(LogSortProperty.Time);
   }
 
