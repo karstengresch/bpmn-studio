@@ -192,7 +192,7 @@ export class App {
         moduleId: 'modules/heatmap/heatmap',
       },
       {
-        route: ['inspect', 'inspect/:processModelId?/:view?'],
+        route: ['inspect', 'inspect/:processModelId?/:view?/:latestSource?'],
         title: 'Inspect',
         name: 'inspect',
         moduleId: 'modules/inspect/inspect',
