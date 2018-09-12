@@ -50,6 +50,8 @@ export default {
       inspectNavigateToDashboard: 'navbar:inspectLink:navigateToDashboard',
       showInspectButtons: 'navbar:tools:showButtonsOnInspect',
       hideInspectButtons: 'navbar:tools:hideButtonsOnInspect',
+      disableHeatmapAndEnableDashboardButton: 'navbar:tools:inspectButtons:disableHeatmapEnableDashboard',
+      disableDashboardAndEnableHeatmapButton: 'navbar:tools:inspectButtons:disableDashboardEnableHeatmap',
     },
     processDefDetail: {
       printDiagram: 'processdefdetail:diagram:print',

@@ -123,6 +123,16 @@ export class NavBar {
       this._eventAggregator.subscribe(environment.events.navBar.hideInspectButtons, () => {
         this.showInspectTools = false;
       }),
+
+      this._eventAggregator.subscribe(environment.events.navBar.disableHeatmapAndEnableDashboardButton, () => {
+        this.disableHeatmapButton = true;
+        this.disableDashboardButton = false;
+      }),
+
+      this._eventAggregator.subscribe(environment.events.navBar.disableDashboardAndEnableHeatmapButton, () => {
+        this.disableHeatmapButton = false;
+        this.disableDashboardButton = true;
+      }),
     ];
   }
 

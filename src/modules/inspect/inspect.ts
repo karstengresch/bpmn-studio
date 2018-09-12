@@ -49,10 +49,12 @@ export class Inspect {
 
       if (routeParameters.latestSource === 'process-engine') {
         this._eventAggregator.publish(environment.events.navBar.showInspectButtons);
+        this._eventAggregator.publish(environment.events.navBar.disableDashboardAndEnableHeatmapButton);
         this._eventAggregator.publish(environment.events.navBar.showProcessName, process);
       }
     } else if (routeParameters.view === 'heatmap') {
       this._eventAggregator.publish(environment.events.navBar.showInspectButtons);
+      this._eventAggregator.publish(environment.events.navBar.disableHeatmapAndEnableDashboardButton);
       this._eventAggregator.publish(environment.events.navBar.showProcessName, process);
 
       this.showDashboard = false;
