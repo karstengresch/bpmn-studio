@@ -17,6 +17,7 @@ export class NavBar {
   public dropdown: HTMLElement;
   public solutionExplorerIsActive: boolean = true;
   public showTools: boolean = false;
+  public showInspectTools: boolean = false;
   public disableStartButton: boolean = true;
   public disableSaveButton: boolean = false;
   public showProcessName: boolean = false;
@@ -118,13 +119,13 @@ export class NavBar {
         this.inspectView = 'dashboard';
       }),
 
-      // this._eventAggregator.subscribe(environment.events.navBar.fileSystemSource, () => {
-      //   this.latestSource = 'file-system';
-      // }),
+      this._eventAggregator.subscribe(environment.events.navBar.showInspectButtons, () => {
+        this.showInspectTools = true;
+      }),
 
-      // this._eventAggregator.subscribe(environment.events.navBar.processEngineSource, () => {
-      //   this.latestSource = 'process-engine';
-      // }),
+      this._eventAggregator.subscribe(environment.events.navBar.hideInspectButtons, () => {
+        this.showInspectTools = false;
+      }),
     ];
   }
 
