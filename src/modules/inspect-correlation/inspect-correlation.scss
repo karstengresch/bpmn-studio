@@ -40,6 +40,14 @@
   height: 100%;
 }
 
+.inspect-correlation__bottom-panel__resize-div {
+  height: 9px;
+  width: 100%;
+  z-index: 1;
+  margin-bottom: -4px;
+  cursor: row-resize;
+}
+
 .inspect-correlation__upper-panel {
   display: flex;
   flex-grow: 1;
