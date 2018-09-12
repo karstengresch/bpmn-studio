@@ -29,7 +29,6 @@ export class Inspect {
   }
 
   public activate(routeParameters: IInspectRouteParameters): void {
-    this._eventAggregator.publish(environment.events.processSolutionPanel.navigateToHeatmap);
 
     const noRouteParameters: boolean = routeParameters.processModelId === undefined || routeParameters.view === undefined;
     if (noRouteParameters) {
@@ -62,7 +61,11 @@ export class Inspect {
 
   }
 
-  public deactivate(): void {
+  public attached(): void {
+    this._eventAggregator.publish(environment.events.processSolutionPanel.navigateToHeatmap);
+  }
+
+  public detached(): void {
     this._eventAggregator.publish(environment.events.navBar.inspectNavigateToDashboard);
     this._eventAggregator.publish(environment.events.processSolutionPanel.navigateToDesigner);
     this._eventAggregator.publish(environment.events.navBar.hideInspectButtons);

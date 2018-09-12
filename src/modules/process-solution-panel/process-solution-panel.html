@@ -76,7 +76,7 @@
     <div class="solution-explorer__process-engine" if.bind="processEngineIndexCardIsActive">
       <div class="process-explorer__heading">Solution Explorer</div>
       <div repeat.for="diagram of openedProcessEngineSolution.diagrams" class="process-explorer__structure-item">
-        <a route-href="route.bind: diagramRoute; params.bind: { processModelId: diagram.name, view: inspectView }" id="processSolutionPanel-${diagram.id}" title="${diagram.name}">${diagram.name}</a>
+        <a route-href="route.bind: diagramRoute; params.bind: { processModelId: diagram.id, view: inspectView }" id="processSolutionPanel-${diagram.id}" title="${diagram.name}">${diagram.name}</a>
       </div>
     </div>
   </div>

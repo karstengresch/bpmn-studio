@@ -89,10 +89,6 @@ export class Heatmap {
     this._viewer.attachTo(this.viewerContainer);
   }
 
-  public detached(): void {
-    this._eventAggregator.publish(environment.events.navBar.hideProcessName);
-  }
-
   private _importXML(xml: string, modeler: IBpmnModeler): Promise<void> {
     return new Promise((resolve: Function, reject: Function): void => {
       modeler.importXML(xml, (importXmlError: Error) => {

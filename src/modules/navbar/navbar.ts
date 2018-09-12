@@ -66,11 +66,8 @@ export class NavBar {
       this._eventAggregator.subscribe(environment.events.navBar.updateProcess, (process: IDiagram) => {
         this.process = process;
 
-        if (process.id === undefined) {
-          this.latestSource = 'file-system';
-        } else {
-          this.latestSource = 'process-engine';
-        }
+        const processIdIsUndefined: boolean = process.id === undefined;
+        processIdIsUndefined ? this.latestSource = 'file-system' : this.latestSource = 'process-engine';
 
         this.diagramContainsUnsavedChanges = false;
       }),
