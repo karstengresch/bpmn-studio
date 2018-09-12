@@ -18,7 +18,7 @@ export class Inspect {
 
   @bindable() public processModelId: string;
   public showHeatmap: boolean = false;
-  public showDashboard: boolean = true;
+  @bindable() public showDashboard: boolean = true;
   public heatmap: Heatmap;
   public dashboard: Dashboard;
 

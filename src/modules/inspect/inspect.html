@@ -7,8 +7,8 @@
     <div if.bind="showDashboard" class="inspect__dashboard-container">
       <dashboard view-model.ref="dashboard"></dashboard>
     </div>
-    <div if.bind="showHeatmap" class="inspect__heatmap-container">
-      <heatmap view-model.ref="heatmap" processmodelid.bind="processModelId"></heatmap>
+    <div show.bind="showHeatmap" class="inspect__heatmap-container">
+      <heatmap view-model.ref="heatmap" processmodelid.bind="processModelId" dashboardIsShown.bind="showDashboard"></heatmap>
     </div>
 
     <div class="inspect-layout__tools-right">

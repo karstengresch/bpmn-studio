@@ -17,6 +17,7 @@ interface RouteParameters {
 export class Heatmap {
   public viewerContainer: HTMLDivElement;
   @bindable() public processmodelid: string;
+  @bindable() public dashboardIsShown: string;
   public test: HTMLElement;
 
   private _processModel: ProcessModelExecution.ProcessModel;
@@ -31,11 +32,21 @@ export class Heatmap {
   }
 
   public processmodelidChanged(): void {
-    const viewerContainerIsAttached: boolean = this.viewerContainer !== undefined && this.viewerContainer !== null;
+    const noProcessModelId: boolean = this.processmodelid === undefined || this.processmodelid === null;
+    if (noProcessModelId) {
+      return;
+    }
+
+    const attachedViewer: Element = document.getElementsByClassName('bjs-container')[0];
+
+    const viewerContainerIsAttached: boolean = this.viewerContainer !== undefined
+                                            && this.viewerContainer !== null
+                                            && attachedViewer !== undefined
+                                            && attachedViewer !== null;
+
     const viewerIsInitialized: boolean = this._viewer !== undefined;
 
     if (viewerContainerIsAttached) {
-      const attachedViewer: Element = document.getElementsByClassName('bjs-container')[0];
       this.viewerContainer.removeChild(attachedViewer);
     }
 
@@ -48,6 +59,11 @@ export class Heatmap {
   }
 
   public async attached(): Promise<void> {
+    const noProcessModelId: boolean = this.processmodelid === undefined || this.processmodelid === null;
+    if (noProcessModelId) {
+      return;
+    }
+
     this._modeler = new bundle.modeler({
       moddleExtensions: {
         camunda: bundle.camundaModdleDescriptor,
@@ -84,7 +100,9 @@ export class Heatmap {
 
     this._heatmapService.addOverlays(overlays, elementRegistry, activeTokens);
 
-    this._eventAggregator.publish(environment.events.navBar.showProcessName, this._processModel);
+    if (!this.dashboardIsShown) {
+      this._eventAggregator.publish(environment.events.navBar.showProcessName, this._processModel);
+    }
 
     this._viewer.attachTo(this.viewerContainer);
   }
