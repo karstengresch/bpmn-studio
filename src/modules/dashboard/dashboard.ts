@@ -13,15 +13,14 @@ import {
 
 import {
   IAuthenticationService,
-  NotificationType,
 } from '../../contracts/index';
 import {NotificationService} from '../notification/notification.service';
 
 @inject('ManagementApiClientService', 'NotificationService', 'AuthenticationService', Router)
 export class Dashboard {
 
-  public showTaskList: boolean = false;
-  public showProcessList: boolean = false;
+  public showTaskList: boolean = true;
+  public showProcessList: boolean = true;
 
   private _managementApiService: IManagementApiService;
   private _notificationService: NotificationService;
@@ -40,7 +39,6 @@ export class Dashboard {
   }
 
   // public async canActivate(): Promise<boolean> {
-  //   console.log('canactivate done');
   //   const managementContext: ManagementContext = this._getManagementContext();
 
   //   const hasClaimsForTaskList: boolean = await this._hasClaimsForTaskList(managementContext);
@@ -71,7 +69,7 @@ export class Dashboard {
       const errorIsForbiddenError: boolean = isError(error, ForbiddenError);
       const errorIsUnauthorizedError: boolean = isError(error, UnauthorizedError);
 
-      if (errorIsForbiddenError || errorIsUnauthorizedError) {
+      if (errorIsForbiddenError || errorIsUnauthorizedError) {
         return false;
       }
     }
@@ -88,7 +86,7 @@ export class Dashboard {
       const errorIsForbiddenError: boolean = isError(error, ForbiddenError);
       const errorIsUnauthorizedError: boolean = isError(error, UnauthorizedError);
 
-      if (errorIsForbiddenError || errorIsUnauthorizedError) {
+      if (errorIsForbiddenError || errorIsUnauthorizedError) {
         return false;
       }
     }
