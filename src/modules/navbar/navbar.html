@@ -59,17 +59,20 @@
         </button>
       </template>
       <template if.bind="showTools">
-<<<<<<< HEAD
-          <button class="menu-bar__menu-center--action-button" click.delegate="startProcess()" disabled.bind="validationError || disableStartButton" title.bind="disableStartButton ? 'Before starting the process please deploy it to the ProcessEngine' : 'Start Process'">
-            <i class="fas fa-play"></i>
-          </button>
-        </template>
-=======
-        <button class="menu-bar__menu-center--action-button" click.delegate="startProcess()" disabled.bind="validationError || disableStartButton" title="Start Process">
+        <button class="menu-bar__menu-center--action-button" click.delegate="startProcess()" disabled.bind="validationError || disableStartButton" title.bind="disableStartButton ? 'Before starting the process please deploy it to the ProcessEngine' : 'Start Process'">
           <i class="fas fa-play"></i>
         </button>
       </template>
->>>>>>> :sparkles: Add Tooltip for Heatmap Button and Disable it When Diagram is on fs
+      <template if.bind="showInspectTools">
+        <button class="menu-bar__menu-center--action-button" click.delegate="showDashboard()" disabled.bind="disableDashboardButton" title.bind="disableDashboardButton ? 'You are on the dashboard' : 'Show Dashboard'">
+          <i class="fas fa-chalkboard"></i>
+        </button>
+      </template>
+      <template if.bind="showInspectTools">
+        <button class="menu-bar__menu-center--action-button" click.delegate="showHeatmap()" disabled.bind="disableHeatmapButton" title.bind="disableHeatmapButton ? 'You are on the heatmap view' : 'Show Heatmap'">
+          <i class="fas fa-chart-line"></i>
+        </button>
+      </template>
       <user-login class="menu-bar__user-login"></user-login>
     </div>
   </div>

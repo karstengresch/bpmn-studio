@@ -21,6 +21,8 @@ export class NavBar {
   public disableSaveButton: boolean = false;
   public showProcessName: boolean = false;
   public disableDiagramUploadButton: boolean = true;
+  public disableHeatmapButton: boolean = true;
+  public disableDashboardButton: boolean = false;
   public diagramContainsUnsavedChanges: boolean = false;
   public inspectView: string = 'dashboard';
   public disableDesignLink: boolean = false;
@@ -138,6 +140,32 @@ export class NavBar {
 
   public navigateBack(): void {
     this._router.navigateBack();
+  }
+
+  public showDashboard(): void {
+    this.disableDashboardButton = true;
+    this.disableHeatmapButton = false;
+
+    this._router.navigateToRoute('inspect', {
+      processModelId: this.process.id,
+      view: 'dashboard',
+      latestSource: this.latestSource,
+    });
+
+    this._eventAggregator.publish(environment.events.processSolutionPanel.navigateToHeatmap, 'dashboard');
+  }
+
+  public showHeatmap(): void {
+    this.disableHeatmapButton = true;
+    this.disableDashboardButton = false;
+
+    this._router.navigateToRoute('inspect', {
+      processModelId: this.process.id,
+      view: 'heatmap',
+      latestSource: this.latestSource,
+    });
+
+    this._eventAggregator.publish(environment.events.processSolutionPanel.navigateToHeatmap, 'heatmap');
   }
 
   public navigateToDesigner(): void {
