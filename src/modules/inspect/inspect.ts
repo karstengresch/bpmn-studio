@@ -47,6 +47,14 @@ export class Inspect {
       this.showHeatmap = false;
       this.showDashboard = true;
 
+      setTimeout(() => {
+        const dashboardIsAttached: boolean = this.dashboard !== undefined;
+
+        if (dashboardIsAttached) {
+          this.dashboard.canActivate();
+        }
+      }, 0);
+
       if (routeParameters.latestSource === 'process-engine') {
         this._eventAggregator.publish(environment.events.navBar.showInspectButtons);
         this._eventAggregator.publish(environment.events.navBar.disableDashboardAndEnableHeatmapButton);
@@ -64,6 +72,12 @@ export class Inspect {
   }
 
   public attached(): void {
+    const dashboardIsAttached: boolean = this.dashboard !== undefined;
+
+    if (dashboardIsAttached) {
+      this.dashboard.canActivate();
+    }
+
     this._eventAggregator.publish(environment.events.processSolutionPanel.navigateToHeatmap);
   }
 
