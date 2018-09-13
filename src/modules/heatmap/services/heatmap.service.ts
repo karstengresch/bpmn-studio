@@ -38,24 +38,20 @@ export class HeatmapService implements IHeatmapService {
     const elementsWithoutToken: Array<IShape> = this._getElementsWithoutToken(elementRegistry, tokenWithIdAndLength);
     let participantsTokenCount: number = 0;
 
-    const addOverlay: ((elementId: string,
-                        count: number,
-                        position: IOverlayPosition,
-                      ) => void) = ((elementId: string,
-                                     count: number,
-                                     position: IOverlayPosition,
-                                    ): void => {
-      const maximalTokenCount: number = 100;
-      const countIsTooHigh: boolean = count >=  maximalTokenCount;
+    const addOverlay: ((elementId: string, count: number, position: IOverlayPosition) => void ) =
+      ((elementId: string, count: number, position: IOverlayPosition): void => {
 
-      overlays.add(elementId, {
-        position: {
-          left: position.left,
-          top: position.top,
-        },
-        html: `<div class="heatmap__overlay" title="This element has actual ${count} token.">${countIsTooHigh ? '99+' : count}</div>`,
+        const maximalTokenCount: number = 100;
+        const countIsTooHigh: boolean = count >=  maximalTokenCount;
+
+        overlays.add(elementId, {
+          position: {
+            left: position.left,
+            top: position.top,
+          },
+          html: `<div class="heatmap__overlay" title="This element has actual ${count} token.">${countIsTooHigh ? '99+' : count}</div>`,
+        });
       });
-    });
 
     tokenWithIdAndLength.forEach((token: {flowNodeId: string, count: number}) => {
       const tokenShape: IShape = this._getShape(elementRegistry, token);
