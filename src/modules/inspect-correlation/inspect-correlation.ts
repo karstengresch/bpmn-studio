@@ -93,9 +93,11 @@ export class InspectCorrelation {
   }
 
   public resize(event) {
+    const mouseYPosition: number = event.clientY;
     const inspectPanelHeightWithStatusBar: number = this.bottomPanelResizeDiv.parentElement.parentElement.clientHeight + 20;
-    const mouseYPosition: number = inspectPanelHeightWithStatusBar - event.clientY;
-    this.bottomPanelHeight = mouseYPosition;
+    const newBottomPanelHeight: number = inspectPanelHeightWithStatusBar - mouseYPosition;
+
+    this.bottomPanelHeight = newBottomPanelHeight;
   }
 
   public toggleTokenViewer(): void {
