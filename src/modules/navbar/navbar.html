@@ -59,7 +59,7 @@
         </button>
       </template>
       <template if.bind="showTools">
-          <button class="button menu-bar__menu-center--action-button" class.bind="validationError || disableDiagramUploadButton ? 'button--disabled' : ''" click.delegate="startProcess()" disabled.bind="validationError || disableStartButton" title.bind="disableStartButton ? 'Before starting the process please deploy it to the ProcessEngine' : 'Start Process'">
+          <button class="button menu-bar__menu-center--action-button" class.bind="validationError || disableStartButton ? 'button--disabled' : ''" click.delegate="startProcess()" disabled.bind="validationError || disableStartButton" title.bind="disableStartButton ? 'Before starting the process please deploy it to the ProcessEngine' : 'Start Process'">
             <i class="fas fa-play"></i>
           </button>
         </template>
