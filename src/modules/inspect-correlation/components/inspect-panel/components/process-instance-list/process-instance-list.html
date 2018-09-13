@@ -5,7 +5,7 @@
     <thead>
       <tr class="correlation-table__headlines">
         <th click.delegate="sortList(ProcessInstanceListSortProperty.Number)">
-          Number (${sortedTableData.length}) <i if.bind="sortSettings.sortProperty === ProcessInstanceListSortProperty.Number" class.bind="sortSettings.ascending ? 'fas fa-caret-up' : ' fas fa-caret-down'"></i>
+          Number <i if.bind="sortSettings.sortProperty === ProcessInstanceListSortProperty.Number" class.bind="sortSettings.ascending ? 'fas fa-caret-up' : ' fas fa-caret-down'"></i>
         </th>
         <th click.delegate="sortList(ProcessInstanceListSortProperty.StartedAt)">
           Started at <i if.bind="sortSettings.sortProperty === ProcessInstanceListSortProperty.StartedAt" class.bind="sortSettings.ascending ? 'fas fa-caret-up' : ' fas fa-caret-down'"></i>
