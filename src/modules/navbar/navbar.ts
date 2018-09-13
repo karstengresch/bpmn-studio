@@ -2,16 +2,13 @@ import {EventAggregator, Subscription} from 'aurelia-event-aggregator';
 import {bindable, inject} from 'aurelia-framework';
 import {RouteConfig, Router} from 'aurelia-router';
 
-import {IDiagram} from '@process-engine/solutionexplorer.contracts';
-
-import {IEventFunction} from '../../contracts';
 import environment from '../../environment';
 
 @inject(Router, EventAggregator)
 export class NavBar {
 
   @bindable() public activeRouteName: string;
-  public process: IDiagram;
+  public navbarTitle: string;
   public diagramInfo: HTMLElement;
   public dropdown: HTMLElement;
   public solutionExplorerIsActive: boolean = true;
@@ -41,27 +38,18 @@ export class NavBar {
         this._dertermineActiveRoute();
       }),
 
-      this._eventAggregator.subscribe(environment.events.navBar.showTools, (process: IDiagram) => {
+      this._eventAggregator.subscribe(environment.events.navBar.showTools, (navbarTitle: string) => {
         this.showTools = true;
-        this.process = process;
+        this.navbarTitle = navbarTitle;
       }),
 
       this._eventAggregator.subscribe(environment.events.navBar.hideTools, () => {
         this.showTools = false;
       }),
 
-      this._eventAggregator.subscribe(environment.events.navBar.updateProcess, (process: IDiagram) => {
-        this.process = process;
+      this._eventAggregator.subscribe(environment.events.navBar.updateProcess, (processId: string) => {
+        this.navbarTitle = processId;
         this.diagramContainsUnsavedChanges = false;
-
-        /**
-         * For some reason, the uri of the process is undefiend if the
-         * process is opened from the ProcessEngine.
-         * TODO: If this gets fixed, we have to check, if the uri starts
-         * with http in to check, if the diagram was opened from a
-         * connected ProcessEngine.
-         */
-        this.processOpenedFromProcessEngine = (process.uri === undefined);
       }),
 
       this._eventAggregator.subscribe(environment.events.navBar.disableSaveButton, () => {

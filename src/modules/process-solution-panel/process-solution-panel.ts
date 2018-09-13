@@ -355,7 +355,11 @@ export class ProcessSolutionPanel {
                                           : (navigationResult as PipelineResult).completed;
 
     if (navigationSuccessful) {
-      this._eventAggregator.publish(environment.events.navBar.updateProcess, diagram);
+      const navbarTitle: string = (diagram.id === undefined)
+                                        ? (diagram.name)
+                                        : (diagram.id);
+
+      this._eventAggregator.publish(environment.events.navBar.updateProcess, navbarTitle);
     }
   }
 

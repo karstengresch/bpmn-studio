@@ -72,7 +72,10 @@ export class DiagramDetail {
   }
 
   public attached(): void {
-    this._eventAggregator.publish(environment.events.navBar.showTools, this.diagram);
+    const navbarTitle: string = (this.diagram.id === undefined)
+                              ? (this.diagram.name)
+                              : (this.diagram.id);
+    this._eventAggregator.publish(environment.events.navBar.showTools, navbarTitle);
     this._eventAggregator.publish(environment.events.navBar.enableDiagramUploadButton);
     this._eventAggregator.publish(environment.events.navBar.disableStartButton);
 
