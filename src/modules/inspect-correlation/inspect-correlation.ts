@@ -35,6 +35,8 @@ export class InspectCorrelation {
   private _eventAggregator: EventAggregator;
   private _subscriptions: Array<Subscription>;
   private _processModelId: string;
+  private _statusBarHeight: number = 20;
+  private _minInspectPanelHeight: number = 250;
 
   constructor(inspectCorrelationService: IInspectCorrelationService,
               managementApiService: IManagementApiService,
@@ -94,9 +96,9 @@ export class InspectCorrelation {
 
   public resize(event) {
     const mouseYPosition: number = event.clientY;
-    const inspectPanelHeightWithStatusBar: number = this.bottomPanelResizeDiv.parentElement.parentElement.clientHeight + 20;
+    const inspectPanelHeightWithStatusBar: number = this.bottomPanelResizeDiv.parentElement.parentElement.clientHeight + this._statusBarHeight;
     const newBottomPanelHeight: number = inspectPanelHeightWithStatusBar - mouseYPosition;
-    const minInspectPanelHeight: number = 250;
+    const minInspectPanelHeight: number = this._minInspectPanelHeight;
 
     this.bottomPanelHeight = Math.max(newBottomPanelHeight, minInspectPanelHeight);
   }
