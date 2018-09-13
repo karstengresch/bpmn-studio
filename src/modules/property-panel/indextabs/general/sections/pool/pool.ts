@@ -120,10 +120,10 @@ export class PoolSection implements ISection {
     ValidationRules.ensure((businessObject: IModdleElement) => businessObject.id)
     .displayName('processId')
     .required()
-    .withMessage('Process-Id cannot be blank.')
+    .withMessage('Process-ID cannot be blank.')
     .then()
     .satisfies((id: string) => this._formIdIsUnique(id) && this._isProcessIdUnique(id))
-    .withMessage('Process-Id already exists.')
+    .withMessage('Process-ID already exists.')
     .on(this.businessObjInPanel.processRef);
   }
 

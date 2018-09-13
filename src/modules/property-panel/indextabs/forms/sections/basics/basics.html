@@ -94,7 +94,7 @@
       <table>
         <tr repeat.for="value of enumValues" index.bind="$index">
           <td class="key-value-column-left">
-            <input type="text" class="key-value-input" value.bind="newEnumValueIds[$index]" placeholder="Id" change.delegate="changeEnumValueId($index)">
+            <input type="text" class="key-value-input" value.bind="newEnumValueIds[$index]" placeholder="ID" change.delegate="changeEnumValueId($index)">
           </td>
           <td class="key-value-column-right">
             <input type="text" class="key-value-input" value.bind="newEnumValueNames[$index]" placeholder="Name" change.delegate="changeEnumValueName($index)">

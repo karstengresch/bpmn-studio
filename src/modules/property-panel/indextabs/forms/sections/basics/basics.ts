@@ -516,10 +516,10 @@ export class BasicsSection implements ISection {
       .ensure((form: IForm) => form.id)
       .displayName('formId')
       .required()
-      .withMessage('Id cannot be blank.')
+      .withMessage('ID cannot be blank.')
       .then()
       .satisfies((id: string) => this._formIdIsUnique(id))
-      .withMessage('Id already exists.')
+      .withMessage('ID already exists.')
       .on(this.selectedForm);
   }
 

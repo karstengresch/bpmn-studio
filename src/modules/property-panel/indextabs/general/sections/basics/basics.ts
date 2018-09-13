@@ -178,10 +178,10 @@ export class BasicsSection implements ISection {
       .ensure((businessObject: IModdleElement) => businessObject.id)
       .displayName('elementId')
       .required()
-        .withMessage('Id cannot be blank.')
+        .withMessage('ID cannot be blank.')
       .then()
       .satisfies((id: string) => this._formIdIsUnique(id) && this._isProcessIdUnique(id))
-        .withMessage('Id already exists.')
+        .withMessage('ID already exists.')
       .on(this.businessObjInPanel);
   }
 
