@@ -93,7 +93,6 @@ export class InspectCorrelation {
   }
 
   public resize(event) {
-    // console.log(event.clientY);
     const inspectPanelHeightWithStatusBar: number = this.bottomPanelResizeDiv.parentElement.parentElement.clientHeight + 20;
     const mouseYPosition: number = inspectPanelHeightWithStatusBar - event.clientY;
     this.bottomPanelHeight = mouseYPosition;
