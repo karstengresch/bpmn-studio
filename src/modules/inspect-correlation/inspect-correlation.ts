@@ -8,7 +8,7 @@ import {
   ProcessModelExecution,
 } from '@process-engine/management_api_contracts';
 
-import {IAuthenticationService, ILogEntry, IEventFunction} from '../../contracts/index';
+import {IAuthenticationService, IEventFunction, ILogEntry} from '../../contracts/index';
 import environment from '../../environment';
 import {IInspectCorrelationService} from './contracts';
 
