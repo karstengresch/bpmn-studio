@@ -45,12 +45,15 @@ export class HeatmapService implements IHeatmapService {
                                      count: number,
                                      position: IOverlayPosition,
                                     ): void => {
+      const maximalTokenCount: number = 100;
+      const countIsTooHigh: boolean = count >=  maximalTokenCount;
+
       overlays.add(elementId, {
         position: {
           left: position.left,
           top: position.top,
         },
-        html: `<div class="heatmap__overlay" title="This element has actual ${count} token.">${count}</div>`,
+        html: `<div class="heatmap__overlay" title="This element has actual ${count} token.">${countIsTooHigh ? '99+' : count}</div>`,
       });
     });
 
