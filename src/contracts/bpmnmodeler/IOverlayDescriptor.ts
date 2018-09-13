@@ -3,13 +3,14 @@ import {IOverlayPosition} from './IOverlayPosition';
 export interface IOverlayDescriptor {
   position: IOverlayPosition;
   html: string;
-  // configure scale=false to use non-scaling overlays
-  // configure scale={ min: 1 } to use non-shrinking overlays
+  // Configure scale=false to use non-scaling overlays
+  // Configure scale={ min: 1 } to use non-shrinking overlays
   scale?: false | { min: 1 };
-  // configure show={ minZoom: 0.6 } to hide overlays at low zoom levels
+  // Configure show={ minZoom: 0.6 } to hide overlays at low zoom levels
   show?: { minZoom: number };
 
-    /* uncomment to configure defaults for all overlays (Viewer Constructor)
+  /* Uncomment to configure defaults for all overlays.
+     This must be done in the viewer constructor.
   overlays: {
     defaults: {
       show: { minZoom: 1 },
