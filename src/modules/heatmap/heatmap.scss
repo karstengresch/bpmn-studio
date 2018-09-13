@@ -33,15 +33,15 @@
 }
 
 .heatmap__overlay {
+  width: 35px;
+  height: 35px;
+  min-height: 16px;
+  padding: 9px;
   background-color: black;
-  color: White;
   border-radius: 50%;
   font-family: Arial;
   font-size: 12px;
-  padding: 9px;
-  min-height: 16px;
-  width: 35px;
-  height: 35px;
+  color: White;
   text-align: center;
 }
 

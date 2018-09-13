@@ -5,13 +5,13 @@
 }
 
 .inspect-layout__tools-right {
-  border-left: 2px solid #dcdbdb;
-  width: 36px;
-  background-color: #f7f7f7;
-  right: 0px;
-  top: 42px;
-  bottom: 0;
   position: fixed;
+  width: 36px;
+  top: 42px;
+  right: 0px;
+  bottom: 0;
+  background-color: #f7f7f7;
+  border-left: 2px solid #dcdbdb;
 }
 
 .inspect__heatmap-container {
