@@ -93,7 +93,7 @@
     "@process-engine/consumer_api_contracts": "^0.15.0",
     "@process-engine/management_api_client": "^0.7.0",
     "@process-engine/management_api_contracts": "^0.8.0",
-    "@process-engine/process_engine_runtime": "develop",
+    "@process-engine/process_engine_runtime": "2.1.1",
     "@process-engine/solutionexplorer.contracts": "1.0.0",
     "@process-engine/solutionexplorer.repository.contracts": "1.0.0",
     "@process-engine/solutionexplorer.repository.filesystem": "1.0.0",
