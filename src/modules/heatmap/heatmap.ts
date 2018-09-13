@@ -18,7 +18,6 @@ export class Heatmap {
   public viewerContainer: HTMLDivElement;
   @bindable() public processmodelid: string;
   @bindable() public dashboardIsShown: string;
-  public test: HTMLElement;
 
   private _processModel: ProcessModelExecution.ProcessModel;
   private _heatmapService: IHeatmapService;
@@ -44,12 +43,11 @@ export class Heatmap {
                                             && attachedViewer !== undefined
                                             && attachedViewer !== null;
 
-    const viewerIsInitialized: boolean = this._viewer !== undefined;
-
     if (viewerContainerIsAttached) {
       this.viewerContainer.removeChild(attachedViewer);
     }
-
+    
+    const viewerIsInitialized: boolean = this._viewer !== undefined;
     if (viewerIsInitialized) {
       this._viewer.detach();
       this._viewer.destroy();
@@ -74,10 +72,20 @@ export class Heatmap {
 
     this._eventAggregator.publish(environment.events.navBar.updateProcess, this._processModel);
 
-    await this._importXML(this._processModel.xml, this._modeler);
+    await this._pushXmlToBpmnModeler(this._processModel.xml, this._modeler);
 
     const elementRegistry: IElementRegistry  = this._modeler.get('elementRegistry');
+    
+    /*
+     * TODO: Refactoring opportunity; HeatmapService could use a fluent API; This is how it would look like:
+     * this._heatmapService
+     *   .setFlowNodeAssociations(elementRegistry) // -> associations
+     *   .setRuntimeInformationForProcessModel(this.processmodelid) // -> flowNodeRuntimeInformation
+     *   .getColoredXML(this._modeler) // <- associations, flowNodeRuntimeInformation
+     */ 
+    
     const associations: Array<IFlowNodeAssociation> = await this._heatmapService.getFlowNodeAssociations(elementRegistry);
+    
     const flowNodeRuntimeInformation: Array<FlowNodeRuntimeInformation> = await this
       ._heatmapService
       .getRuntimeInformationForProcessModel(this.processmodelid);
@@ -92,7 +100,7 @@ export class Heatmap {
       ],
     });
 
-    await this._importXML(xml, this._viewer);
+    await this._pushXmlToBpmnModeler(xml, this._viewer);
 
     const activeTokens: Array<ActiveToken> = await this._heatmapService.getActiveTokensForProcessModel(this.processmodelid);
 
@@ -100,14 +108,15 @@ export class Heatmap {
 
     this._heatmapService.addOverlays(overlays, elementRegistry, activeTokens);
 
-    if (!this.dashboardIsShown) {
+    const dashboardIsNotShown: boolean = !this.dashboardIsShown;
+    if (dashboardIsNotShown) {
       this._eventAggregator.publish(environment.events.navBar.showProcessName, this._processModel);
     }
 
     this._viewer.attachTo(this.viewerContainer);
   }
 
-  private _importXML(xml: string, modeler: IBpmnModeler): Promise<void> {
+  private _pushXmlToBpmnModeler(xml: string, modeler: IBpmnModeler): Promise<void> {
     return new Promise((resolve: Function, reject: Function): void => {
       modeler.importXML(xml, (importXmlError: Error) => {
         if (importXmlError) {
