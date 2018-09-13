@@ -31,7 +31,7 @@
         <div class="diagram" id="bpmnIoDiagram">
           <div ref="canvasModel" class="canvasModel"></div>
         </div>
-        <div class="properties" ref="propertyPanel" css="width: ${propertyPanelWidth}px; display: ${propertyPanelDisplay}; max-width: calc(100% - ${minCanvasWidth}px); min-width: ${minPropertyPanelWidth}px;">
+        <div class="properties" ref="propertyPanel" show.bind="showPropertyPanel" css="width: ${propertyPanelWidth}px; max-width: calc(100% - ${minCanvasWidth}px); min-width: ${minPropertyPanelWidth}px;">
           <div class="resize-div" ref="resizeButton"></div>
           <diagram-tools-right modeler.bind="modeler"></diagram-tools-right>
           <property-panel id="js-properties-panel" modeler.bind="modeler" xml.bind="xml"></property-panel>
@@ -43,8 +43,8 @@
 
     <div class="bpmn-io-layout__tools-right">
       <div show.bind="!showXMLView && !showDiffView" class="tool-list tool-list--vertical">
-        <div ref="toggleButtonPropertyPanel" class="tool__right tool--active">
-          <button class="button menu-bar__menu-left--tool" click.delegate="togglePanel()" title="Toggle visibility of the Property Panel">
+        <div ref="toggleButtonPropertyPanel" class="button tool__right tool--active">
+          <button class="button menu-bar__menu-left--tool" click.delegate="togglePanel()" class.bind="showPropertyPanel ? 'button--active' : ''" title="Toggle visibility of the Property Panel">
             <i class="fas fa-sliders-h"></i>
           </button>
         </div>

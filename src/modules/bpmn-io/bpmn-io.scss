@@ -18,6 +18,7 @@
   height: 100%;
   background: rgb(220, 219, 219);
   overflow-y: auto;
+  display: inline;
   -ms-overflow-style: none;
 }
 
@@ -51,10 +52,6 @@
   padding: 2px;
   //opacity: 0.5;
   text-align: center;
-}
-
-.tool--active {
-  //opacity: 1;
 }
 
 /*
