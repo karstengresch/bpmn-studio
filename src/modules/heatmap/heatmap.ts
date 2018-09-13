@@ -46,7 +46,7 @@ export class Heatmap {
     if (viewerContainerIsAttached) {
       this.viewerContainer.removeChild(attachedViewer);
     }
-    
+
     const viewerIsInitialized: boolean = this._viewer !== undefined;
     if (viewerIsInitialized) {
       this._viewer.detach();
@@ -75,17 +75,17 @@ export class Heatmap {
     await this._pushXmlToBpmnModeler(this._processModel.xml, this._modeler);
 
     const elementRegistry: IElementRegistry  = this._modeler.get('elementRegistry');
-    
+
     /*
      * TODO: Refactoring opportunity; HeatmapService could use a fluent API; This is how it would look like:
      * this._heatmapService
      *   .setFlowNodeAssociations(elementRegistry) // -> associations
      *   .setRuntimeInformationForProcessModel(this.processmodelid) // -> flowNodeRuntimeInformation
      *   .getColoredXML(this._modeler) // <- associations, flowNodeRuntimeInformation
-     */ 
-    
+     */
+
     const associations: Array<IFlowNodeAssociation> = await this._heatmapService.getFlowNodeAssociations(elementRegistry);
-    
+
     const flowNodeRuntimeInformation: Array<FlowNodeRuntimeInformation> = await this
       ._heatmapService
       .getRuntimeInformationForProcessModel(this.processmodelid);
