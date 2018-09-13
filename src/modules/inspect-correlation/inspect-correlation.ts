@@ -1,5 +1,5 @@
 import {EventAggregator, Subscription} from 'aurelia-event-aggregator';
-import {bindable, inject} from 'aurelia-framework';
+import {bindable, inject, observable} from 'aurelia-framework';
 
 import {
   Correlation,
@@ -8,7 +8,7 @@ import {
   ProcessModelExecution,
 } from '@process-engine/management_api_contracts';
 
-import {IAuthenticationService, ILogEntry} from '../../contracts/index';
+import {IAuthenticationService, ILogEntry, IEventFunction} from '../../contracts/index';
 import environment from '../../environment';
 import {IInspectCorrelationService} from './contracts';
 
@@ -21,11 +21,13 @@ export class InspectCorrelation {
   public correlations: Array<Correlation>;
   @bindable({ changeHandler: 'selectedCorrelationChanged'}) public selectedCorrelation: Correlation;
   @bindable() public inspectPanelFullscreen: boolean = false;
+  @observable public bottomPanelHeight: number = 250;
   public xml: string;
   public token: string;
   public log: Array<ILogEntry>;
   public showInspectPanel: boolean = true;
   public showTokenViewer: boolean = false;
+  public bottomPanelResizeDiv: HTMLDivElement;
 
   private _managementApiService: IManagementApiService;
   private _authenticationService: IAuthenticationService;
@@ -61,6 +63,24 @@ export class InspectCorrelation {
         this.showInspectPanel = showInspectPanel;
       }),
     ];
+
+    this.bottomPanelResizeDiv.addEventListener('mousedown', (e: Event) => {
+      const windowEvent: Event = e || window.event;
+      windowEvent.cancelBubble = true;
+
+      const mousemoveFunction: IEventFunction = (event: MouseEvent): void => {
+        this.resize(event);
+        document.getSelection().empty();
+      };
+
+      const mouseUpFunction: IEventFunction = (): void => {
+        document.removeEventListener('mousemove', mousemoveFunction);
+        document.removeEventListener('mouseup', mouseUpFunction);
+      };
+
+      document.addEventListener('mousemove', mousemoveFunction);
+      document.addEventListener('mouseup', mouseUpFunction);
+    });
   }
 
   public detached(): void {
@@ -70,6 +90,13 @@ export class InspectCorrelation {
     for (const subscription of this._subscriptions) {
       subscription.dispose();
     }
+  }
+
+  public resize(event) {
+    // console.log(event.clientY);
+    const inspectPanelHeightWithStatusBar: number = this.bottomPanelResizeDiv.parentElement.parentElement.clientHeight + 20;
+    const mouseYPosition: number = inspectPanelHeightWithStatusBar - event.clientY;
+    this.bottomPanelHeight = mouseYPosition;
   }
 
   public toggleTokenViewer(): void {

@@ -10,8 +10,8 @@
         <diagram-viewer class="inspect-correlation__diagram-viewer" xml.bind="xml"></diagram-viewer>
         <token-viewer class="inspect-correlation__token-viewer" token.bind="token" show.bind="showTokenViewer"></token-viewer>
       </div>
-      <div class="inspect-correlation__bottom-panel__resize-div" ref="resizeDiv"></div>
-      <div class="inspect-correlation__bottom-panel" class.bind="inspectPanelFullscreen ? 'inspect-correlation__bottom-panel__fullscreen' : ''" show.bind="showInspectPanel">
+      <div class="inspect-correlation__bottom-panel__resize-div" ref="bottomPanelResizeDiv"></div>
+      <div class="inspect-correlation__bottom-panel" css="height: ${bottomPanelHeight}px;" class.bind="inspectPanelFullscreen ? 'inspect-correlation__bottom-panel__fullscreen' : ''" show.bind="showInspectPanel">
         <inspect-panel correlations.bind="correlations" selected-correlation.two-way="selectedCorrelation" fullscreen.two-way="inspectPanelFullscreen" log.bind="log"></inspect-panel>
       </div>
     </div>
