@@ -1,6 +1,7 @@
 import {bindable} from 'aurelia-framework';
 
 import {Correlation} from '@process-engine/management_api_contracts';
+
 import {ILogEntry, InspectPanelTab} from '../../../../contracts/index';
 
 export class InspectPanel {
