@@ -42,7 +42,7 @@ export class ProcessInstanceList {
       const formattedStartedDate: string = this._dateService.getDateStringFromTimestamp(correlation.startedAt);
 
       const index: number = this._getIndexForCorrelation(correlation, correlations);
-      const state: string = correlation.state.charAt(0).toUpperCase() + correlation.state.slice(1);
+      const state: string = correlation.state.toUpperCase();
 
       const tableEntry: IProcessInstanceTableEntry = {
         index: index,
