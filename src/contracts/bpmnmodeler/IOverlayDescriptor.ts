@@ -8,14 +8,4 @@ export interface IOverlayDescriptor {
   scale?: false | { min: 1 };
   // Configure show={ minZoom: 0.6 } to hide overlays at low zoom levels
   show?: { minZoom: number };
-
-  /* Uncomment to configure defaults for all overlays.
-     This must be done in the viewer constructor.
-  overlays: {
-    defaults: {
-      show: { minZoom: 1 },
-      scale: true
-    }
-  }
-  */
 }
