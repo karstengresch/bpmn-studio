@@ -134,12 +134,17 @@
   }
 
   .entry {
-    opacity: 0.5;
+    /*
+     * This is used instead of the global button class because the
+     * button class does not use important which is needed in this case
+     * to override the existing properties, given by bpmn.io.
+     */
+    color: darkgray !important;
   }
 
   .highlighted-entry,
   .entry:hover {
-    color: #000 !important;
+    color: #5e5e5e !important;
     opacity: 1;
   }
 
