@@ -17,7 +17,7 @@
   <div class="section-panel panel--grow">
     <div class="panel__heading">
       Form Fields
-      <button class="remove-context-button" disabled.bind="!isFormSelected" click.delegate="removeSelectedForm()">
+      <button class="button remove-context-button" class.bind="isFormSelected ? '' : 'button--disabled'" disabled.bind="!isFormSelected" click.delegate="removeSelectedForm()">
         <i class="fas fa-trash"></i>
       </button>
       <button class="button add-context-button" click.delegate="addForm()">
