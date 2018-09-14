@@ -63,9 +63,12 @@ export class HeatmapService implements IHeatmapService {
 
     tokenWithIdAndLength.forEach((token: ITokenPositionAndCount) => {
       const tokenShape: IShape = this._getShape(elementRegistry, token);
-      if (tokenShape === undefined) {
+      const tokenShapeIsUndefined: boolean = tokenShape === undefined;
+
+      if (tokenShapeIsUndefined) {
         return;
       }
+
       const tokenShapeIsGateway: boolean = tokenShape.type === 'bpmn:ExclusiveGateway';
       const tokenShapeIsEvent: boolean = tokenShape.type === 'bpmn:EndEvent' || tokenShape.type === 'bpmn:StartEvent';
 
