@@ -258,8 +258,8 @@ export class HeatmapService implements IHeatmapService {
 
   private _getMedianRunTimeForAssociation(association: IConnection): number {
     const annotationText: string = association.target.businessObject.text;
-    const lengthofRTStamp: number = 4;
-    const startRunTimeText: number = annotationText.search('RT:') + lengthofRTStamp;
+    const lengthOfRTStamp: number = 4;
+    const startRunTimeText: number = annotationText.search('RT:') + lengthOfRTStamp;
     const lengthOfRunTimeText: number = 12;
     const runTimeTimeStamp: string = annotationText.substr(startRunTimeText, lengthOfRunTimeText);
     const date: Date = new Date('1970-01-01T' + runTimeTimeStamp + 'Z');
