@@ -22,6 +22,9 @@ import {
   ITokenPositionAndCount,
 } from '../contracts/index';
 
+// maximalTokenCount is used to sanitise the displayed number to "99+"
+const maximalTokenCount: number = 100;
+
 @inject('HeatmapMockRepository')
 export class HeatmapService implements IHeatmapService {
   private _heatmapRepository: IHeatmapRepository;
@@ -47,7 +50,6 @@ export class HeatmapService implements IHeatmapService {
     const addOverlay: ((elementId: string, count: number, position: IOverlayPosition) => void ) =
       ((elementId: string, count: number, position: IOverlayPosition): void => {
 
-        const maximalTokenCount: number = 100;
         const countIsTooHigh: boolean = count >=  maximalTokenCount;
 
         overlays.add(elementId, {
