@@ -13,4 +13,8 @@ export const defaultOverlayPositions: IDefaultOverlayPositions = {
     left: 23,
     top: -24,
   },
+  participants: {
+    left: 18,
+    top: 20,
+  },
 };

@@ -87,10 +87,8 @@ export class HeatmapService implements IHeatmapService {
 
     const participantShape: IShape = this._getParticipantShape(elementRegistry);
     addOverlay(participantShape.id, participantsTokenCount, {
-      // tslint:disable-next-line:no-magic-numbers
-      left: participantShape.width - 18,
-      // tslint:disable-next-line:no-magic-numbers
-      top: participantShape.height - 20,
+      left: participantShape.width - defaultOverlayPositions.participants.left,
+      top: participantShape.height - defaultOverlayPositions.participants.top,
     });
   }
 
