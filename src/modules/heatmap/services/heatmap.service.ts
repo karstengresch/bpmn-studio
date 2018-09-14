@@ -14,7 +14,13 @@ import {
   IOverlayPosition,
   IShape,
 } from '../../../contracts/index';
-import {defaultOverlayPositions, IFlowNodeAssociation, IHeatmapRepository, IHeatmapService} from '../contracts/index';
+import {
+  defaultOverlayPositions,
+  IFlowNodeAssociation,
+  IHeatmapRepository,
+  IHeatmapService,
+  ITokenPositionAndCount,
+} from '../contracts/index';
 
 @inject('HeatmapMockRepository')
 export class HeatmapService implements IHeatmapService {
@@ -34,7 +40,7 @@ export class HeatmapService implements IHeatmapService {
 
   public addOverlays(overlays: IOverlay, elementRegistry: IElementRegistry, activeTokens: Array<ActiveToken>): void {
     const tokenToCount: Array<ActiveToken> = this._getTokenToCount(activeTokens);
-    const tokenWithIdAndLength: Array<{flowNodeId: string, count: number}> = this._getTokenWithIdAndCount(activeTokens, tokenToCount);
+    const tokenWithIdAndLength: Array<ITokenPositionAndCount> = this._getTokenWithIdAndCount(activeTokens, tokenToCount);
     const elementsWithoutToken: Array<IShape> = this._getElementsWithoutToken(elementRegistry, tokenWithIdAndLength);
     let participantsTokenCount: number = 0;
 
@@ -53,7 +59,7 @@ export class HeatmapService implements IHeatmapService {
         });
       });
 
-    tokenWithIdAndLength.forEach((token: {flowNodeId: string, count: number}) => {
+    tokenWithIdAndLength.forEach((token: ITokenPositionAndCount) => {
       const tokenShape: IShape = this._getShape(elementRegistry, token);
       if (tokenShape === undefined) {
         return;
@@ -183,7 +189,7 @@ export class HeatmapService implements IHeatmapService {
     return elementsToColor;
   }
 
-  private _getShape(elementRegistry: IElementRegistry, elementToColor: FlowNodeRuntimeInformation | {flowNodeId: string, count: number}): IShape {
+  private _getShape(elementRegistry: IElementRegistry, elementToColor: FlowNodeRuntimeInformation | ITokenPositionAndCount): IShape {
     const elementShape: IShape = elementRegistry.get(elementToColor.flowNodeId);
 
     return elementShape;
@@ -203,7 +209,7 @@ export class HeatmapService implements IHeatmapService {
 
   private _getElementsWithoutToken(
     elementRegistry: IElementRegistry,
-    tokenWithIdAndLength: Array<{flowNodeId: string, count: number}>,
+    tokenWithIdAndLength: Array<ITokenPositionAndCount>,
   ): Array<IShape> {
     const allElements: Array<IShape> = elementRegistry.getAll();
     const filteredElements: Array<IShape> = allElements.filter((element: IShape) => {
@@ -219,7 +225,7 @@ export class HeatmapService implements IHeatmapService {
     });
 
     const filterWithActiveToken: Array<IShape> = filteredElements.filter((element: IShape) => {
-      const token: {flowNodeId: string, count: number} = tokenWithIdAndLength.find((activeToken: {flowNodeId: string, count: number}) => {
+      const token: ITokenPositionAndCount = tokenWithIdAndLength.find((activeToken: ITokenPositionAndCount) => {
         return activeToken.flowNodeId === element.id;
       });
       if (token === undefined) {
@@ -260,8 +266,8 @@ export class HeatmapService implements IHeatmapService {
     return medianRunTimeInMs;
   }
 
-  private _getTokenWithIdAndCount(activeTokens: Array<ActiveToken>, tokenToCount: Array<ActiveToken>): Array<{flowNodeId: string, count: number}> {
-    const tokenWithIdAndLength: Array<{flowNodeId: string, count: number}> = [];
+  private _getTokenWithIdAndCount(activeTokens: Array<ActiveToken>, tokenToCount: Array<ActiveToken>): Array<ITokenPositionAndCount> {
+    const tokenWithIdAndLength: Array<ITokenPositionAndCount> = [];
     tokenToCount.forEach((token: ActiveToken) => {
       const tokenOfAnElement: Array<ActiveToken> =  activeTokens.filter((activeToken: ActiveToken) => {
         return activeToken.flowNodeId === token.flowNodeId;
