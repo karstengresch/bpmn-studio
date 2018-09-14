@@ -58,6 +58,7 @@ export class ProcessInstanceList {
 
   public sortList(property: ProcessInstanceListSortProperty): void {
     this.sortedTableData = [];
+
     const isSamePropertyAsPrevious: boolean = this.sortSettings.sortProperty === property;
     const ascending: boolean = isSamePropertyAsPrevious ? !this.sortSettings.ascending
                                                         : true;
