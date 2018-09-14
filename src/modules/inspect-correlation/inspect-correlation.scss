@@ -6,11 +6,11 @@
 }
 
 .inspect-correlation__panels {
+  display: flex;
   width: calc(100% - 72px);
   height: 100%;
-  margin-left: 36px;
   margin-right: 36px;
-  display: flex;
+  margin-left: 36px;
   flex-direction: column;
 }
 
@@ -42,13 +42,13 @@
 }
 
 .inspect-correlation__bottom-panel__resize-div {
+  z-index: 1;
   height: 9px;
   width: 100%;
-  flex-shrink: 0;
-  z-index: 1;
   margin-top: -4px;
   margin-bottom: -4px;
   cursor: row-resize;
+  flex-shrink: 0;
 }
 
 .inspect-correlation__upper-panel {
@@ -67,23 +67,23 @@
 
 .inspect-correlation__right-toolbar {
   position: absolute;
+  top: 0px;
+  right: 0px;
   width: 36px;
   height: 100%;
+  padding-bottom: 22px;
   background-color: #f7f7f7;
   border-left: 2px solid #ccc;
-  right: 0px;
-  top: 0px;
-  padding-bottom: 22px;
 }
 
 .inspect-correlation__left-toolbar {
   position: absolute;
+  top: 0px;
+  left: 0px;
   width: 36px;
   height: 100%;
   background-color: #f7f7f7;
   border-right: 2px solid #ccc;
-  left: 0px;
-  top: 0px;
   padding-bottom: 22px;
 }
 
