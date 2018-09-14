@@ -18,21 +18,9 @@ export class InspectPanel {
   }
 
   public changeTab(inspectPanelTab: InspectPanelTab): void {
-    switch (inspectPanelTab) {
-      case InspectPanelTab.ProcessInstanceList:
-        this.showProcessInstanceList = true;
-        this.showLogViewer = false;
-        break;
+    const shouldShowProcessInstanceList: boolean = inspectPanelTab === InspectPanelTab.ProcessInstanceList;
+    const shouldShowLogViewer: boolean = inspectPanelTab === InspectPanelTab.LogViewer;
 
-      case InspectPanelTab.LogViewer:
-        this.showProcessInstanceList = false;
-        this.showLogViewer = true;
-        break;
-
-      default:
-        this.showProcessInstanceList = false;
-        this.showLogViewer = false;
-        break;
-    }
-  }
+    this.showProcessInstanceList = shouldShowProcessInstanceList;
+    this.showLogViewer = shouldShowLogViewer;
 }
