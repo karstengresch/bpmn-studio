@@ -53,7 +53,6 @@ export class InspectCorrelation {
     this._processModelId = routeParameters.processModelId;
 
     this.correlations = await this._inspectCorrelationService.getAllCorrelationsForProcessModelId(this._processModelId);
-
   }
 
   public attached(): void {
