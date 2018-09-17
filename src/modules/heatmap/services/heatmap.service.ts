@@ -212,6 +212,14 @@ export class HeatmapService implements IHeatmapService {
     return participantShape;
   }
 
+  /**
+   *
+   * @param elementRegistry Die Elementregistry des BPMN-Modelers
+   * @param tokenWithIdAndLength Array von flowNodeIds und deren ActiveToken Anzahl
+   *
+   * Diese Methode filtert alle Elemente des Diagramms nach Elementen, die ein Overlay
+   * bekommen sollen und nach den Elementen, die keinen Token besitzen.
+   */
   private _getElementsWithoutToken(
     elementRegistry: IElementRegistry,
     tokenWithIdAndLength: Array<ITokenPositionAndCount>,
@@ -271,6 +279,14 @@ export class HeatmapService implements IHeatmapService {
     return medianRunTimeInMs;
   }
 
+  /**
+   *
+   * @param activeTokens Alle Token eines Prozessmodells.
+   * @param tokenToCount ActiveToken, dessen Anzahl ermittelt werden muss
+   *
+   * Diese Methode filtert die ActiveTokens nach den Token, die gezählt werden müssen
+   * und gibt dessen flowNodeId und die Anzahl in einem Array zurück.
+   */
   private _getTokenWithIdAndCount(activeTokens: Array<ActiveToken>, tokenToCount: Array<ActiveToken>): Array<ITokenPositionAndCount> {
     const tokenWithIdAndLength: Array<ITokenPositionAndCount> = [];
     tokenToCount.forEach((token: ActiveToken) => {
@@ -287,6 +303,12 @@ export class HeatmapService implements IHeatmapService {
     return tokenWithIdAndLength;
   }
 
+  /**
+   * Diese Methode findet die ActiveToken Objecte, welche die gleiche flowNodeId haben
+   * und speichert diese im Array tokenToCount.
+   * Anschließend können in der _getTokenWithIdAndCount Methode die ActiveTokens nach
+   * den tokenToCount gefiltert werden und die Anzahl ermittelt werden.
+   */
   private _getTokenToCount(activeTokens: Array<ActiveToken>): Array<ActiveToken> {
     const tokenToCount: Array<ActiveToken> = [];
 
