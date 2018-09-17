@@ -23,4 +23,5 @@ export class InspectPanel {
 
     this.showProcessInstanceList = shouldShowProcessInstanceList;
     this.showLogViewer = shouldShowLogViewer;
+  }
 }
