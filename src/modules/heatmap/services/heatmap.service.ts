@@ -42,7 +42,19 @@ export class HeatmapService implements IHeatmapService {
   }
 
   public addOverlays(overlays: IOverlay, elementRegistry: IElementRegistry, activeTokens: Array<ActiveToken>): void {
+    this._includeShapeTypeToActiveToken(elementRegistry, activeTokens);
+    const taskToken: Array<ActiveToken> = this._filterTasksfromActiveTokens(activeTokens);
+    const eventToken: Array<ActiveToken> = this._filterEventsfromActiveTokens(activeTokens);
+    const gatewayToken: Array<ActiveToken> = this._filterGatewaysfromActiveTokens(activeTokens);
+
+    console.log(taskToken);
+    console.log(eventToken);
+    console.log(gatewayToken);
+
     const tokenToCount: Array<ActiveToken> = this._getTokenToCount(activeTokens);
+
+    console.log(tokenToCount);
+
     const tokenWithIdAndLength: Array<ITokenPositionAndCount> = this._getTokenWithIdAndCount(activeTokens, tokenToCount);
     const elementsWithoutToken: Array<IShape> = this._getElementsWithoutToken(elementRegistry, tokenWithIdAndLength);
     let participantsTokenCount: number = 0;
@@ -101,6 +113,50 @@ export class HeatmapService implements IHeatmapService {
       left: participantShape.width - defaultOverlayPositions.participants.left,
       top: participantShape.height - defaultOverlayPositions.participants.top,
     });
+  }
+
+  private _includeShapeTypeToActiveToken(elementRegistry: IElementRegistry, activeTokens: Array<ActiveToken>): void {
+    activeTokens.map((tokenElement: ActiveToken & { type: string }) => {
+      const shapeOfTokenElement: IShape = this._getShape(elementRegistry, tokenElement);
+
+      tokenElement.type = shapeOfTokenElement.type;
+    });
+  }
+
+  private _filterTasksfromActiveTokens(activeTokens: Array<ActiveToken>): Array<ActiveToken> {
+    const tokenOnTasks: Array<ActiveToken> =  activeTokens.filter((activeToken: ActiveToken & { type: string }) => {
+      // alle Task types nachschauen
+      const tokenElementIsTask: boolean = activeToken.type === 'bpmn:ScriptTask'
+                                || activeToken.type === 'bpmn:ServiceTask'
+                                || activeToken.type === 'bpmn:UserTask';
+
+      return tokenElementIsTask;
+    });
+
+    return tokenOnTasks;
+  }
+
+  private _filterGatewaysfromActiveTokens(activeTokens: Array<ActiveToken>): Array<ActiveToken> {
+    const tokenOnGateways: Array<ActiveToken> =  activeTokens.filter((activeToken: ActiveToken & { type: string }) => {
+      // alle gateway types nachschauen
+      const tokenElementIsGateway: boolean = activeToken.type === 'bpmn:ExclusiveGateway';
+
+      return tokenElementIsGateway;
+    });
+
+    return tokenOnGateways;
+  }
+
+  private _filterEventsfromActiveTokens(activeTokens: Array<ActiveToken>): Array<ActiveToken> {
+    const tokenOnEvents: Array<ActiveToken> =  activeTokens.filter((activeToken: ActiveToken & { type: string }) => {
+      // alle Task types nachschauen
+      const tokenElementIsEvent: boolean = activeToken.type === 'bpmn:EndEvent'
+                                || activeToken.type === 'bpmn:StartEvent';
+
+      return tokenElementIsEvent;
+    });
+
+    return tokenOnEvents;
   }
 
   public getProcess(processModelId: string): Promise<ProcessModelExecution.ProcessModel> {
@@ -194,7 +250,7 @@ export class HeatmapService implements IHeatmapService {
     return elementsToColor;
   }
 
-  private _getShape(elementRegistry: IElementRegistry, elementToColor: FlowNodeRuntimeInformation | ITokenPositionAndCount): IShape {
+  private _getShape(elementRegistry: IElementRegistry, elementToColor: FlowNodeRuntimeInformation | ITokenPositionAndCount | ActiveToken): IShape {
     const elementShape: IShape = elementRegistry.get(elementToColor.flowNodeId);
 
     return elementShape;
