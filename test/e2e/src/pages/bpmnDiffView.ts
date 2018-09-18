@@ -1,18 +1,25 @@
-import {by, element, ElementFinder} from 'protractor';
+import {
+  by,
+  element,
+  ElementFinder, promise,
+} from 'protractor';
+
+import {By} from 'selenium-webdriver';
 
 export class BpmnDiffView {
 
-  // Define Links, Urls, Classes
-
   // Define Elements
-  public bpmnDiffViewTag: ElementFinder = element(by.tagName('bpmn-diff-view'));
-  public changesListClassName: ElementFinder = element(by.className('diff-change-list'));
+  private byTagName: By = by.tagName('bpmn-diff-view');
+  private byChangesListId: By = by.id('changesList');
+
+  public bpmnDiffViewTag: ElementFinder = element(this.byTagName);
+  public changesListId: ElementFinder = element(this.byChangesListId);
 
   // Define Functions
-  public openDiffViewByClickOnButton(showDiffViewButton: ElementFinder): any {
+  public static openDiffViewByClickOnButton(showDiffViewButton: ElementFinder): promise.Promise<void> {
     return showDiffViewButton.click();
   }
-  public closeDiffViewByClickOnButton(hideDiffViewButton: ElementFinder): any {
+  public static closeDiffViewByClickOnButton(hideDiffViewButton: ElementFinder): any {
     return hideDiffViewButton.click();
   }
 }

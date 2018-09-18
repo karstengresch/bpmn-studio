@@ -24,7 +24,7 @@
         <span class="diff-button-hint__text">Select diff mode</span>
         <i class="fas fa-arrow-down fa-3x"></i>
       </span>
-      <div class="diff-change-list" if.bind="showChangeList">
+      <div class="diff-change-list" if.bind="showChangeList" id="changesList">
         <span class="no-change-message" if.bind="noChangesExisting">${noChangesReason}</span>
         <div class="change-list-table-wrapper" if.bind="!noChangesExisting">
           <table class="change-list-table">
