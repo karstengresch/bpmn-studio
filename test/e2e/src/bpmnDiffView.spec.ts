@@ -1,4 +1,9 @@
-import {browser, ElementFinder, protractor, ProtractorExpectedConditions} from 'protractor';
+import {
+  browser,
+  ElementFinder,
+  protractor,
+  ProtractorExpectedConditions,
+} from 'protractor';
 
 import {BpmnIo} from './pages/bpmn-io';
 import {BpmnDiffView} from './pages/bpmnDiffView';
